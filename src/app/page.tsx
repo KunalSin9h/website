@@ -10,7 +10,7 @@ export default function Home() {
         <span className="opacity-30">#</span> Hello 👋🏼
       </p>
       <p>
-        I am <span className="">Kunal</span>, a{" "}
+        I&#39;m <span className="">Kunal</span>, a{" "}
         <HoverTooltip content="29th May 2002" child={<span>21</span>} /> y/o
         developer based in{" "}
         <Link
@@ -40,8 +40,8 @@ export default function Home() {
         <span className="italic">Computer Science & Engineering.</span>
       </p>
       <p>
-        I love building end-to-end products, tools, beautiful interfaces. I a
-        have strong passion for Backend Development, Servers & Linux, CLI,
+        I love building end-to-end products, tools, beautiful interfaces. I have
+        a strong passion for Backend Development, Servers & Linux, CLI,
         Databases, Cloud & Networking.{" "}
       </p>
       <p>
