@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import {
   Select,
@@ -15,12 +15,14 @@ import {
 export default function SelectRoute() {
   const router = useRouter();
 
+  const section = getCurrentSection(usePathname());
+
   return (
     <Select
-      defaultValue="about"
+      defaultValue={section}
       onValueChange={(value: string) => {
         if (value === "about") value = "";
-        router.replace(`/${value}`);
+        router.push(`/${value}`);
       }}
     >
       <SelectTrigger className="w-[120px]">
@@ -39,4 +41,10 @@ export default function SelectRoute() {
       </SelectContent>
     </Select>
   );
+}
+
+function getCurrentSection(pathname: string): string {
+  let paths = pathname.split("/");
+  paths = paths.filter((tok) => tok !== "/" && tok !== "");
+  return paths[0] === undefined ? "about" : paths[0];
 }
