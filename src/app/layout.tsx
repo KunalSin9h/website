@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
+import Image from "next/image";
+import Time from "@/components/time";
 
 export const metadata: Metadata = {
   title: "Kunal Singh",
@@ -91,6 +93,17 @@ export default function RootLayout({
                 {children}
               </div>
             </main>
+            <footer className="flex-1">
+              <div className="container">
+                <Image
+                  className="py-8 select-none w-auto h-auto md:py-4"
+                  src="/images/wavy-line.webp"
+                  alt="Wavy Line image"
+                  width={100}
+                  height={100}
+                />
+              </div>
+            </footer>
           </div>
         </ThemeProvider>
       </body>
