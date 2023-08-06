@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
-import Time from "@/components/time";
 
 export const metadata: Metadata = {
   title: "Kunal Singh",
