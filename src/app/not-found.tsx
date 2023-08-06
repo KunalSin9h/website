@@ -6,7 +6,7 @@ export default function Loading() {
       <h1 className="text-3xl font-bold">
         <span className="opacity-60">#</span> 404
       </h1>
-      <p className="text-xl">Page Not Found</p>
+      <p className="md:text-xl text-md">Page Not Found</p>
       <Image
         className="rounded w-full h-full"
         src="/gifs/404.webp"
@@ -14,7 +14,7 @@ export default function Loading() {
         width={500}
         height={0}
       />
-      <a href="/" className="font-bold text-lg inline-bold hover:opacity-60">
+      <a href="/" className="font-bold text-sm md:text-lg inline-bold hover:opacity-60">
         {" "}
         <svg
           className="inline"
