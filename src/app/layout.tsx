@@ -95,7 +95,7 @@ export default function RootLayout({
             <footer className="flex-1">
               <div className="container">
                 <Image
-                  className="py-8 select-none w-auto h-auto md:py-4"
+                  className="py-8 select-none w-auto h-auto md:py-4 dark:invert"
                   src="/images/wavy-line.webp"
                   alt="Wavy Line image"
                   width={100}
