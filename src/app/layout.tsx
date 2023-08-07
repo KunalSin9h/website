@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: "Kunal Singh",
@@ -90,6 +91,7 @@ export default function RootLayout({
             <main className="flex-1">
               <div className="container flex flex-col space-y-6">
                 {children}
+                <Analytics />
               </div>
             </main>
             <footer className="flex-1">
