@@ -188,12 +188,11 @@ const components = {
   // @ts-ignore
   BlogImage: (props) => (
     <Image
-      className="py-2"
       {...(props as ImageProps)}
       placeholder="blur"
       blurDataURL={rgbDataURL(255, 255, 255)}
       draggable={false}
-      alt="image"
+      alt=""
     />
   ),
 };
