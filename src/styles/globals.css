@@ -2,38 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-
-  --gray0: #232323;
-  --gray1: #232323;
-  --gray2: #232323;
-  --gray3: #232323;
-  --gray4: #232323;
-  --gray5: #232323;
-  --gray6: #232323;
-  --gray8: #232323;
-  --gray7: #232323;
-  --gray9: #232323;
-
-  --focus-color: var(--gray7);
-
-  --wrapper: 950px;
-  --about-padding: 50px;
-
-  --font-fallback: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-}
-
-ul {
-  list-style: disc;
-}
-
-ol {
-  list-style: decimal;
-}
-
 .blur {
   top: 0;
   width: 100vw;
@@ -146,11 +114,4 @@ ol {
   .container {
     max-width: 680px;
   }
-}
-
-.rehype-code-title {
-  border: solid 1px #232323;
-  font-size: 12px;
-  border-radius: 10px 10px 0 0;
-  padding: 10px 0px 10px 15px;
 }

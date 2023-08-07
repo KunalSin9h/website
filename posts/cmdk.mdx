@@ -28,7 +28,7 @@ As said above, in this post, we'll be focusing on building our own command menu 
 
 Since we'll be using [Tailwind CSS](https://tailwindcss.com), I suggest you start by installing and configuring that. Skip over this if your project already uses Tailwind.
 
-```bash:terminal
+```bash title="terminal"
 # Install Tailwind with peer dependencies
 yarn add tailwindcss postcss autoprefixer -D
 # Generate the Tailwind and PostCSS configuration
@@ -49,21 +49,21 @@ First, we'll create a `commands.tsx` file at `components/Menu`, which will store
 
 Anyways, let's begin by creating a `Command` type before we create our array of objects:
 
-```ts:components/Menu/commands.tsx
-import { ReactElement } from 'react'
+```ts title="components/Menu/commands.tsx"
+import { ReactElement } from "react";
 
 export type Command = {
-  icon: ReactElement
-  text: string
-  perform: () => void
-}
+  icon: ReactElement;
+  text: string;
+  perform: () => void;
+};
 ```
 
 It's super simple: just an icon, some text, and a perform event which happens on click.
 
 Next, we'll create our command. Create an array of objects of type `Command`, and add in your commands:
 
-```tsx:components/Menu/commands.tsx
+```tsx title="components/Menu/commands.tsx"
 // ...
 import {
   SiFramer,
@@ -78,77 +78,77 @@ import {
   SiGithub,
   SiNike,
   SiDiscord,
-} from 'react-icons/si'
+} from "react-icons/si";
 
 export const commands: Command[] = [
   {
     icon: <SiFramer />,
-    text: 'Framer Motion',
-    perform: () => window.open('https://framer.com/motion', '_blank'),
+    text: "Framer Motion",
+    perform: () => window.open("https://framer.com/motion", "_blank"),
   },
   {
     icon: <SiTailwind CSS />,
-    text: 'Tailwind CSS',
-    perform: () => window.open('tailwindcss.com', '_blank'),
+    text: "Tailwind CSS",
+    perform: () => window.open("tailwindcss.com", "_blank"),
   },
   {
     icon: <SiApple />,
-    text: 'Apple',
-    perform: () => window.open('https://apple.com', '_blank'),
+    text: "Apple",
+    perform: () => window.open("https://apple.com", "_blank"),
   },
   {
     icon: <SiArchlinux />,
-    text: 'Arch Linux',
-    perform: () => window.open('https://apple.com', '_blank'),
+    text: "Arch Linux",
+    perform: () => window.open("https://apple.com", "_blank"),
   },
   {
     icon: <SiVercel />,
-    text: 'Vercel',
-    perform: () => window.open('https://vercel.com', '_blank'),
+    text: "Vercel",
+    perform: () => window.open("https://vercel.com", "_blank"),
   },
   {
     icon: <SiTesla />,
-    text: 'Tesla',
-    perform: () => window.open('https://tesla.com', '_blank'),
+    text: "Tesla",
+    perform: () => window.open("https://tesla.com", "_blank"),
   },
   {
     icon: <SiDeno />,
-    text: 'Deno',
-    perform: () => window.open('https://deno.land', '_blank'),
+    text: "Deno",
+    perform: () => window.open("https://deno.land", "_blank"),
   },
   {
     icon: <SiDiscord />,
-    text: 'Discord',
-    perform: () => window.open('https://discord.com', '_blank'),
+    text: "Discord",
+    perform: () => window.open("https://discord.com", "_blank"),
   },
   {
     icon: <SiFlutter />,
-    text: 'Flutter',
-    perform: () => window.open('https://flutter.dev/', '_blank'),
+    text: "Flutter",
+    perform: () => window.open("https://flutter.dev/", "_blank"),
   },
   {
     icon: <SiGithub />,
-    text: 'GitHub',
-    perform: () => window.open('https://github.com/', '_blank'),
+    text: "GitHub",
+    perform: () => window.open("https://github.com/", "_blank"),
   },
   {
     icon: <SiNike />,
-    text: 'Nike',
-    perform: () => window.open('https://nike.com/', '_blank'),
+    text: "Nike",
+    perform: () => window.open("https://nike.com/", "_blank"),
   },
   {
     icon: <SiTwitter />,
-    text: 'Twitter',
-    perform: () => window.open('https://twitter.com', '_blank'),
+    text: "Twitter",
+    perform: () => window.open("https://twitter.com", "_blank"),
   },
-]
+];
 ```
 
 ### Building Our Menu
 
 Now that we finished adding commands, let's get started building our menu. Start by creating the skeleton, which we'll gradually add features to.
 
-```tsx:components/Menu/Menu.tsx
+```tsx title="components/Menu/Menu.tsx"
 const CommandMenu: FC = () => {
   return (
     <motion.div
@@ -250,11 +250,11 @@ const filter = (query: string): Command[] =>
 
 Next, we'll use a `useEffect` hook to update the results every time the user types something onto the search bar.
 
-```tsx:components/Menu/Menu.tsx
+```tsx titlecomponents/Menu/Menu.tsx
 useEffect(
   () => (query ? setResults(filter(query)) : setResults(null)),
   [query, setQuery]
-)
+);
 ```
 
 Awesome. Now, let's go inside our `input` component and make sure we update our `setQuery` hook on change.

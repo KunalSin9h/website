@@ -1,8 +1,9 @@
+import "@/styles/mdx.css";
+
 import { format, parseISO } from "date-fns";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import MDX from "@/components/MDX";
-import styles from "@/styles/slug.module.css";
 
 allPosts.sort((a, b) => (a.published < b.published ? 1 : -1));
 
@@ -42,9 +43,7 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
         </time>
         <h1 className="text-3xl font-bold">{post.title}</h1>
       </div>
-      <div className={styles.blog}>
-        <MDX code={post.body.code} />
-      </div>
+      <MDX code={post.body.code} />
     </article>
   );
 };

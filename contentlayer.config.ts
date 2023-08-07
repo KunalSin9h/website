@@ -11,6 +11,7 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypePresetMinify from "rehype-preset-minify";
 import { extractTocHeadings } from "./src/lib/remarkTocHeadings";
+import rehypePrettyCode from "rehype-pretty-code";
 
 const computedFields: ComputedFields = {
   toc: { type: "json", resolve: (doc) => extractTocHeadings(doc.body.raw) },
@@ -36,13 +37,44 @@ export default makeSource({
   contentDirPath: "posts",
   documentTypes: [Post],
   mdx: {
-    remarkPlugins: [remarkGfm, remarkSectionize],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      rehypeCodeTitles,
-      rehypePrism,
-      rehypePresetMinify,
-      [rehypeAutolinkHeadings, { properties: { className: ["anchor"] } }],
+      // rehypeCodeTitles,
+      // rehypePrism,
+      // rehypePresetMinify,
+      [
+        rehypePrettyCode,
+        {
+          theme: "one-dark-pro",
+          onVisitLine(node: any) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node: any) {
+            if (node.properties.className === undefined) {
+              node.properties.className = ["line--highlighted"];
+            } else {
+              node.properties.className.push("line--highlighted");
+            }
+          },
+          onVisitHighlightedWord(node: any) {
+            node.properties.className = ["word--highlighted"];
+          },
+        },
+      ],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ["subheading-anchor"],
+            ariaLabel: "Link to section",
+          },
+        },
+      ],
     ],
   },
 });
