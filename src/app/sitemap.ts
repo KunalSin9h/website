@@ -9,7 +9,7 @@ const Sitemap = () => {
 
   const routes = ["", "/", "/blog", "/stack", "/system", "/work"].map(
     (route) => ({
-      url: `https://kunalsin9h.xyz${route}`,
+      url: `https://kunalsin9h.com{route}`,
       lastModified: new Date().toISOString().split("T")[0],
     })
   );
