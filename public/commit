@@ -1,0 +1,203 @@
+#!/usr/bin/env bash
+
+# Reset
+Color_Off=''
+
+# Regular Colors
+Red=''
+Green=''
+Yellow=''
+Cyan=''
+Magenta=''
+Dim='' # White
+
+# Bold
+Bold_White=''
+Bold_Green=''
+
+if [[ -t 1 ]]; then
+    # Reset
+    Color_Off='\033[0m' # Text Reset
+
+    # Regular Colors
+    Red='\033[0;31m'   # Red
+    Green='\033[0;32m' # Green
+    Yellow='\033[1;33m' # Yellow
+    Cyan='\033[0;36m'
+    Magenta='\033[1;35m'
+    Dim='\033[0;2m'    # White
+
+    # Bold
+    Bold_Green='\033[1;32m' # Bold Green
+    Bold_White='\033[1m'    # Bold White
+fi
+
+bold_success() {
+    echo -e "${Bold_Green}$@ ${Color_Off}"
+}
+
+info() {
+    echo -e "${Dim}$@ ${Color_Off}"
+}
+
+info_bold() {
+    echo -e "${Bold_White}$@ ${Color_Off}"
+}
+
+error() {
+    echo -e "${Red}error${Color_Off}:" "$@" >&2
+    exit 1
+}
+
+success() {
+    echo -e "${Bold_Breen}$@ ${Color_Off}"
+}
+
+# check is curl installed or not
+if ! command -v curl &> /dev/null
+then
+    error "commit uses curl for downloading files, please install curl and try again"
+fi
+
+bold_success
+bold_success █▀▀ █▀█ █▀▄▀█ █▀▄▀█ █ ▀█▀
+bold_success █▄▄ █▄█ █░▀░█ █░▀░█ █ ░█░
+bold_success
+
+echo -e "${Yellow}Commit${Color_Off} helps in better git experience and maintain proper commit messages."
+
+if ! [ -x "$(command -v gum)" ]; then
+    echo ""
+    echo >&2 -e "${Red}Error${Color_Off}: ${Bold_White}gum${Color_Off} is not installed."
+    echo >&2 -e "Commit uses gum for styling prompts, ${Magenta}make sure you have installed gum${Color_Off} before proceeding. ${Cyan}https://github.com/charmbracelet/gum#installation${Color_Off}"
+    exit 1
+fi
+
+echo
+info "Installing commit..."
+
+commit_uri=https://raw.githubusercontent.com/KunalSin9h/git-commit/master/commit
+
+# get latest release from github
+LATEST_RELEASE=$(curl -s https://api.github.com/repos/KunalSin9h/git-commit/releases/latest | grep "tag_name" | cut -d '"' -f 4)
+
+install_env=COMMIT_INSTALL
+bin_env=\$$install_env/bin
+
+install_dir=${!install_env:-$HOME/.commit}
+bin_dir=$install_dir/bin
+sh=$bin_dir/commit
+
+if [[ ! -d $bin_dir ]]; then
+    mkdir -p "$bin_dir" ||
+        error -e "${Red}Failed${Color_Off} to create install directory \"$bin_dir\""
+fi
+
+curl -fsSL --fail --location --output "$sh" "$commit_uri" ||
+  error "Failed to download commit from \"$commit_uri\""
+
+gum spin --spinner dot --title "Downloading commit..." --spinner.foreground="80" -- sleep 5  && echo -e "commit version $LATEST_RELEASE downloaded. ${Cyan}https://github.com/KunalSin9h/git-commit${Color_Off}"
+
+gum spin --spinner dot --title "Setting Up..." --spinner.foreground="80" -- sleep 3
+
+chmod +x "$sh" ||
+    error 'Failed to set permissions on commit executable'
+
+tildify() {
+    if [[ $1 = $HOME/* ]]; then
+        local replacement=\~/
+
+        echo "${1/$HOME\//$replacement}"
+    else
+        echo "$1"
+    fi
+}
+
+echo
+success "commit was installed successfully to $Bold_Green$(tildify "$sh")"
+
+refresh_command=''
+
+tilde_bin_dir=$(tildify "$bin_dir")
+quoted_install_dir=\"${install_dir//\"/\\\"}\"
+
+if [[ $quoted_install_dir = \"$HOME/* ]]; then
+    quoted_install_dir=${quoted_install_dir/$HOME\//\$HOME/}
+fi
+
+echo
+
+case $(basename "$SHELL") in
+fish)
+    commands=(
+        "set --export $install_env $quoted_install_dir"
+        "set --export PATH $bin_env \$PATH"
+    )
+
+    fish_config=$HOME/.config/fish/config.fish
+    tilde_fish_config=$(tildify "$fish_config")
+
+    if [[ -w $fish_config ]]; then
+        {
+            echo -e '\n# commit'
+
+            for command in "${commands[@]}"; do
+                echo "$command"
+            done
+        } >>"$fish_config"
+
+        info "Added \"$tilde_bin_dir\" to \$PATH in \"$tilde_fish_config\""
+
+        refresh_command="source $tilde_fish_config"
+    else
+        echo "Manually add the directory to $tilde_fish_config (or similar):"
+
+        for command in "${commands[@]}"; do
+            info_bold "  $command"
+        done
+    fi
+
+   ;;
+zsh)
+    commands=(
+        "export $install_env=$quoted_install_dir"
+        "export PATH=\"$bin_env:\$PATH\""
+    )
+
+    zsh_config=$HOME/.zshrc
+    tilde_zsh_config=$(tildify "$zsh_config")
+
+    if [[ -w $zsh_config ]]; then
+        {
+            echo -e '\n# commit'
+
+            for command in "${commands[@]}"; do
+                echo "$command"
+            done
+        } >>"$zsh_config"
+
+        info "Added \"$tilde_bin_dir\" to \$PATH in \"$tilde_zsh_config\""
+
+        refresh_command="exec $SHELL"
+    else
+        echo "Manually add the directory to $tilde_zsh_config (or similar):"
+
+        for command in "${commands[@]}"; do
+            info_bold "  $command"
+        done
+    fi
+    ;;
+*)
+    echo -e "Manually add the directory to ${Yellow}~/.bashrc${Color_Off} (or similar):"
+    info_bold "  export $install_env=$quoted_install_dir"
+    info_bold "  export PATH=\"$bin_env:\$PATH\""
+    ;;
+esac
+
+echo
+echo -e "To get started, go to your project folder and type ${Yellow}commit${Color_Off} to commit changes."
+echo
+
+if [[ $refresh_command ]]; then
+    info_bold " $refresh_command"
+fi
