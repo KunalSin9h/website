@@ -1,5 +1,5 @@
 [data-rehype-pretty-code-fragment] code {
-  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-2 text-sm text-black selection:bg-[#e6ffe6];
+  @apply text-black grid min-w-full break-words rounded-none border-0 bg-transparent p-2 text-sm selection:bg-[#52525b80] dark:selection:bg-[#52525b80] dark:selection:text-inherit;
   counter-reset: line;
   box-decoration-break: clone;
 }
@@ -15,9 +15,11 @@
   text-align: right;
   color: gray;
 }
+
 [data-rehype-pretty-code-fragment] .line--highlighted {
   @apply bg-slate-300 bg-opacity-10;
 }
+
 [data-rehype-pretty-code-fragment] .line-highlighted span {
   @apply relative;
 }
@@ -33,7 +35,6 @@
 
 code {
   counter-reset: line;
-
 }
 
 code > [data-line]::before {

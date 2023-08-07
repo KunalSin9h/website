@@ -1,12 +1,7 @@
 import * as React from "react";
 import Image, { ImageProps } from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from "@/lib/utils";
 
 const keyStr =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -190,10 +185,10 @@ const components = {
       {...props}
     />
   ),
-  Image,
   // @ts-ignore
   BlogImage: (props) => (
     <Image
+      className="py-2"
       {...(props as ImageProps)}
       placeholder="blur"
       blurDataURL={rgbDataURL(255, 255, 255)}

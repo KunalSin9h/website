@@ -4,17 +4,12 @@ import {
   ComputedFields,
 } from "contentlayer/source-files";
 import remarkGfm from "remark-gfm";
-import remarkSectionize from "remark-sectionize";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrism from "rehype-prism-plus";
 import rehypePresetMinify from "rehype-preset-minify";
-import { extractTocHeadings } from "./src/lib/remarkTocHeadings";
 import rehypePrettyCode from "rehype-pretty-code";
 
 const computedFields: ComputedFields = {
-  toc: { type: "json", resolve: (doc) => extractTocHeadings(doc.body.raw) },
   slug: {
     type: "string",
     resolve: (doc) => `/blog/${doc._raw.sourceFileName.replace(/\.mdx$/, "")}`,
@@ -40,9 +35,7 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      // rehypeCodeTitles,
-      // rehypePrism,
-      // rehypePresetMinify,
+      rehypePresetMinify,
       [
         rehypePrettyCode,
         {

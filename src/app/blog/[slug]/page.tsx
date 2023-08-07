@@ -36,7 +36,7 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-xl py-8">
+    <article className="max-w-xl py-8">
       <div className="mb-8 text-center">
         <time dateTime={post.published} className="mb-1 text-xs text-gray-600">
           {format(parseISO(post.published), "LLLL d, yyyy")}
