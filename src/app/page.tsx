@@ -1,10 +1,6 @@
 import HoverTooltip from "@/components/hover-tooltip";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Metadata } from "next";
-import Meta from "@/components/Meta";
-
-export const metadata: Metadata = Meta({});
 
 export default function Home() {
   return (
