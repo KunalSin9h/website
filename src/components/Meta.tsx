@@ -41,6 +41,9 @@ export default function Meta(params: {
           width: 1200,
           height: 630,
         },
+        {
+          url: "/images/og.jpg",
+        },
       ],
     },
     icons: {
@@ -59,6 +62,9 @@ export default function Meta(params: {
           url: "/images/og.jpg",
           width: 1200,
           height: 630,
+        },
+        {
+          url: "/images/og.jpg",
         },
       ],
     },
