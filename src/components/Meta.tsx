@@ -35,16 +35,7 @@ export default function Meta(params: {
       locale: "en_US",
       type,
       publishedTime,
-      images: [
-        {
-          url: "/images/og.jpg",
-          width: 1200,
-          height: 630,
-        },
-        {
-          url: "/images/og.jpg",
-        },
-      ],
+      images: [{ url: "/images/og.jpg" }],
     },
     icons: {
       icon: "/images/favicon.ico",
@@ -57,16 +48,7 @@ export default function Meta(params: {
       description,
       site: "kunalsin9h.com",
       creator: "@KunalSin9h",
-      images: [
-        {
-          url: "/images/og.jpg",
-          width: 1200,
-          height: 630,
-        },
-        {
-          url: "/images/og.jpg",
-        },
-      ],
+      images: ["/images/og.jpg"],
     },
     viewport: {
       width: "device-width",
