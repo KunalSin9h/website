@@ -24,7 +24,7 @@ export default function Work() {
             icon="/images/dearapp.png"
             name="DearApp"
             tagline="Consumer Social"
-            role="Co-Founder & Backend Developer"
+            role="Backend Developer"
             work="Building systems to facilitate realtime messaging, feed and social connections."
           />
         </TiltBox>
@@ -34,7 +34,7 @@ export default function Work() {
             icon="/images/meltred.png"
             name="Meltred"
             tagline="Software Deployment"
-            role="Founder & Developer"
+            role="Developer"
             work="Building full stack application for managing and deploying software with ease on own machines."
           />
         </TiltBox>
