@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Kunal Singh",

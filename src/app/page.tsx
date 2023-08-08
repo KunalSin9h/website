@@ -1,6 +1,5 @@
 import HoverTooltip from "@/components/hover-tooltip";
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -49,43 +48,6 @@ export default function Home() {
         projects, I have to switch to VSCode. Currently, I am learning Rust and
         Real-time Systems. I love contributing to Open-Source Software
         Development.
-      </p>
-      <p>
-        Right now i&#39;m working on{" "}
-        <Link
-          href="https://github.com/dearapp"
-          target="_black"
-          prefetch={false}
-        >
-          <span className="font-bold inline-block hover:opacity-60">
-            <Image
-              className="rounded inline"
-              src="/images/dearapp.jpg"
-              alt="DearApp Logo"
-              width={20}
-              height={20}
-            />{" "}
-            DearApp
-          </span>
-        </Link>
-        : A privacy focused closed network social media app and{" "}
-        <Link
-          href="https://github.com/meltred"
-          target="_black"
-          prefetch={false}
-        >
-          <span className="font-bold inline-block hover:opacity-60">
-            <Image
-              className="rounded inline"
-              src="/images/meltred.jpg"
-              alt="Meltred Logo"
-              width={20}
-              height={20}
-            />{" "}
-            Meltred
-          </span>
-        </Link>
-        : A software for managing and working with app deployments.{" "}
       </p>
       <p>
         Apart from software development, I love to play basketball, attempt to
