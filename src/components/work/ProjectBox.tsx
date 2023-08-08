@@ -41,7 +41,7 @@ export default function ProjectBox({
           </span>
         </p>
         <p>
-          <span className="opacity-70">Description: </span>
+          <span className="opacity-60 font-bold">Description: </span>
           <span>{description}</span>
         </p>
       </div>
