@@ -7,9 +7,87 @@ import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
-import Meta from "@/components/Meta";
 
-export const metadata: Metadata = Meta({});
+export const metadata: Metadata = {
+  title: { default: "Kunal Singh", template: "%s • Kunal Singh" },
+  creator: "Kunal Singh",
+  publisher: "Kunal Singh",
+  description: "Software Developer. Backend, Servers, Linux.",
+  keywords: [
+    "Kunal",
+    "kunal",
+    "singh",
+    "Singh",
+    "Kunal Singh",
+    "kunalsin9h",
+    "kunalsin9h.com",
+    "Kunal Sin9h",
+  ],
+  authors: [{ name: "Kunal Singh", url: "https://kunalsin9h.com" }],
+  colorScheme: "dark light",
+  openGraph: {
+    title: "Kunal Singh",
+    description: "Software Developer. Backend, Servers, Linux.",
+    url: "https://kunalsin9h.com",
+    siteName: "Kunal Singh",
+    images: [
+      { url: "https://kunalsin9h.com/images/og.jpg", width: 1200, height: 630 },
+      {
+        url: "https://kunalsin9h.com/images/og-alt.png",
+        width: 1200,
+        height: 630,
+        alt: 'A white background with the text "Kunal Singh" in the bottom left',
+      },
+    ],
+    locale: "en-US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/images/favicon.ico",
+    shortcut: "/images/favicon.ico",
+  },
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  twitter: {
+    card: "summary_large_image",
+    title: "Kunal Singh",
+    description: "Software Developer. Backend, Servers, Linux.",
+    siteId: "kunalsin9h",
+    creator: "@KunalSin9h",
+    creatorId: "kunalsin9h",
+    images: {
+      url: "https://kunalsin9h.com/images/og.jpg",
+      alt: 'A gradient background with noise and "Kunal Singh" written at the bottom left',
+    },
+  },
+  verification: {
+    google: "QaDDzSdVB9rbLtACat7LBgfamFanwkSYv0MzdCGERxU=",
+
+    yandex: "Ey7X4/zlbWtObK3I",
+    yahoo: "yahoo",
+    other: { me: ["kunal@kunalsin9h.com"] },
+  },
+  alternates: {
+    canonical: "https://kunalsin9h.com",
+    types: { "application/rss+xml": "https://kunalsin9h.com/rss.xml" },
+  },
+  assets: ["https://kunalsin9h.com/assets.zip"],
+  category: "technology",
+};
 
 export default function RootLayout({
   children,
