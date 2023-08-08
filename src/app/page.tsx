@@ -50,7 +50,7 @@ export default function Home() {
         Real-time Systems. I love contributing to Open-Source Software
         Development.
       </p>
-      <p>
+      {/* <p>
         Right now i&#39;m working on{" "}
         <Link
           href="https://github.com/dearapp"
@@ -86,7 +86,7 @@ export default function Home() {
           </span>
         </Link>
         : A software for managing and working with app deployments.{" "}
-      </p>
+      </p> */}
       <p>
         Apart from software development, I love to play basketball, attempt to
         wake up early for a morning run (although I &#39;m really struggling
