@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import MDX from "@/components/MDX";
+import Meta from "@/components/Meta";
 
 allPosts.sort((a, b) => (a.published < b.published ? 1 : -1));
 
@@ -13,21 +14,17 @@ export const generateStaticParams = async () =>
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
 
-  if (!post) return null;
+  if (!post) return Meta({ title: "Blog by Kunal Singh" });
 
   const { title, published: publishedTime, description, slug } = post;
 
-  return {
+  return Meta({
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime,
-      url: `https://kunalsin9h.com/blog/${slug}`,
-    },
-  };
+    url: `https://kunalsin9h.com/blog/${slug}`,
+    publishedTime,
+    type: "article",
+  });
 };
 
 const BlogPage = ({ params }: { params: { slug: string } }) => {

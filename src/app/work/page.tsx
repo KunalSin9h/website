@@ -1,6 +1,14 @@
 import WorkBox from "@/components/work/WorkBox";
 import TiltBox from "@/components/Tiltbox";
 import ProjectBox from "@/components/work/ProjectBox";
+import { Metadata } from "next";
+import Meta from "@/components/Meta";
+
+export const metadata: Metadata = Meta({
+  url: "https://kunalsin9h.com/work",
+  title: "Work & Project • Kunal Singh",
+  description: "Work and Project by Kunal Singh",
+});
 
 export default function Work() {
   return (

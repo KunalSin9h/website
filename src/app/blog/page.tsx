@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
+import { Metadata } from "next";
+import Meta from "@/components/Meta";
+
+export const metadata: Metadata = Meta({
+  url: "https://kunalsin9h.com/blog",
+  title: "All Blogs • Kunal Singh",
+  description: "All blogs posts from Kunal Singh on kunalsin9h.com",
+});
 
 function Post(post: Post) {
   return (
