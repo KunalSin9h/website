@@ -7,11 +7,9 @@ import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
+import Meta from "@/components/Meta";
 
-export const metadata: Metadata = {
-  title: "Kunal Singh",
-  description: "Software Developer",
-};
+export const metadata: Metadata = Meta({});
 
 export default function RootLayout({
   children,

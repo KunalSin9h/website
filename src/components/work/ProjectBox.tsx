@@ -2,11 +2,11 @@ import Link from "next/link";
 import { OpenInNewWindow } from "../Icons/radix";
 
 const languageColor = new Map([
-  ["go", "#29BEB0"],
-  ["golang", "#29BEB0"],
-  ["rust", "#CE422B"],
-  ["shell", "#8ce454"],
-  ["typescript", "#007acc"],
+  ["go", "bg-cyan-500"],
+  ["golang", "bg-cyan-500"],
+  ["rust", "bg-orange-300"],
+  ["shell", "bg-lime-500"],
+  ["typescript", "bg-sky-500"],
 ]);
 
 export default function ProjectBox({
@@ -32,11 +32,11 @@ export default function ProjectBox({
       </Link>
       <div className="ml-4">
         <p className="flex space-x-2">
-          <span className="opacity-70">Language: </span>
+          <span className="opacity-60 font-bold">Language: </span>
           <span className="flex space-x-2 items-center justify-start">
             <span>{language}</span>
             <span
-              className={`h-3 w-3 inline-block rounded-full opacity-80 bg-[${langColor}]`}
+              className={`h-3 w-3 inline-block rounded-full opacity-80 ${langColor}`}
             ></span>
           </span>
         </p>

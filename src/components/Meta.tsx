@@ -6,7 +6,8 @@ export default function Meta(params: {
   publishedTime?: string;
 }) {
   const title = params.title || "Kunal Singh";
-  const description = params.description || "Kunal Singh's Personal Website";
+  const description =
+    params.description || "Kunal Singh's Personal Website. Software Developer.";
   const url = params.url || "https://kunalsin9h.com";
   const type = params.type || "website";
   const publishedTime = params.publishedTime || "";
