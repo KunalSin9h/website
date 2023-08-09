@@ -25,6 +25,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return PageMeta({
     title,
     description,
+    image: `https://api9.hop.sh/image/${title}`,
     type: "article",
     publishedTime,
     url: `https://kunalsin9h.com/blog/${slug}`,
