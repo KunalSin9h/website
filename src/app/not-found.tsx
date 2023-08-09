@@ -1,4 +1,11 @@
 import Image from "next/image";
+import { Metadata } from "next";
+import PageMeta from "@/lib/pageMetadata";
+
+export const metadata: Metadata = PageMeta({
+  title: "404, Page not found",
+  description: "This page does not exit, check the URL and try again.",
+});
 
 export default function Loading() {
   return (
@@ -14,7 +21,10 @@ export default function Loading() {
         width={500}
         height={0}
       />
-      <a href="/" className="font-bold text-sm md:text-lg inline-bold hover:opacity-60">
+      <a
+        href="/"
+        className="font-bold text-sm md:text-lg inline-bold hover:opacity-60"
+      >
         {" "}
         <svg
           className="inline"
