@@ -4,7 +4,7 @@ import { allPosts, Post } from "contentlayer/generated";
 import { Metadata } from "next";
 import PageMeta from "@/lib/pageMetadata";
 
-export const meta: Metadata = PageMeta({
+export const metadata: Metadata = PageMeta({
   title: "All Blogs",
   description: "All blogs posts from Kunal Singh on kunalsin9h.com",
   url: "https://kunalsin9h.com/blog/",
