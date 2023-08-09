@@ -2,14 +2,13 @@ import WorkBox from "@/components/work/WorkBox";
 import TiltBox from "@/components/Tiltbox";
 import ProjectBox from "@/components/work/ProjectBox";
 import { Metadata } from "next";
+import PageMeta from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = PageMeta({
   title: "Work & Project",
   description: "Companies, Projects and Open-source projects",
-  openGraph: {
-    url: "https://kunalsin9h.com/work",
-  },
-};
+  url: "https://kunalsin9h.com/work/",
+});
 
 export default function Work() {
   return (

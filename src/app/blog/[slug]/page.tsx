@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import MDX from "@/components/MDX";
+import PageMeta from "@/lib/pageMetadata";
 
 allPosts.sort((a, b) => (a.published < b.published ? 1 : -1));
 
@@ -14,20 +15,20 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
 
   if (!post)
-    return {
+    return PageMeta({
       title: "404, Blog post not found",
       description: "This blog post does not exit, check the URL and try again.",
-    };
+    });
 
   const { title, published: publishedTime, description, slug } = post;
 
-  return {
+  return PageMeta({
     title,
     description,
-    url: `https://kunalsin9h.com/blog/${slug}`,
-    publishedTime,
     type: "article",
-  };
+    publishedTime,
+    url: `https://kunalsin9h.com/blog/${slug}`,
+  });
 };
 
 const BlogPage = ({ params }: { params: { slug: string } }) => {
