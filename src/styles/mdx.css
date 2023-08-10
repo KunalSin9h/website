@@ -33,11 +33,11 @@
   @apply mt-0;
 }
 
-code {
+[data-line-numbers] {
   counter-reset: line;
 }
 
-code > [data-line]::before {
+[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
 
@@ -49,11 +49,11 @@ code > [data-line]::before {
   color: gray;
 }
 
-code[data-line-numbers-max-digits='2'] > [data-line]::before {
+[data-line-numbers-max-digits='2'] > [data-line]::before {
   width: 2rem;
 }
 
-code[data-line-numbers-max-digits='3'] > [data-line]::before {
+[data-line-numbers-max-digits='3'] > [data-line]::before {
   width: 3rem;
 }
 

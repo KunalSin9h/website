@@ -1,0 +1,153 @@
+---
+title: Elixir 1, Genera language features and variables
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-11"
+---
+
+Elixir is a High Level, Dynamic, Functional Programming language based on Erlang Development Platform. Erlang is designed to create scalable, distributed, and fault-tolerant systems. Elixir is a modern replacement for Erlang Programming language which also runs on Erlang VM. Both language are inter compatible and can easily share libraries.
+
+#### The Elixir Programming language
+
+The Elixir programming language is more compact, clean and easy to write and maintain.
+
+Today we are going to start a tour of elixir language, these are my notes while learning elixir from the book _"Elixir in Action, Second Edition"_ by _Sasa Juric_. I have alwasy used conventional note book for writing technical notes, mainly notes when learning new programming language and i think they are not that useful, hence this is me trying to take notes on [Obsidian](https://obsidian.md) and later publish on my [blog](https://kunalsin9h.com/blog).
+
+> **Note**: This is not a guide, nor a tutorial, it just just which i may have written in my note book, so these are think form the language which i kept for future reference, i.e this series will mostly contain `nontrivial` concepts and constructs.
+
+Here is the beautiful book cover picture.
+
+<BlogImage
+  alt="Elixir in Action Book Cover"
+  src="https://tiddi.kunalsin9h.com/LREVrd7"
+  width={360}
+  height={451}
+/>
+
+I am pretty sure that this will be more usable and effective that note books, because i find my self writing lots of notes in my [GitHub Gist](https://gist.github.com/kunalsin9h), from which i take reference a lot.
+
+**So lets start**
+
+### Installation
+
+Elixir can be installed from the official [installation guild](https://elixir-lang.org/install.html) , what i have seen is for most (if not all) OS have `elixir` package for elixir.
+
+For me, on Arch linux, the command is
+
+```bash
+sudo pacman -s elixir
+```
+
+This will install both `elixir` and `erlang`.
+As elixir will run on Erlang VM, called as `BEAM`, we also need `Erlang` on the system.
+
+#### Interactive Shell
+
+`elixir` comes with an _interactive shell_ like _node_, _python_ and many more, which can be starting by running `iex` (_**i**nteractive **e**li**x**ir_).
+
+```bash
+iex
+```
+
+for me, i can see something like this.
+
+```bash
+$ iex
+Erlang/OTP 26 [erts-14.0.1] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [jit:ns]
+
+Interactive Elixir (1.15.0) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)>
+```
+
+see i am using `Erlang` version `26` and `Elixir` version `1.15.0`.
+
+Running `iex` starts an instance of the `BEAM` and then starts an
+interactive Elixir shell inside it.
+
+Now we can execute an expression by directly typing on shell.
+
+```bash
+iex(3)> 1 + 2
+3
+iex(4)>
+```
+
+here `1 + 2` is an expression which resulted in `3` .
+
+> **Note**: Everything in Elixir is an **expression**, even `if` and `case`.
+>
+> I think this is because `Elixir` is a functional programming language, so passing of data between functions is very important as the data is itself is `immutable`
+
+Any valid `elixir` code can be executed in the shell, even multi line commands,
+
+```bash
+iex(7)> 1 + (
+...(7)>   2 * 3
+...(7)> ) / 4
+2.5
+iex(8)>
+```
+
+- `iex` is provided by a module called [`IEx`](https://hexdocs.pm/iex)
+
+```bash
+iex(9)> h IEx
+```
+
+#### Variables
+
+```bash
+iex(7)> my_name = "Kunal Singh"
+"Kunal Singh"
+iex(8)> my_name = 20
+20
+iex(9)> my_name
+20
+iex(10)> my_name = [1, 2, 3]
+[1, 2, 3]
+iex(11)> my_name
+[1, 2, 3]
+iex(12)>
+```
+
+- Dynamic Type
+
+In Elixir terms, assignment is called _Binding_. When
+you initialize a variable with a value, the variable is bound to
+that value.
+
+Variables name
+
+```bash
+valid_variable_name
+also_valid_1
+validButNotRecommended
+NotValid
+```
+
+variable names can end with a **?** and **!**,
+
+> what!
+
+```bash
+iex(1)> a? = "A"
+"A"
+iex(2)> b! = "B"
+"B"
+iex(3)> a?
+"A"
+iex(4)> b!
+"B"
+iex(5)>
+```
+
+**About `Rebinding` (reassigning) variables**
+
+Rebinding doesn’t mutate the existing memory location. It
+reserves new memory and reassigns the symbolic name to the
+new location.
+
+> Because here (in erlang / elixir eco) data is `immutable
+
+Elixir is a **Garbage Collected** language, which will clean all these memory allocation, without any manual maneuver.
+
+> I have mixed feeling about this, as language like `Rust` handle memory with garbage collector, which increases the performance of the language.
