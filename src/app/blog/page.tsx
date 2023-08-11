@@ -12,7 +12,7 @@ export const metadata: Metadata = PageMeta({
 
 function Post(post: Post) {
   return (
-    <div className="mb-8">
+    <div className="mb-4">
       <h2 className="mb-1 text-xl">
         <Link
           href={post.slug}
@@ -37,8 +37,8 @@ export default function blog() {
   );
 
   return (
-    <div className="max-w-xl py-8">
-      <h1 className="mb-8 text-2xl font-black">All Blogs</h1>
+    <div className="w-full py-4">
+      <h1 className="mb-4 text-2xl font-black">All Blogs</h1>
       {posts.map((post: Post, idx: number) => (
         <Post key={idx} {...post} />
       ))}

@@ -38,12 +38,12 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
   if (!post) notFound();
 
   return (
-    <article className="max-w-xl py-8">
-      <div className="mb-8 text-center">
+    <article className="w-full py-4">
+      <div className="mb-8 text-left">
         <time dateTime={post.published} className="mb-1 text-xs text-gray-600">
           {format(parseISO(post.published), "LLLL d, yyyy")}
         </time>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">{post.title}</h1>
       </div>
       <MDX code={post.body.code} />
     </article>
