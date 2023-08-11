@@ -11,7 +11,7 @@ export default function System() {
         Starting with the{" "}
         <span className="font-bold italic">Operating System, </span>I have used
         Windows for nearly 6 months, in my initial days, and then switched to
-        Ubuntu, which again i have used for nearly a year.
+        Ubuntu, which i have used for nearly a year.
       </p>
       <p>
         Now, from past 6 months, i have been using{" "}
@@ -51,7 +51,7 @@ export default function System() {
       />
       <p>
         With the <strong>Kernal</strong> version <strong>6.4.3</strong>. I
-        don$&apos;t know any linux distro will give this latest version of
+        don&apos;t know any linux distro will give this latest version of
         kernal.
       </p>
       <p>
