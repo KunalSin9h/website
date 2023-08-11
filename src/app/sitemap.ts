@@ -7,7 +7,7 @@ const Sitemap = () => {
     lastModified: post.published,
   }));
 
-  const routes = ["", "/", "/blog", "/stack", "/system", "/work"].map(
+  const routes = ["", "/", "/blog", "/system", "/work"].map(
     (route) => ({
       url: `https://kunalsin9h.com${route}`,
       lastModified: new Date().toISOString().split("T")[0],
