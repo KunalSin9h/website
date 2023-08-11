@@ -28,7 +28,17 @@ export default function SelectRoute() {
       <SelectTrigger className="w-[120px]">
         <SelectValue placeholder="Select page" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent
+        // When taping the list item, the mobile version will open the nearest link
+        // fix
+        // https://github.com/shadcn-ui/ui/issues/486#issuecomment-1669279593
+        ref={(ref) => {
+          if (!ref) return;
+          ref.ontouchstart = (e) => {
+            e.preventDefault();
+          };
+        }}
+      >
         <SelectGroup>
           <SelectItem defaultChecked value="about">
             About
