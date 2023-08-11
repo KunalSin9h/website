@@ -103,7 +103,7 @@ const components = {
 
   // @ts-ignore
   li: ({ className, ...props }) => (
-    <li className={cn("mt-2 ml-4", className)} {...props} />
+    <li className={cn("mt-2 ml-2", className)} {...props} />
   ),
 
   // @ts-ignore
