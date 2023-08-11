@@ -62,7 +62,7 @@ best to follow them and respect the community style.
 - `defmodule` and `def` are macros, not keywords
 - if function has no argument then we can omit the parentheses:
 
-```exs title="data.ex" showLineNumbers {3,10}
+```elixir title="data.ex" showLineNumbers {3,10}
 defmodule Data do
 
   def name do
@@ -79,7 +79,7 @@ The return value of a function is the return value of its last expression. There
 
 -> if function definition is small, we can use **condense** syntax, like
 
-```exs title="data.ex" showLineNumbers {3}
+```elixir title="data.ex" showLineNumbers {3}
 defmodule Data do
 
   def name, do: "Kunal Singh"
@@ -90,7 +90,7 @@ end
 IO.puts(Data.name)
 ```
 
-```ex title="geometry.ex" showLineNumbers {5}
+```elixir title="geometry.ex" showLineNumbers {5}
 defmodule Geometry do
   def square_area(a), do: a * a
 end
@@ -108,7 +108,7 @@ elixir geometry.ex
 
 Parenthesis are **optional** in elixir,
 
-```exs title="geometry.ex" showLineNumbers {5,7}
+```elixir title="geometry.ex" showLineNumbers {5,7}
 defmodule Geometry do
   def square_area(a), do: a * a
 end
@@ -123,7 +123,7 @@ IO.puts area
 
 If function are in very same `module` , no need to prefix it with the `module` name
 
-```exs title="person.ex" showLineNumbers {12,13}
+```elixir title="person.ex" showLineNumbers {12,13}
 defmodule Person do
 
   def first_name do
@@ -149,7 +149,7 @@ IO.puts(Person.full_name)
 
 ### Pipeline Operator
 
-```exs title="pipeline.ex" showLineNumbers
+```elixir title="pipeline.ex" showLineNumbers
 a = -2 |> abs() |> Integer.to_string()
 
 IO.puts(a)
@@ -178,7 +178,7 @@ next(pervious(a, b), c, d)
 
 What is the output of the following code
 
-```exs title="pipeline.ex" showLineNumbers
+```elixir title="pipeline.ex" showLineNumbers
 a = -2 |> abs() |> max(1) |> min(0)
 IO.puts(a)
 ```
