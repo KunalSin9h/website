@@ -96,9 +96,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background font-sans text-[0.9rem] selection:bg-[#00FFCA] dark:selection:bg-[#E4DCCF] dark:selection:text-black">
+      <body className="min-h-screen bg-background font-sans text-[1rem] selection:bg-[#C8FFE0] dark:selection:bg-[#475569] dark:selection:text-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex min-h-screen flex-col py-8">
+          <div className="flex min-h-screen flex-col py-4 md:py-8">
             <header className="container">
               <div className="flex items-center justify-between border-b py-4">
                 <a href="/" className="flex items-center space-x-2">

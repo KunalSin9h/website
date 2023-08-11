@@ -17,7 +17,7 @@ export default function Home() {
           href="https://www.google.com/maps/place/Bhopal,+Madhya+Pradesh/@23.1993882,77.3234907,12z/data=!3m1!4b1!4m6!3m5!1s0x397c428f8fd68fbd:0x2155716d572d4f8!8m2!3d23.2599333!4d77.412615!16zL20vMGN3NTE?entry=ttu"
           prefetch={false}
         >
-          <span className="font-bold hover:opacity-60 text-[0.9rem] inline-block">
+          <span className="font-bold hover:opacity-60 text-[1rem] inline-block">
             <svg
               className="inline text-orange-400"
               xmlns="http://www.w3.org/2000/svg"

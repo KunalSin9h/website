@@ -22,7 +22,7 @@ const components = {
   h1: ({ className, ...props }) => (
     <h1
       className={cn(
-        "mt-2 scroll-m-20 text-4xl font-bold tracking-tight",
+        "mt-2 scroll-m-20 text-2xl font-bold tracking-tight",
         className
       )}
       {...props}
@@ -32,7 +32,7 @@ const components = {
   h2: ({ className, ...props }) => (
     <h2
       className={cn(
-        "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+        "mt-4 scroll-m-20 text-xl font-semibold tracking-tight",
         className
       )}
       {...props}
@@ -43,7 +43,7 @@ const components = {
   h3: ({ className, ...props }) => (
     <h3
       className={cn(
-        "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight",
+        "mt-4 scroll-m-20 text-lg font-semibold tracking-tight",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ const components = {
   h4: ({ className, ...props }) => (
     <h4
       className={cn(
-        "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+        "mt-4 scroll-m-20 text-md font-semibold tracking-tight",
         className
       )}
       {...props}
@@ -65,18 +65,7 @@ const components = {
   h5: ({ className, ...props }) => (
     <h5
       className={cn(
-        "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-        className
-      )}
-      {...props}
-    />
-  ),
-
-  // @ts-ignore
-  h6: ({ className, ...props }) => (
-    <h6
-      className={cn(
-        "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
+        "mt-4 scroll-m-20 text-sm font-semibold tracking-tight",
         className
       )}
       {...props}
@@ -86,7 +75,10 @@ const components = {
   // @ts-ignore
   a: ({ className, ...props }) => (
     <a
-      className={cn("font-medium underline underline-offset-4", className)}
+      className={cn(
+        "font-medium underline underline-offset-4 decoration-[#52525b80] dark:decoration-slate-500 hover:decoration-pink-400 dark:hover:decoration-pink-400",
+        className
+      )}
       {...props}
     />
   ),
@@ -94,31 +86,31 @@ const components = {
   // @ts-ignore
   p: ({ className, ...props }) => (
     <p
-      className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+      className={cn("leading-7 [&:not(:first-child)]:mt-4", className)}
       {...props}
     />
   ),
 
   // @ts-ignore
   ul: ({ className, ...props }) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul className={cn("my-4 ml-4 list-disc", className)} {...props} />
   ),
 
   // @ts-ignore
   ol: ({ className, ...props }) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+    <ol className={cn("my-4 ml-4 list-decimal", className)} {...props} />
   ),
 
   // @ts-ignore
   li: ({ className, ...props }) => (
-    <li className={cn("mt-2", className)} {...props} />
+    <li className={cn("mt-2 ml-4", className)} {...props} />
   ),
 
   // @ts-ignore
   blockquote: ({ className, ...props }) => (
     <blockquote
       className={cn(
-        "mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground",
+        "mt-4 border-l-4 pl-4 rounded pt-1 bg-slate-200 border-slate-400 text-slate-700 dark:bg-slate-900 dark:border-l-slate-700 dark:text-slate-200",
         className
       )}
       {...props}
@@ -130,11 +122,12 @@ const components = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
+    <img className={cn("rounded", className)} alt={alt} {...props} />
   ),
-  hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
+  hr: ({ ...props }) => <hr className="my-2 md:my-4" {...props} />,
+
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
-    <div className="my-6 w-full overflow-y-auto">
+    <div className="my-4 w-full overflow-y-auto">
       <table className={cn("w-full", className)} {...props} />
     </div>
   ),
@@ -169,7 +162,7 @@ const components = {
   pre: ({ className, ...props }) => (
     <pre
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4",
+        "mb-4 mt-4 overflow-x-auto rounded-lg border bg-black py-4",
         className
       )}
       {...props}
