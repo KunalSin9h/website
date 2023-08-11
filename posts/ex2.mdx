@@ -1,0 +1,186 @@
+---
+title: Elixir 2: Modules, Functions, Pipeline Operator
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-11"
+---
+
+- `modules` is like `namespace` in **Elixir**
+- every elixir function **must** be defined inside a `module` [^1]
+- `module` -> collection of function
+
+[^1]: I think this is done to prevent confusion / hoch-poch, as elixir only have function, so how we can manage so large number of functions
+
+`IO` is a module present in the elixir standard library, which have `.puts()` function
+
+```bash
+iex(1)> IO.puts("Hello, World")
+Hello, World
+:ok
+iex(2)> IO.puts "Hello, World"
+Hello, World
+:ok
+iex(3)>
+```
+
+To define our own `module`, use the `defmodule` construct. Inside the `module`, we define functions using `def` construct.
+
+```bash
+iex(1)> defmodule Math do
+...(1)>    def sum(a, b) do
+...(1)>        a + b
+...(1)>    end
+...(1)> end
+{:module, Math,
+ <<70, 79, 82, 49, 0, 0, 5, 64, 66, 69, 65, 77, 65, 116, 85, 56, 0, 0, 0, 168,
+   0, 0, 0, 18, 11, 69, 108, 105, 120, 105, 114, 46, 77, 97, 116, 104, 8, 95,
+   95, 105, 110, 102, 111, 95, 95, 10, 97, ...>>, {:sum, 2}}
+iex(2)> Math.sum(10, 99)
+109
+iex(3)> Math.sum(-1, -2)
+-3
+iex(4)> Math.sum(0, 0)
+0
+iex(5)> Math.sum(5, -5)
+0
+iex(6)>
+```
+
+- extension are `.ex` or `.exs`
+- `module` must be defined in single source file, many `moduels` can be defined in single source file,
+- `module` name must be start with uppercase and usually it is CamelCase style. A `module` name can contain number, underscore, and `.` (dot)
+- we can nest modules
+
+#### Functions
+
+As with variables, function names can end with the `?` and `!`
+characters. The `?` character is often used to indicate a function
+that returns either `true` or `false`. Placing the character `!` at the
+end of the name indicates a function that may raise a `runtime`
+`error`. Both of these are conventions, rather than rules, but it’s
+best to follow them and respect the community style.
+
+- `defmodule` and `def` are macros, not keywords
+- if function has no argument then we can omit the parentheses:
+
+```exs title="data.ex" showLineNumbers {3,10}
+defmodule Data do
+
+  def name do
+    "Kunal Singh"
+  end
+
+end
+
+
+IO.puts(Data.name)
+```
+
+The return value of a function is the return value of its last expression. There’s no explicit return in Elixir.
+
+-> if function definition is small, we can use **condense** syntax, like
+
+```exs title="data.ex" showLineNumbers {3}
+defmodule Data do
+
+  def name, do: "Kunal Singh"
+
+end
+
+
+IO.puts(Data.name)
+```
+
+```ex title="geometry.ex" showLineNumbers {5}
+defmodule Geometry do
+  def square_area(a), do: a * a
+end
+
+area = Geometry.square_area(10)
+
+IO.puts(area)
+```
+
+To run all these file use `elixir` as
+
+```bash
+elixir geometry.ex
+```
+
+Parenthesis are **optional** in elixir,
+
+```exs title="geometry.ex" showLineNumbers {5,7}
+defmodule Geometry do
+  def square_area(a), do: a * a
+end
+
+area = Geometry.square_area 10
+
+IO.puts area
+```
+
+> `mix` the **Build tool** for `Elixir` (which must have installed along with `elixir`) has a formatter, which can format the code as.
+> **`mix format file.ex`**
+
+If function are in very same `module` , no need to prefix it with the `module` name
+
+```exs title="person.ex" showLineNumbers {12,13}
+defmodule Person do
+
+  def first_name do
+    "Kunal"
+  end
+
+  def last_name do
+    "Singh"
+  end
+
+  def full_name do
+    f = first_name()
+    l = last_name()
+    f <> " " <> l
+  end
+
+end
+
+IO.puts(Person.full_name)
+```
+
+> **Note**: `f <> " " <> l` in line 14 is _string concatination_
+
+### Pipeline Operator
+
+```exs title="pipeline.ex" showLineNumbers
+a = -2 |> abs() |> Integer.to_string()
+
+IO.puts(a)
+```
+
+This `pipeline operator` is just syntax sugar which will compile in this construct at compile time
+
+```bash
+IO.puts(Integer.to_string(abs(-2)))
+```
+
+In general the `|>` puts the result of previous function to the **first** argument of the next function
+i.e
+
+```bash
+previous(a, b) |> next(c, d)
+```
+
+is same as
+
+```bash
+next(pervious(a, b), c, d)
+```
+
+#### Question?
+
+What is the output of the following code
+
+```exs title="pipeline.ex" showLineNumbers
+a = -2 |> abs() |> max(1) |> min(0)
+IO.puts(a)
+```
+
+To be continued...
