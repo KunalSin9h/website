@@ -34,7 +34,6 @@ export default function SelectRoute() {
             About
           </SelectItem>
           <SelectItem value="work">Work</SelectItem>
-          <SelectItem value="stack">Stack</SelectItem>
           <SelectItem value="system">System</SelectItem>
           <SelectItem value="blog">Blog</SelectItem>
         </SelectGroup>
