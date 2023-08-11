@@ -5,6 +5,7 @@ import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import MDX from "@/components/MDX";
 import PageMeta from "@/lib/pageMetadata";
+import Link from "next/link";
 
 allPosts.sort((a, b) => (a.published < b.published ? 1 : -1));
 
@@ -38,7 +39,13 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
   if (!post) notFound();
 
   return (
-    <article className="w-full py-4">
+    <article className="w-full py-2">
+      <Link
+        href={"/blog"}
+        className="underline underline-offset-4 hover:decoration-pink-400"
+      >
+        &larr; back
+      </Link>
       <div className="mb-8 text-left">
         <time dateTime={post.published} className="mb-1 text-xs text-gray-600">
           {format(parseISO(post.published), "LLLL d, yyyy")}
