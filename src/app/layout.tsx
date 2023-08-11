@@ -96,7 +96,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background font-sans text-[1rem] selection:bg-[#C8FFE0] dark:selection:bg-[#475569] dark:selection:text-white">
+      <body className="min-h-screen bg-background font-sans text-[1rem] selection:bg-[#C8FFE0] dark:selection:bg-[#F1F0E8] dark:selection:text-black">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex min-h-screen flex-col py-4 md:py-8">
             <header className="container">
