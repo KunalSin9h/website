@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import MDX from "@/components/MDX";
 import PageMeta from "@/lib/pageMetadata";
 import Link from "next/link";
+import { GetViewsAndUpdate } from "@/components/Views";
 
 allPosts.sort((a, b) => (a.published < b.published ? 1 : -1));
 
@@ -47,9 +48,12 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
         &larr; back
       </Link>
       <div className="mb-8 text-left">
-        <time dateTime={post.published} className="mb-1 text-xs text-gray-600">
-          {format(parseISO(post.published), "LLLL d, yyyy")}
-        </time>
+        <div className="mb-1 text-xs text-gray-600 flex items-center space-x-2">
+          <time dateTime={post.published}>
+            {format(parseISO(post.published), "LLLL d, yyyy")}
+          </time>
+          <GetViewsAndUpdate slug={params.slug} />
+        </div>
         <h1 className="text-2xl md:text-3xl font-bold">{post.title}</h1>
       </div>
       <MDX code={post.body.code} />
