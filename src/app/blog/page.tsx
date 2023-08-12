@@ -3,6 +3,7 @@ import { compareDesc, format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
 import { Metadata } from "next";
 import PageMeta from "@/lib/pageMetadata";
+import { GetViews } from "@/components/Views";
 
 export const metadata: Metadata = PageMeta({
   title: "All Blogs",
@@ -21,12 +22,12 @@ function Post(post: Post) {
           {post.title}
         </Link>
       </h2>
-      <time
-        dateTime={post.published}
-        className="mb-2 block text-xs text-gray-600"
-      >
-        {format(parseISO(post.published), "LLLL d, yyyy")}
-      </time>
+      <div className="flex space-x-2 items-center block text-xs text-gray-600">
+        <time dateTime={post.published}>
+          {format(parseISO(post.published), "LLLL d, yyyy")}
+        </time>
+        <GetViews slug={post.slug} />
+      </div>
     </div>
   );
 }
