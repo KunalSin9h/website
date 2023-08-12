@@ -1,0 +1,168 @@
+---
+title: Elixir 3. Function Arity, default parameters, private functions, imports, alias, attributes
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-13"
+---
+
+## Function Arity
+
+`Arity`, a fancy name for the number of arguments a function receives. So, a function can be uniquely identified by its `module` , `name` & `arity`.
+
+A function can have same name but with different `arity`.
+If function have an `arity` of _2_ then in **Elixir** world, it is refereed as `Module.func_name/2`
+
+```elixir showLineNumbers title="math.ex"
+defmodule Rectangle do
+  def area(a), do: area(a, a)
+  def area(a, b), do: a * b
+end
+
+IO.puts(Rectangle.area(5, 4))
+IO.puts(Rectangle.area(10))
+```
+
+This pattern allow for lower-arity function to **delegate** to higher-arity functions like
+
+```elixir showLineNumber
+defmodule Math do title="math.ex"
+  def sum(a) do
+    sum(a, 0)
+  end
+
+  def sum(a, b) do
+    a + b
+  end
+end
+
+IO.puts(Math.sum(10))
+IO.puts(Math.sum(10, 10))
+```
+
+This pattern is so frequent, that elixir provides an operator for default parameter, the `\\` operator.
+
+```elixir showLineNumbers title="math.ex" {2}
+defmodule Math do
+  def sum(a, b \\ 0) do
+    a + b
+  end
+end
+
+IO.puts(Math.sum(10))
+IO.puts(Math.sum(10, 10))
+
+```
+
+We can make function **`private`** which can only be accessed within the module in which it is defined. We use **`defp`** macro.
+
+```elixir showLineNumbers title="private.ex" {6}
+defmodule Math do
+  def sum(a, b, c) do
+    sum(a, b) + c
+  end
+
+  defp sum(a, b), do: a + b
+end
+
+IO.puts(Math.sum(10, 10))
+```
+
+To use one modules public functions into another module, we need to `import` it.
+
+```elixir showLineNumbers title="import.ex" {8}
+defmodule Cmp do
+  def max_x(a, b) do
+    max(a, b)
+  end
+end
+
+defmodule Math do
+  import Cmp
+
+  def sum(a, b, c) do
+    max_x(a, b) + max_x(b, c)
+  end
+end
+
+IO.puts(Math.sum(10, 10, 10))
+```
+
+Once `import` we can use its public function without `module prefix`
+
+> `Kernal`, the standard module is imported by default in every module
+
+**Alias**, we can import `as`.
+
+```elixir showLineNumbers title="alias.ex" {8,11}
+defmodule Cmp do
+  def max_x(a, b) do
+    max(a, b)
+  end
+end
+
+defmodule Math do
+  alias Cmp, as: Compare
+
+  def sum(a, b, c) do
+    Compare.max_x(a, b) + Compare.max_x(b, c)
+  end
+end
+
+IO.puts(Math.sum(10, 10, 10))
+```
+
+**Modules Attributes** (`@`)
+
+Module `Attributes` are construct which are defined inside module but they are not functions,
+
+They are.
+
+1. **Compile Time Constants**, which will be `inlined` at compile time, they are not present at runtime.
+
+```elixir showLineNumbers {2,4,6}
+defmodule Geometry do
+  @pi 3.14159
+
+  def area(r), do: @pi * r * r
+
+  def circumference(r), do: 2 * @pi * r
+end
+
+IO.puts(Geometry.area(5))
+IO.puts(Geometry.circumference(5))
+```
+
+2. **Registered** Attributes, they are present at the binary, and can be accessed at runtime
+
+```elixir showLineNumbers
+defmodule Geometry do
+  @moduledoc """
+  Implement basic circle functions
+  """
+  @pi 3.14159
+
+  @doc """
+  Computes the area of circle
+  """
+  @spec area(number) :: number
+  def area(r), do: @pi * r * r
+
+  @doc """
+  Computes the circumference of circle
+  """
+  @spec circumference(number) :: number()
+  def circumference(r), do: 2 * @pi * r
+end
+
+IO.puts(Geometry.area(5))
+IO.puts(Geometry.circumference(5))
+```
+
+Here, `@moduledoc` is for writing documentation of `module`, `@doc` for writing documentation for `functions` and `@spec` for **Type Specification** (**Typespec** ), they are consider good for wiring production code.
+
+**Comments**
+Use `#` for comments, for multiline use `#` for each line, i.e there is not bulk comment construct.
+
+```elixir showLineNumbers
+# This is a comment
+a = 3.14      # so is this
+```
