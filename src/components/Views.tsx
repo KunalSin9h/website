@@ -45,8 +45,10 @@ export function GetViewsAndUpdate({ slug }: { slug: string }) {
       method: "POST",
     }).then((res) => res.json());
 
+  // This query q=update does not do anything in backend
+  // this is just to differentitate the two urls
   const { data, error, isLoading } = useSWR<Response>(
-    `https://api.kunalsin9h.com/v1/views/${slug}`,
+    `https://api.kunalsin9h.com/v1/views/${slug}?q=update`,
     fetcher
   );
 
