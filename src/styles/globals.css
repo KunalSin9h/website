@@ -102,6 +102,11 @@
   }
 }
 
+code {
+  @apply bg-[#AFB8C1] bg-opacity-20 dark:bg-[#6E7681] dark:bg-opacity-40
+}
+
+
 .container {
   width: 100%;
   margin-right: auto;
