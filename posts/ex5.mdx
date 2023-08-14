@@ -68,7 +68,7 @@ iex(4)>
 ```
 
 b 2. **Map.fetch!(map, key)**
-This will `raise` and `Excecption` (the ! is only for convention, indicating this)
+This will `raise` and `Exception` (the ! is only for convention, indicating this)
 
 ```bash {5}
 iex(4)> m = %{1 => 1, 2 => 2, 3 => 3}
@@ -257,7 +257,7 @@ IO.puts(Main.main())
 
 For example `Enum.each/2` will take a list and a lambda / anonymous function.
 
-```elixir showLineNUmbes title="fruits.ex"
+```elixir showLineNumbers title="fruits.ex"
 defmodule Main do
   def main do
     l = ["Apple", "Banana", "Orange", "Papaya"]
@@ -271,7 +271,7 @@ end
 IO.puts(Main.main())
 ```
 
-Sometime we use lambda to just pass the flow to some other function, lets say, `MODULE.function_name/4`, in that case use can use `Caputure Operator` (the `&`) to just pass flow.
+Sometime we use lambda to just pass the flow to some other function, lets say, `MODULE.function_name/4`, in that case use can use `Capture Operator` (the `&`) to just pass flow.
 
 ```elixir showLineNumbers title="capture_operator.ex" {5}
 defmodule Main do
