@@ -1,0 +1,132 @@
+---
+title: Elixir 5. Ranges, Keyword List, MapSet, Date & Time
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-15"
+---
+
+# Higher Level Types
+
+All the build-in types discussed in previous blog posts are inherited by **Erlang** Type system. But on top of these types **Elixir** provides some higher-level abstraction.
+
+> Now the **Elixir** magic is coming, the most frequent are `Range`, `Keyword`, `MapSet` ,`Date`, `Time`, `NaiveDateTime` and `DateTime`.
+
+## Range
+
+A _range_ is an abstraction that allows you to represent a range
+of numbers. The syntax is `i..j`.
+
+```bash
+iex(1)> my_range = 1..2
+1..2
+iex(2)> 1 in my_range
+true
+iex(3)> 100 in my_range
+false
+iex(4)>
+```
+
+> Use of `in` operator ^^
+
+Range is enumerable, so we can use range on function from `Enum` modules, like
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def main do
+
+    Enum.each(1..10, &IO.puts/1)
+
+  end
+
+end
+
+Main.main
+```
+
+> `range` is just implemented by a `Map`, which means it just store the starting and the finish value, hence `range` is very efficient for any range values.
+
+## Keyword List
+
+_Keyword list_ is an abstraction over normal list (yes... the complexity of keyword list is also `O(N)`). A keyword list is essentially a list of tuples containing two elements, first is an `atom` and second can be `anything`.
+
+```bash
+iex(2)> kw_list = [{:debug, true}, {:port, "8080"}, {:env, "dev"}]
+[debug: true, port: "8080", env: "dev"]
+iex(3)>
+```
+
+To make the syntax of _Keyword List_ more elegant, we can omit `{}` and put `:` after the atom name, just like in [`Objects`](http://kunalsin9h.com/blog/ex5)
+
+```bash
+iex(3)> kw_list = [debug: true, port: "8080", env: "dev"]
+[debug: true, port: "8080", env: "dev"]
+iex(4)>
+```
+
+There are many available function in `Keyword` module check: https://hexdocs.pm/elixir/Keyword.htm
+
+Keyword list is heavily used in Elixir and Erlang for optional arguments, we use keyword list a last parameter so clients can give any amount of option arguments.
+
+```elixir showLineNumbers {6-7}
+defmodule Main do
+
+  def main do
+
+    printer(0, 2)
+    printer(0, 2, [msg: "Hello"])
+    printer(0, 2, msg: "Hello", msg_2: "World")
+  end
+
+  def printer(i, j, options \\ []) do
+
+    msg = Keyword.get(options, :msg, "")
+    msg2 = Keyword.get(options, :msg_2, "")
+
+    Enum.each(i..j, fn x ->
+      IO.puts(msg)
+      IO.puts(x)
+      IO.puts(msg2)
+    end)
+
+
+  end
+
+end
+
+Main.main
+```
+
+Line 5. We are not giving any optional arguments, 6. use are using keyword list syntax to pass one option arguments 7. Since this **Pattern** is so common we can omit `[]`
+
+This is the best use case of _Keyword List _ in _Elixir_ and _Erlang_ world.
+
+## MapSet
+
+It is just **SET**!
+
+```bash
+iex(4)> set = MapSet.new([1, 2, 2, 3, 2, 1, 1])
+MapSet.new([1, 2, 3])
+iex(5)>
+```
+
+We use `MapSet` module to work with _Sets_ and you can find more API reference about _MapSet_ here: https://hexdocs.pm/elixir/MapSet.html.
+
+```bash
+iex(4)> set = MapSet.new([1, 2, 2, 3, 2, 1, 1])
+MapSet.new([1, 2, 3])
+iex(5)> MapSet.member?(set, 2)
+true
+iex(6)> MapSet.member?(set, 99)
+false
+iex(7)> set = MapSet.put(set, 100)
+MapSet.new([1, 2, 3, 100])
+iex(8)>
+```
+
+## Dates & Time
+
+https://hexdocs.pm/elixir/Date.html
+https://hexdocs.pm/elixir/Time.html
+https://hexdocs.pm/elixir/DateTime.html
+https://hexdocs.pm/elixir/NaiveDateTime.html
