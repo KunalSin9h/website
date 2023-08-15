@@ -13,7 +13,7 @@ export const metadata: Metadata = PageMeta({
 
 function Post(post: Post) {
   return (
-    <div className="mb-4">
+    <div className="mb-8">
       <h2 className="mb-1 text-xl">
         <Link
           href={post.slug}
