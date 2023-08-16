@@ -7,6 +7,7 @@ import HoverTooltip from "@/components/hover-tooltip";
 import SelectRoute from "./router_select";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
+import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: { default: "Kunal Singh", template: "%s • Kunal Singh" },
@@ -170,6 +171,7 @@ export default function RootLayout({
                 <Analytics />
               </div>
             </main>
+            <BackToTop />
             <footer className="flex-1">
               <div className="container">
                 <Image
