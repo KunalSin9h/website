@@ -40,13 +40,19 @@ export function GetViews({ slug }: { slug: string }) {
 }
 
 export function GetViewsAndUpdate({ slug }: { slug: string }) {
+  // Skip views update when on local development
+  let method = "POST";
+  if (window.location.hostname === "localhost") {
+    method = "GET";
+  }
+
   const fetcher: Fetcher<Response> = (input: RequestInfo | URL) =>
     fetch(input, {
-      method: "POST",
+      method: method,
     }).then((res) => res.json());
 
   // This query q=update does not do anything in backend
-  // this is just to differentitate the two urls
+  // this is just to differentiate the two urls
   const { data, error, isLoading } = useSWR<Response>(
     `https://api.kunalsin9h.com/v1/views/${slug}?q=update`,
     fetcher
