@@ -15,7 +15,7 @@ export default function BackToTop() {
   return (
     <button
       aria-label="Back to top"
-      className={`fixed p-2 bottom-2 right-2 backdrop-blur-xl rounded cursor-pointer bg-slate-500/30 hover:bg-slate-500/40 dark:bg-white/30 dark:hover:bg-white/40 transition-all ease-linear ${
+      className={`fixed p-2 bottom-2 right-2 backdrop-blur-sm rounded cursor-pointer bg-slate-500/30 hover:bg-slate-500/40 dark:bg-white/30 dark:hover:bg-white/40 transition-all ease-linear ${
         up ? "rotate-0" : "rotate-180"
       }`}
       onClick={(e) => {
