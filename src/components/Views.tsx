@@ -40,15 +40,9 @@ export function GetViews({ slug }: { slug: string }) {
 }
 
 export function GetViewsAndUpdate({ slug }: { slug: string }) {
-  // Skip views update when on local development
-  let method = "POST";
-  if (window.location.hostname === "localhost") {
-    method = "GET";
-  }
-
   const fetcher: Fetcher<Response> = (input: RequestInfo | URL) =>
     fetch(input, {
-      method: method,
+      method: "POST",
     }).then((res) => res.json());
 
   // This query q=update does not do anything in backend
