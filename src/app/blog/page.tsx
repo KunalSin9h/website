@@ -14,10 +14,10 @@ export const metadata: Metadata = PageMeta({
 function Post(post: Post) {
   return (
     <div className="mb-8">
-      <h2 className="mb-1 text-xl">
+      <h2 className="mb-1 text-lg md:text-xl">
         <Link
           href={post.slug}
-          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+          className="text-slate-700 hover:text-slate-900 dark:text-slate-400"
         >
           {post.title}
         </Link>
