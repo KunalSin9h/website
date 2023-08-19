@@ -1,0 +1,413 @@
+---
+title: Elixir 8. Control flow, Pattern matching, Guards, Multiclause functions and lambdas
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-19"
+---
+
+# Control Flow
+
+## Pattern Matching
+
+When i write `a = 1`, this means _variable a_ is bound to _value 1_.
+
+Here, the assignment-like operator is an example of _Pattern Matching_, and the `=` operator is called _Match Operator_.
+
+### The Match Operator _aka_ `=`
+
+The basic pattern matching on _Tuple_ is like:
+
+```bash
+iex(2)> {name, age} = {"Kunal Singh", 21}
+{"Kunal Singh", 21}
+iex(3)> name
+"Kunal Singh"
+iex(4)> age
+21
+iex(5)>
+```
+
+Another example using _Erlang's_ function `:calendar.local_time/0`
+
+```bash
+iex(5)> :calendar.local_time
+{{2023, 8, 17}, {23, 58, 14}}
+iex(6)> {date, time} = :calendar.local_time
+{{2023, 8, 17}, {23, 58, 37}}
+iex(7)> date
+{2023, 8, 17}
+iex(8)> time
+{23, 58, 37}
+iex(9)> {year, month, day} = date
+{2023, 8, 17}
+iex(10)> {hr, min, sec} = time
+{23, 58, 37}
+iex(11)> year
+2023
+iex(12)> month
+8
+iex(13)> day
+17
+iex(14)> hr
+23
+iex(15)> min
+58
+iex(16)> sec
+37
+iex(17)>
+```
+
+Finally, it’s worth noting that, just like any other expression,
+the match expression also returns a value. The result of a
+match expression is always the **right-side term** you’re matching
+against:
+
+```bash
+iex(4)> {date, time} = :calendar.local_time
+{{2023, 8, 18}, {23, 10, 31}}
+iex(5)>
+```
+
+**M**atching is not always confined to `var = val`, it cal also be `val = var` or `val = val`.
+
+```bash
+iex(15)> var = 1
+1
+iex(16)> 1 = var
+1
+iex(17)> 1 = 1
+1
+iex(18)>
+```
+
+The left-side pattern can also include constants:
+
+```bash
+iex(1) 1 = 1
+1
+```
+
+This helps in advance matching (_Compound Matching_) like were we try to match with some knowledge
+
+```bash
+iex(19)> person = {:person, "Kunal Singh", 21}
+{:person, "Kunal Singh", 21}
+iex(20)> laptop = {:laptop, "DELL", "16GB", "1TB SSD"}
+{:laptop, "DELL", "16GB", "1TB SSD"}
+iex(21)>
+nil
+iex(22)>
+nil
+iex(23)> {:person, name, age} = person
+{:person, "Kunal Singh", 21}
+iex(24)> {:laptop, company, ram, ssd} = laptop
+{:laptop, "DELL", "16GB", "1TB SSD"}
+iex(25)> name
+"Kunal Singh"
+iex(26)> age
+21
+iex(27)> company
+"DELL"
+iex(28)> ram
+"16GB"
+iex(29)> ssd
+"1TB SSD"
+iex(30)>
+```
+
+This is a common idiom in _Elixir_.
+
+Many function in _Elixir_ and _Erlang_ return either `{:ok, result}` or `{:error, reason}`. so i can pattern match and handle both cases, and treat **Errors as Values**.
+
+Like, `File.read/1` will give this type of return.
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def main do
+
+    {:ok, content} = File.read("./main.ex")
+
+    content
+  end
+
+end
+
+IO.puts(Main.main)
+```
+
+#### Two Things
+
+1. If am not using a variable, prefix it with `_`
+2. If i don't care about any variable in _Pattern Matching_, replace it with `_`
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def main do
+
+    # i am not going to use content so prefix it with _
+    {:ok, _content} = File.read("./main.ex")
+
+    # i am not interested in variables to replace it with _
+    {_, {hr, _, _}} = :calendar.local_time()
+
+    hr
+  end
+
+end
+
+IO.puts(Main.main)
+```
+
+#### Pin Operator _aka_ `^`
+
+This operator is used to match the value to the pattern from variable.
+
+```elixir showLineNumbers {9}
+defmodule Main do
+
+  def main do
+
+    what_is_his_name = "Kunal"
+
+    person = {"Kunal", 21}
+
+    {^what_is_his_name, age} = person
+
+    age
+
+  end
+
+end
+
+IO.puts(Main.main)
+```
+
+## Match Expression
+
+A match expression has a general form as
+
+```bash
+pattern = expression
+```
+
+And the overall result of the expression will be `expression`
+
+So we can _Chain Patter Matching Expression_ like
+
+```bash
+pattern = pattern_2 = pattern_3 = expression
+```
+
+![image which represent above idea](https://tiddi.kunalsin9h.com/3k625XE)
+
+## Matching in Function arguments
+
+```elixir showLineNumbers {3}
+defmodule Main do
+
+  def current_second({_, {_, _, sec}}) do
+      sec
+  end
+
+end
+
+IO.puts(Main.current_second(:calendar.local_time))
+```
+
+# Multiclause Function
+
+> One of the Most important features in Elixir.
+
+Elixir allows you to **overload** a function by specifying multiple
+**clauses**. A _clause_ is a function definition specified by the def
+construct. If you provide multiple definitions of the same
+function with the same arity, it’s said that the function has
+multiple clauses.
+
+> If the meaning of `Clause` is just `function definition` ,the meaning of _Multiclause Function _ just means same function with multi definitions
+
+We can create overloaded function with **Different arity**, but only pattern matching allowed us to create overloaded functions with **same arity**.
+
+```elixir showLineNumbers
+defmodule Geometry do
+  @pi 3.14159
+
+  def area({:rectangle, a, b}) do
+    a * b
+  end
+
+  def area({:square, a}) do
+    a * a
+  end
+
+  def area({:circle, a}) do
+    @pi * a * a
+  end
+
+  @doc """
+  default area function which will be called
+  if none of above function will be matched
+  """
+  def area(unknown) do
+    {:error, {:unknown_shape, unknown}}
+  end
+end
+
+IO.puts(Geometry.area({:rectangle, 5, 10}))
+IO.puts(Geometry.area({:square, 5}))
+IO.puts(Geometry.area({:circle, 10}))
+```
+
+The Runtime search for the matching _clause_ using order in the source code.
+
+> Create multiclause functions at the same position, because their **Position** also places a vital role in the behavior of the execution.
+
+# Guards
+
+Guards are created by `when` keyword, they are like extra layer of pattern matching.
+
+```elixir showLineNumbers
+defmodule Guards do
+
+  def check_parity(0), do: :zero
+
+  def check_parity(num) when num < 0 do
+    :negative
+  end
+
+  def check_parity(num) when num > 0 do
+    :positive
+  end
+
+end
+
+IO.puts(Guards.check_parity(0))
+IO.puts(Guards.check_parity(1))
+IO.puts(Guards.check_parity(-1))
+IO.puts(Guards.check_parity("ABCDE"))
+IO.puts(Guards.check_parity(:x))
+```
+
+This outputs
+
+```bash
+$ elixir main.ex
+zero
+positive
+negative
+positive
+positive
+```
+
+Last tow are bit confusing because, how `"ABCDE"` and `:x` are positive.
+The explanation is that in elixir every types are comparable with `<` and `>`
+
+The their order is :
+
+```elixir
+number < atom < reference < fun < port < pid <
+  tuple < map < list < bitstring (binary)
+```
+
+So, "ABCDE" > 0 and :x > 0
+
+But wait a second.... , these are not numbers, this should not be a valid comparison. So how can we stop this comparison?
+
+using `Kernel.is_number/1`
+
+```elixir showLineNumbers {5,9}
+defmodule Guards do
+
+  def check_parity(0), do: :zero
+
+  def check_parity(num) when is_number(num) and num < 0 do
+    :negative
+  end
+
+  def check_parity(num) when is_number(num) and num > 0 do
+    :positive
+  end
+
+end
+
+IO.puts(Guards.check_parity(0))
+IO.puts(Guards.check_parity(1))
+IO.puts(Guards.check_parity(-1))
+IO.puts(Guards.check_parity("ABCDE"))
+IO.puts(Guards.check_parity(:x))
+```
+
+This outputs
+
+```bash
+$ elixir main.ex
+zero
+positive
+negative
+** (FunctionClauseError) no function clause matching in Guards.check_parity/1
+
+    The following arguments were given to Guards.check_parity/1:
+
+        # 1
+        "ABCDE"
+
+    main.ex:3: Guards.check_parity/1
+    main.ex:18: (file)
+```
+
+Here, `is_number` is a special type of function called `Type checking function`. Their are other like `is_atom/1`, `is_binary/1` (for "strings") and so on.
+More: https://hexdocs.pm/elixir/guards.html.
+
+I am not allowed to call my same function in the guard. Of course for recursion reasons.
+
+This is another great example of guards.
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def smallest_element(list) when length(list) > 0 do
+    Enum.min(list)
+  end
+
+  def smallest_element(_), do: {:error, "This is not a list"}
+end
+```
+
+**IMPORTANT** Guard will convert error thrown in to `false` and move on.
+
+We are done!
+
+The General pattern for **Guard** will be
+
+```elixir
+def fun(a, b) when boolean do
+end
+```
+
+## Multiclause Lambdas
+
+An example for multiclause lambdas is
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def main(num) do
+
+    check_parity =
+      fn
+        0 -> :zero
+        x when is_number(x) and x > 0 -> :positive
+        x when is_number(x) and x < 0 -> :negative
+      end
+
+    check_parity.(num)
+  end
+
+end
+
+
+IO.puts(Main.main(0))
+IO.puts(Main.main(1))
+IO.puts(Main.main(-1))
+```
