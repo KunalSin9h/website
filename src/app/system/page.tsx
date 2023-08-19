@@ -1,4 +1,13 @@
 import Image from "next/image";
+import { Metadata } from "next";
+import PageMeta from "@/lib/pageMetadata";
+
+export const metadata: Metadata = PageMeta({
+  title: "System & Tools",
+  description: "Operating Systems, Editors, Desktop Environments & Other Tools",
+  url: "https://kunalsin9h.com/system/",
+});
+
 
 export default function System() {
   return (
