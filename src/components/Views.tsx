@@ -1,6 +1,8 @@
 "use client";
 
 import useSWR, { Fetcher } from "swr";
+import { useState, useEffect } from "react";
+import useSWRMutation from "swr/mutation";
 import { Skeleton } from "@/components/ui/skeleton";
 import millify from "millify";
 
@@ -40,22 +42,33 @@ export function GetViews({ slug }: { slug: string }) {
 }
 
 export function GetViewsAndUpdate({ slug }: { slug: string }) {
-  const fetcher: Fetcher<Response> = (input: RequestInfo | URL) =>
-    fetch(input, {
-      method: "POST",
-    }).then((res) => res.json());
+  const [views, setViews] = useState(0);
 
-  // This query q=update does not do anything in backend
-  // this is just to differentiate the two urls
-  const { data, error, isLoading } = useSWR<Response>(
-    `https://api.kunalsin9h.com/v1/views/${slug}?q=update`,
-    fetcher
+  const { trigger, isMutating, data, error } = useSWRMutation(
+    `https://api.kunalsin9h.com/v1/views/${slug}`,
+    async function (url) {
+      return await fetch(url, {
+        method: "POST",
+      });
+    }
   );
 
-  if (error) return null;
-  if (isLoading) return <Skeleton className="w-[30px] h-[15px] rounded" />;
+  useEffect(() => {
+    trigger();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const views = data?.data.views;
+  if (error) return null;
+  if (isMutating) return <Skeleton className="w-[30px] h-[15px] rounded" />;
+
+  data
+    ?.clone()
+    ?.json()
+    .then((viewsData: Response) => {
+      if (viewsData.success) {
+        setViews(viewsData.data.views);
+      }
+    });
 
   return (
     <span className="inline flex space-x-2">
