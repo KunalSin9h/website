@@ -32,10 +32,41 @@ function Post(post: Post) {
   );
 }
 
-export default function blog() {
+export default async function blog() {
   const posts = allPosts.sort((a: Post, b: Post) =>
     compareDesc(new Date(a.published), new Date(b.published))
   );
+
+  const search = posts.map((p: Post) => {
+    return {
+      id: p.slug.split("/").at(-1),
+      title: p.title,
+      description: p.description,
+      published: p.published,
+      content: p.body.raw,
+    };
+  });
+
+  if (process.env.NODE_ENV === "production") {
+    const index = "blog";
+    const response = await fetch(
+      `https://api.kunalsin9h.com/v1/search/${index}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: search,
+        }),
+      }
+    );
+
+    if (response.status !== 200) {
+      console.log("Failed to create / update document in the search server");
+      process.exit(1);
+    } else {
+      console.log("Updated search server");
+    }
+  }
 
   return (
     <div className="w-full py-4">
