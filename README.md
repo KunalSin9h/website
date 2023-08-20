@@ -8,6 +8,7 @@ Stack:
 - [Shadcn UI](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [pnpm](https://pnpm.js.org/)
+- [Meilisearch](https://github.com/meilisearch/meilisearch)
 
 ## Development
 
