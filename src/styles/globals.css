@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 0px !important;
+}
+
 .blur {
   top: 0;
   width: 100vw;
@@ -17,11 +21,11 @@
   backdrop-filter: blur(10px);
   opacity: 0.95;
   -webkit-mask-image: linear-gradient(to bottom, #161616 10%, transparent);
-  mask-image:linear-gradient(to bottom, #161616 10%, transparent);
+  mask-image: linear-gradient(to bottom, #161616 10%, transparent);
 }
 
 .blur:after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, #161616, transparent);
@@ -103,9 +107,8 @@
 }
 
 code {
-  @apply bg-[#AFB8C1] bg-opacity-20 dark:bg-[#6E7681] dark:bg-opacity-40
+  @apply bg-[#AFB8C1] bg-opacity-20 dark:bg-[#6E7681] dark:bg-opacity-40;
 }
-
 
 .container {
   width: 100%;
@@ -114,7 +117,6 @@ code {
   padding-right: 1rem;
   padding-left: 1rem;
 }
-
 
 @media (min-width: 680px) {
   .container {

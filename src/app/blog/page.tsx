@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
 import { Metadata } from "next";
 import PageMeta from "@/lib/pageMetadata";
-import { GetViews } from "@/components/Views";
+import Posts from "@/components/Posts";
+import { PostMeta } from "@/types/PostMeta";
 
 export const metadata: Metadata = PageMeta({
   title: "All Blogs",
@@ -11,39 +11,19 @@ export const metadata: Metadata = PageMeta({
   url: "https://kunalsin9h.com/blog/",
 });
 
-function Post(post: Post) {
-  return (
-    <div className="mb-8">
-      <h2 className="mb-1 text-lg md:text-xl">
-        <Link
-          href={post.slug}
-          className="text-slate-700 hover:text-slate-900 dark:text-slate-400"
-        >
-          {post.title}
-        </Link>
-      </h2>
-      <div className="flex space-x-2 items-center block text-xs text-gray-600">
-        <time dateTime={post.published}>
-          {format(parseISO(post.published), "LLLL d, yyyy")}
-        </time>
-        <GetViews slug={post.slug} />
-      </div>
-    </div>
-  );
-}
-
 export default async function blog() {
   const posts = allPosts.sort((a: Post, b: Post) =>
     compareDesc(new Date(a.published), new Date(b.published))
   );
 
-  const search = posts.map((p: Post) => {
+  const postsMeta: PostMeta[] = posts.map((post: Post) => {
     return {
-      id: p.slug.split("/").at(-1),
-      title: p.title,
-      description: p.description,
-      published: p.published,
-      content: p.body.raw,
+      id: post.slug.split("/").at(-1) || "-NON-ID-",
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      published: post.published,
+      content: post.body.raw,
     };
   });
 
@@ -55,7 +35,7 @@ export default async function blog() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          data: search,
+          data: postsMeta,
         }),
       }
     );
@@ -68,12 +48,5 @@ export default async function blog() {
     }
   }
 
-  return (
-    <div className="w-full py-4">
-      <h1 className="mb-4 text-2xl font-black">All Blogs</h1>
-      {posts.map((post: Post, idx: number) => (
-        <Post key={idx} {...post} />
-      ))}
-    </div>
-  );
+  return <Posts posts={postsMeta} />;
 }
