@@ -52,8 +52,8 @@ const BlogPage = ({ params }: { params: { slug: string } }) => {
           <time dateTime={post.published}>
             {format(parseISO(post.published), "LLLL d, yyyy")}
           </time>
-          {/* only update views when env is production not on local dev*/}
-          {process.env.node_env === "production" ? (
+          {/* Only update views when env is production not on local dev*/}
+          {process.env.NODE_ENV === "production" ? (
             <GetViewsAndUpdate slug={params.slug} />
           ) : null}
         </div>
