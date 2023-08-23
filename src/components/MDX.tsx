@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Fira_Code } from "next/font/google";
 
 const firaCode = Fira_Code({
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
   subsets: ["latin"],
   display: "swap",
 });
