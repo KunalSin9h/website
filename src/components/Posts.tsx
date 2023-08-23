@@ -29,6 +29,7 @@ function PostCard(post: PostMeta) {
 }
 
 export default function Posts({ posts }: { posts: PostMeta[] }) {
+  const original = posts;
   const [blogPosts, setBlogPosts] = useState(posts);
   const [textSearch, setTextSearch] = useState("");
 
@@ -40,7 +41,9 @@ export default function Posts({ posts }: { posts: PostMeta[] }) {
       const data: PostMeta[] = await response.json();
       setBlogPosts(data);
     };
-    fetchPosts();
+    if (textSearch !== "") {
+      fetchPosts();
+    }
   }, [textSearch]);
 
   return (
@@ -51,7 +54,11 @@ export default function Posts({ posts }: { posts: PostMeta[] }) {
           type="text"
           placeholder="Search..."
           onChange={(e) => {
-            setTextSearch(e.target.value);
+            if (e.target.value === "") {
+              setBlogPosts(original);
+            } else {
+              setTextSearch(e.target.value);
+            }
           }}
         />
       </div>
