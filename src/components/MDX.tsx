@@ -2,6 +2,13 @@ import * as React from "react";
 import Image, { ImageProps } from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
+import { Fira_Code } from "next/font/google";
+
+const firaCode = Fira_Code({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const keyStr =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -172,7 +179,7 @@ const components = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem]",
+        `relative rounded border px-[0.3rem] py-[0.2rem] text-[0.8rem] ${firaCode.className}`,
         className
       )}
       {...props}

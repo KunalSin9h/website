@@ -8,6 +8,13 @@ import SelectRoute from "./router_select";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
 import BackToTop from "@/components/BackToTop";
+import { League_Spartan } from "next/font/google";
+
+const leagueSpartan = League_Spartan({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: { default: "Kunal Singh", template: "%s • Kunal Singh" },
@@ -97,7 +104,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background font-sans text-[1rem] selection:bg-[#C8FFE0] dark:selection:bg-[#F1F0E8] dark:selection:text-black">
+      <body
+        className={`min-h-screen bg-background ${leagueSpartan.className} text-[1.1rem] selection:bg-[#C8FFE0] dark:selection:bg-[#F1F0E8] dark:selection:text-black`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex min-h-screen flex-col py-4 md:py-8">
             <header className="container">
