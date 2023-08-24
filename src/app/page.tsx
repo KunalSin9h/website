@@ -73,7 +73,7 @@ export default function Home() {
         everywhere with that. I am always looking for new and exciting
         opportunity. Reach out to{" "}
         <Link href="mailto:kunal@kunalsin9h.com">
-          <span className="hover:opacity-60 font-mono font-bold">
+          <span className="hover:opacity-60 font-bold">
             kunal@kunalsin9h.com
           </span>
         </Link>
