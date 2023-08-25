@@ -73,7 +73,7 @@ export default function LiveActivity() {
       <SheetTrigger>
         <OnlineButton />
       </SheetTrigger>
-      <SheetContent className="text-left">
+      <SheetContent className="text-left overflow-y-scroll">
         <SheetHeader className="mt-8 text-left">
           <SheetTitle>
             Hey, I am online on Discord, <br /> say hi there.{" "}
