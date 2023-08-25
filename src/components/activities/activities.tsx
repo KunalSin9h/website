@@ -106,7 +106,7 @@ export function SpotifyBox({ act }: { act: Spotify }) {
       <p className="text-xs uppercase my-1 text-green-400">
         Listening to Spotify
       </p>
-      <div className="flex items-center justify-start space-x-4">
+      <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4">
         <Image
           className="rounded"
           unoptimized={true}
