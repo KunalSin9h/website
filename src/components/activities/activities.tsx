@@ -11,8 +11,9 @@ import { Problems } from "../Icons/radix";
 Most of VsCodeBox is similar to NeoVimBox code
 */
 export function VsCodeBox({ act }: { act: VsCode }) {
+  console.log(act);
   const [isRepo, setIsRepo] = useState(false);
-  const repo = `kunalsin9h/${act.state.replaceAll("Workspace: ", "")}`;
+  const repo = `kunalsin9h/${act.state?.replaceAll("Workspace: ", "")}`;
 
   hasGithubRepo(repo)
     .then(setIsRepo)
@@ -20,7 +21,7 @@ export function VsCodeBox({ act }: { act: VsCode }) {
 
   return (
     <div className="flex flex-col p-4 w-full">
-      <div className="flex items-center justify-start space-x-4">
+      <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4">
         <Image
           className=""
           src="/images/vscode.png"
@@ -62,7 +63,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
 
   return (
     <div className="flex flex-col p-4 w-full">
-      <div className="flex items-center justify-start space-x-4">
+      <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4">
         <Image
           className=""
           src="/images/vim.png"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OnlineButton from "./onlineButton";
 
 import {
@@ -17,48 +17,54 @@ import { NeoVimBox, SpotifyBox, VsCodeBox } from "./activities";
 export default function LiveActivity() {
   const [online, setOnline] = useState(false);
   const [spotify, setSpotify] = useState<Spotify>();
-
   const [activities, setActivities] = useState([] as Activities);
 
-  const socket = new WebSocket("wss://api.lanyard.rest/socket");
+  useEffect(() => {
+    const socket = new WebSocket("wss://api.lanyard.rest/socket");
 
-  socket.addEventListener("error", () => {
-    setOnline(false);
-  });
+    socket.addEventListener("error", () => {
+      setOnline(false);
+    });
 
-  socket.addEventListener("close", () => {
-    setOnline(false);
-  });
+    socket.addEventListener("close", () => {
+      setOnline(false);
+    });
 
-  socket.addEventListener("message", ({ data }) => {
-    const lanyard = JSON.parse(data);
-    const opcode = lanyard.op;
+    socket.addEventListener("message", ({ data }) => {
+      console.log(data);
+      const lanyard = JSON.parse(data);
+      const opcode = lanyard.op;
 
-    if (opcode === 1) {
-      socket.send(
-        JSON.stringify({
-          op: 2,
-          d: {
-            subscribe_to_id: "964155459835691038",
-          },
-        })
-      );
+      if (opcode === 1) {
+        socket.send(
+          JSON.stringify({
+            op: 2,
+            d: {
+              subscribe_to_id: "964155459835691038",
+            },
+          })
+        );
 
-      setInterval(() => {
-        socket.send(JSON.stringify({ op: 3 }));
-      }, lanyard.d.heartbeat_interval);
-    }
+        setInterval(() => {
+          socket.send(
+            JSON.stringify({
+              op: 3,
+            })
+          );
+        }, lanyard.d.heartbeat_interval);
+      }
 
-    if (opcode === 0) {
-      if (lanyard.d.discord_status === "online") setOnline(true);
-      else setOnline(false);
+      if (opcode === 0) {
+        if (lanyard.d.discord_status === "online") setOnline(true);
+        else setOnline(false);
 
-      if (lanyard.d.listening_to_spotify) setSpotify(lanyard.d.spotify);
-      else setSpotify(undefined);
+        if (lanyard.d.listening_to_spotify) setSpotify(lanyard.d.spotify);
+        else setSpotify(undefined);
 
-      setActivities(lanyard.d.activities);
-    }
-  });
+        setActivities(lanyard.d.activities);
+      }
+    });
+  }, []);
 
   if (!online) return null;
 
@@ -67,8 +73,8 @@ export default function LiveActivity() {
       <SheetTrigger>
         <OnlineButton />
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader className="mt-8">
+      <SheetContent className="text-left">
+        <SheetHeader className="mt-8 text-left">
           <SheetTitle>
             Hey, I am online on Discord, <br /> say hi there.{" "}
           </SheetTitle>
@@ -87,6 +93,8 @@ export default function LiveActivity() {
                       return <VsCodeBox key={index} act={act as VsCode} />;
                     if (act?.name === "Neovim")
                       return <NeoVimBox key={index} act={act as NeoVim} />;
+
+                    return null;
                   })}
               {spotify ? <SpotifyBox act={spotify} /> : null}
             </div>
