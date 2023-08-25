@@ -76,9 +76,8 @@ export default function LiveActivity() {
       <SheetContent className="text-left overflow-y-scroll">
         <SheetHeader className="mt-8 text-left">
           <SheetTitle>
-            Hey, I am online on Discord, <br /> say hi there.{" "}
+            Heyy, I am online on Discord, <br /> say hi. @kunalsin9h{" "}
           </SheetTitle>
-          <SheetDescription>I am @kunalsin9h on discord</SheetDescription>
           <div>
             <p>
               {activities.length === 0 && spotify === undefined
