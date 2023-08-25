@@ -5,13 +5,14 @@ import { useState } from "react";
 import { NeoVim, Spotify, VsCode } from "./types";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Problems } from "../Icons/radix";
 
 /*
 Most of VsCodeBox is similar to NeoVimBox code
 */
 export function VsCodeBox({ act }: { act: VsCode }) {
   const [isRepo, setIsRepo] = useState(false);
-  const repo = `https://github.com/kunalsin9h/${act.state.replaceAll(
+  const repo = `https://api.github.com/repos/kunalsin9h/${act.state.replaceAll(
     "Workspace: ",
     ""
   )}`;
@@ -39,7 +40,11 @@ export function VsCodeBox({ act }: { act: VsCode }) {
           </div>
         </div>
       </div>
-      <Link href={repo} className={`${isRepo ? "" : "hidden"}`} target="_black">
+      <Link
+        href={repo}
+        className={`${isRepo ? "" : "hidden"} mt-2`}
+        target="_black"
+      >
         <Button className="w-full">
           {act.buttons ? act.buttons[0] : null}
         </Button>
@@ -52,6 +57,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
   const [isRepo, setIsRepo] = useState(false);
 
   const folderName = act.details.replaceAll("In workspace ", "").split(" ")[0];
+  const workspaceName = act.details.replaceAll("problems found", "");
 
   const repo = `https://api.github.com/repos/kunalsin9h/${folderName}`;
 
@@ -71,14 +77,25 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
         />
         <div>
           <div className="font-bold">{act.name}</div>
-          <div className="text-sm opacity-80">{act.details}</div>
+          <div className="text-sm opacity-80">
+            <div className="flex items-center ">
+              {workspaceName}
+              <span className="ml-1">
+                <Problems />
+              </span>
+            </div>
+          </div>
           <div className="text-sm opacity-80">{act.state}</div>
           <div className="text-sm opacity-80">
             {elapsedTime(act.timestamps.start)} elapsed
           </div>
         </div>
       </div>
-      <Link href={repo} className={`${isRepo ? "" : "hidden"}`} target="_black">
+      <Link
+        href={repo}
+        className={`${isRepo ? "" : "hidden"} mt-2`}
+        target="_black"
+      >
         <Button className="w-full">View Repository</Button>
       </Link>
     </div>
