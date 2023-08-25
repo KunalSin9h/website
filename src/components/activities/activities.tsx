@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { NeoVim, Spotify, VsCode } from "./types";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -7,10 +10,15 @@ import Link from "next/link";
 Most of VsCodeBox is similar to NeoVimBox code
 */
 export function VsCodeBox({ act }: { act: VsCode }) {
+  const [isRepo, setIsRepo] = useState(false);
   const repo = `https://github.com/kunalsin9h/${act.state.replaceAll(
     "Workspace: ",
     ""
   )}`;
+
+  hasGithubRepo(repo)
+    .then(setIsRepo)
+    .catch((_) => setIsRepo(false));
 
   return (
     <div className="flex flex-col p-4 w-full">
@@ -31,18 +39,7 @@ export function VsCodeBox({ act }: { act: VsCode }) {
           </div>
         </div>
       </div>
-      <Link
-        href={repo}
-        className={`${hasGithubRepo(repo)
-          .then((res) => {
-            if (res) return "";
-            else return "hidden";
-          })
-          .catch((_) => {
-            return "hidden";
-          })} w-full my-2`}
-        target="_black"
-      >
+      <Link href={repo} className={`${isRepo ? "" : "hidden"}`} target="_black">
         <Button className="w-full">
           {act.buttons ? act.buttons[0] : null}
         </Button>
@@ -51,11 +48,16 @@ export function VsCodeBox({ act }: { act: VsCode }) {
   );
 }
 
-export async function NeoVimBox({ act }: { act: NeoVim }) {
+export function NeoVimBox({ act }: { act: NeoVim }) {
+  const [isRepo, setIsRepo] = useState(false);
+
   const folderName = act.details.replaceAll("In workspace ", "").split(" ")[0];
 
-  const repo = `https://github.com/kunalsin9h/${folderName}`;
-  const repoExist = hasGithubRepo(repo);
+  const repo = `https://api.github.com/repos/kunalsin9h/${folderName}`;
+
+  hasGithubRepo(repo)
+    .then(setIsRepo)
+    .catch((_) => setIsRepo(false));
 
   return (
     <div className="flex flex-col p-4 w-full">
@@ -76,18 +78,7 @@ export async function NeoVimBox({ act }: { act: NeoVim }) {
           </div>
         </div>
       </div>
-      <Link
-        href={repo}
-        className={`${hasGithubRepo(repo)
-          .then((res) => {
-            if (res) return "";
-            else return "hidden";
-          })
-          .catch((_) => {
-            return "hidden";
-          })} w-full my-2`}
-        target="_black"
-      >
+      <Link href={repo} className={`${isRepo ? "" : "hidden"}`} target="_black">
         <Button className="w-full">View Repository</Button>
       </Link>
     </div>
@@ -99,9 +90,13 @@ export function SpotifyBox({ act }: { act: Spotify }) {
 }
 
 async function hasGithubRepo(repo: string): Promise<boolean> {
-  const response = await fetch(repo);
-  console.log(response.status);
-  return response.status === 200;
+  try {
+    const response = await fetch(repo);
+    return response.status === 200;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
 }
 
 // startTime and Date.now are in meiliseconds
