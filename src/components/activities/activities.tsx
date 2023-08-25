@@ -12,10 +12,7 @@ Most of VsCodeBox is similar to NeoVimBox code
 */
 export function VsCodeBox({ act }: { act: VsCode }) {
   const [isRepo, setIsRepo] = useState(false);
-  const repo = `https://api.github.com/repos/kunalsin9h/${act.state.replaceAll(
-    "Workspace: ",
-    ""
-  )}`;
+  const repo = `kunalsin9h/${act.state.replaceAll("Workspace: ", "")}`;
 
   hasGithubRepo(repo)
     .then(setIsRepo)
@@ -41,13 +38,11 @@ export function VsCodeBox({ act }: { act: VsCode }) {
         </div>
       </div>
       <Link
-        href={repo}
+        href={`https://github.com/${repo}`}
         className={`${isRepo ? "" : "hidden"} mt-2`}
         target="_black"
       >
-        <Button className="w-full">
-          {act.buttons ? act.buttons[0] : null}
-        </Button>
+        <Button className="w-full">View Repository</Button>
       </Link>
     </div>
   );
@@ -59,7 +54,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
   const folderName = act.details.replaceAll("In workspace ", "").split(" ")[0];
   const workspaceName = act.details.replaceAll("problems found", "");
 
-  const repo = `https://api.github.com/repos/kunalsin9h/${folderName}`;
+  const repo = `kunalsin9h/${folderName}`;
 
   hasGithubRepo(repo)
     .then(setIsRepo)
@@ -94,7 +89,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
         </div>
       </div>
       <Link
-        href={repo}
+        href={`https://github.com/${repo}`}
         className={`${isRepo ? "" : "hidden"} mt-2`}
         target="_black"
       >
@@ -155,7 +150,7 @@ export function SpotifyBox({ act }: { act: Spotify }) {
 
 async function hasGithubRepo(repo: string): Promise<boolean> {
   try {
-    const response = await fetch(repo);
+    const response = await fetch(`https://api.github.com/repos/${repo}`);
     return response.status === 200;
   } catch (err) {
     console.log(err);
