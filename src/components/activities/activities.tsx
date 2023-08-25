@@ -23,7 +23,7 @@ export function VsCodeBox({ act }: { act: VsCode }) {
 
   return (
     <div className="flex flex-col p-4 w-full">
-      <div className="flex items-center justify-start space-x-8">
+      <div className="flex items-center justify-start space-x-4">
         <Image
           className=""
           src="/images/vscode.png"
@@ -67,7 +67,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
 
   return (
     <div className="flex flex-col p-4 w-full">
-      <div className="flex items-center justify-start space-x-8">
+      <div className="flex items-center justify-start space-x-4">
         <Image
           className=""
           src="/images/vim.png"
@@ -78,12 +78,14 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
         <div>
           <div className="font-bold">{act.name}</div>
           <div className="text-sm opacity-80">
-            <div className="flex items-center ">
-              {workspaceName}
-              <span className="ml-1">
-                <Problems />
-              </span>
-            </div>
+            {
+              <div className="flex items-center inline-block">
+                {workspaceName}
+                <span className="ml-1 inline">
+                  <Problems />
+                </span>
+              </div>
+            }
           </div>
           <div className="text-sm opacity-80">{act.state}</div>
           <div className="text-sm opacity-80">
@@ -103,7 +105,50 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
 }
 
 export function SpotifyBox({ act }: { act: Spotify }) {
-  return <p>{act.name}</p>;
+  return (
+    <div className="flex flex-col p-2 w-full">
+      <p className="text-xs uppercase my-1">Listening to Spotify</p>
+      <div className="flex items-center justify-start space-x-4">
+        <Image
+          className="rounded"
+          unoptimized={true}
+          src={act.album_art_url}
+          alt="Spotify Song album art"
+          placeholder="blur"
+          blurDataURL={rgbDataURL(255, 255, 255)}
+          draggable={false}
+          width={80}
+          height={80}
+        />
+        <div>
+          <div className="font-bold">{act.song}</div>
+          <div className="text-sm opacity-80">
+            {"by "} {act.artist}
+          </div>
+          <div className="text-sm opacity-80">
+            {"on "}
+            {act.album}
+          </div>
+        </div>
+      </div>
+      <Link
+        href={`https://open.spotify.com/track/${act.track_id}`}
+        target="_black"
+        className="w-full mt-2"
+      >
+        <Button className="w-full flex items-center justify-center space-x-1">
+          <Image
+            className="dark:invert"
+            src="/images/spotify.webp"
+            alt="Spotify Logo"
+            width={25}
+            height={25}
+          />
+          <span>Play on Spotify</span>
+        </Button>
+      </Link>
+    </div>
+  );
 }
 
 async function hasGithubRepo(repo: string): Promise<boolean> {
@@ -129,3 +174,17 @@ function elapsedTime(startTime: number): string {
     sec !== 0 ? sec : ""
   }`;
 }
+
+const keyStr =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+const triplet = (e1: number, e2: number, e3: number) =>
+  keyStr.charAt(e1 >> 2) +
+  keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
+  keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
+  keyStr.charAt(e3 & 63);
+
+export const rgbDataURL = (r: number, g: number, b: number) =>
+  `data:image/gif;base64,R0lGODlhAQABAPAA${
+    triplet(0, r, g) + triplet(b, 255, 255)
+  }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;

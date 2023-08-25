@@ -16,6 +16,8 @@ import { NeoVimBox, SpotifyBox, VsCodeBox } from "./activities";
 
 export default function LiveActivity() {
   const [online, setOnline] = useState(false);
+  const [spotify, setSpotify] = useState<Spotify>();
+
   const [activities, setActivities] = useState([] as Activities);
 
   const socket = new WebSocket("wss://api.lanyard.rest/socket");
@@ -51,6 +53,9 @@ export default function LiveActivity() {
       if (lanyard.d.discord_status === "online") setOnline(true);
       else setOnline(false);
 
+      if (lanyard.d.listening_to_spotify) setSpotify(lanyard.d.spotify);
+      else setSpotify(undefined);
+
       setActivities(lanyard.d.activities);
     }
   });
@@ -65,12 +70,15 @@ export default function LiveActivity() {
       <SheetContent>
         <SheetHeader className="mt-8">
           <SheetTitle>
-            {/* @ts-ignore */}
             Hey, I am online on Discord, <br /> say hi there.{" "}
           </SheetTitle>
           <SheetDescription>I am @kunalsin9h on discord</SheetDescription>
           <div>
-            <p>Other Activities</p>
+            <p>
+              {activities.length === 0 && spotify === undefined
+                ? null
+                : "Other Activities"}
+            </p>
             <div>
               {activities.length === 0
                 ? null
@@ -79,9 +87,8 @@ export default function LiveActivity() {
                       return <VsCodeBox key={index} act={act as VsCode} />;
                     if (act?.name === "Neovim")
                       return <NeoVimBox key={index} act={act as NeoVim} />;
-                    if (act?.name === "Spotify")
-                      return <SpotifyBox key={index} act={act as Spotify} />;
                   })}
+              {spotify ? <SpotifyBox act={spotify} /> : null}
             </div>
           </div>
         </SheetHeader>

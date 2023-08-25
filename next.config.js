@@ -12,6 +12,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "tiddi.kunalsin9h.com",
       },
+      {
+        protocol: "https",
+        hostname: "i.scdn.co",
+      },
     ],
   },
 };

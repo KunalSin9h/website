@@ -1,32 +1,17 @@
-export type Activities = (Spotify | NeoVim | VsCode | undefined)[];
-export type Activity = Spotify | NeoVim | VsCode | undefined;
+export type Activities = (NeoVim | VsCode | undefined)[];
+export type Activity = NeoVim | VsCode | undefined;
 
 export type Spotify = {
-  flag: number;
-  id: string;
-  name: string;
-  type: number;
-  state: string;
-  session_id: string;
-  details: string;
+  track_id: string;
   timestamps: {
     start: number;
     end: number;
   };
-  assets: {
-    large_image: string;
-    large_text: string;
-  };
-  sync_id: string;
-  created_at: number;
-  party: {
-    id: string;
-  };
+  album: string;
+  album_art_url: string;
+  artist: string;
+  song: string;
 };
-
-export function isSpotify(act: Activity): act is Spotify {
-  return true;
-}
 
 export type NeoVim = {
   id: string;
