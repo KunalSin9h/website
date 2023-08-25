@@ -62,7 +62,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
     .catch((_) => setIsRepo(false));
 
   return (
-    <div className="flex flex-col p-4 w-full">
+    <div className="flex flex-col py-4 w-full">
       <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4">
         <Image
           className=""
@@ -102,7 +102,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
 
 export function SpotifyBox({ act }: { act: Spotify }) {
   return (
-    <div className="flex flex-col p-2 w-full">
+    <div className="flex flex-col py-4 w-full">
       <p className="text-xs uppercase my-1 text-green-400">
         Listening to Spotify
       </p>
