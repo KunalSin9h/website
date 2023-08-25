@@ -107,7 +107,9 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
 export function SpotifyBox({ act }: { act: Spotify }) {
   return (
     <div className="flex flex-col p-2 w-full">
-      <p className="text-xs uppercase my-1">Listening to Spotify</p>
+      <p className="text-xs uppercase my-1 text-green-400">
+        Listening to Spotify
+      </p>
       <div className="flex items-center justify-start space-x-4">
         <Image
           className="rounded"
