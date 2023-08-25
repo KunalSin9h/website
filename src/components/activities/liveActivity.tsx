@@ -79,7 +79,7 @@ export default function LiveActivity() {
             Heyy, I am online on Discord, <br /> say hi. @kunalsin9h{" "}
           </SheetTitle>
           <div>
-            <p>
+            <p className="opacity-80">
               {activities.length === 0 && spotify === undefined
                 ? null
                 : "Other Activities"}

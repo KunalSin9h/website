@@ -20,7 +20,7 @@ export function VsCodeBox({ act }: { act: VsCode }) {
     .catch((_) => setIsRepo(false));
 
   return (
-    <div className="flex flex-col p-4 w-full">
+    <div className="flex flex-col py-4 w-full">
       <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4">
         <Image
           className=""
