@@ -9,10 +9,11 @@ import Image from "next/image";
 import { Analytics } from "@vercel/analytics/react";
 import BackToTop from "@/components/BackToTop";
 import { League_Spartan } from "next/font/google";
+import LiveActivity from "@/components/activities/liveActivity";
 
 const leagueSpartan = League_Spartan({
   weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
+  subsets: ["latin-ext"],
   display: "swap",
 });
 
@@ -170,8 +171,9 @@ export default function RootLayout({
                   <ModeToggle />
                 </div>
               </div>
-              <div className="py-4">
+              <div className="py-4 flex justify-between items-center">
                 <SelectRoute />
+                <LiveActivity />
               </div>
             </header>
             <main className="flex-1">
