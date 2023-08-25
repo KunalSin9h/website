@@ -1,0 +1,205 @@
+---
+title: Elixir 9. Conditionals
+description: My Elixir language notes, written on internet rather on note book
+published: "2023-08-25"
+---
+
+# Conditionals
+
+Branching can be done using _Multiclause Functions_, also _Elixir_ Provides us with standard way of doing branching with `if` and `case`.
+
+### Branching with _MULTICLAUSE FUNCTION_
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def test(0), do: :zero
+  def test(x) when x > 0, do: :positive
+  def test(x) when x < 0, do: :negative
+
+  def empty?([]), do: true
+  def empty?([_ | _]), do: false
+
+  def main do
+    IO.puts test(-1)
+    IO.puts test(1)
+    IO.puts test(0)
+    IO.puts empty?([])
+    IO.puts empty?([1, 2, 3])
+  end
+end
+
+Main.main()
+```
+
+We can use multiclause function with pattern matching to create next level branching patterns.
+
+In the typical setup of imperative language, such as JavaScript we do something like this.
+
+```js showLineNumbers
+function fact(n) {
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  return n * fact(n - 1);
+}
+```
+
+This same `fact` factorial function when implemented using elixir look like
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def fact(0), do: 0
+  def fact(1), do: 1
+  def fact(n), do: n * fact(n - 1)
+
+  def main do
+    IO.puts fact(4)
+  end
+end
+
+Main.main()
+```
+
+> Not using `if` and `case`.
+
+Another example, finding sum of elements of list.
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def sum([]), do: 0
+  def sum([a | b]), do: a + sum(b)
+
+  def main do
+    IO.puts sum([1, 2, 3, 4])
+  end
+end
+
+Main.main()
+```
+
+> With the help of `Multiclause Functions` + `Pattern Matching` + `Guards`, it is possible to achieve anything which can be done using _Classical Branching System_
+
+### Classical Branching Constructs
+
+Elixir provides us with macros `if`, `unless`, `cond` and `case` .
+
+**IF**
+
+```bash
+if condition do
+	# condition is true
+else
+	# condition is false
+end
+```
+
+An example to check if a given token is string (binary in context of elixir) will be
+
+```elixir showLineNumbers
+defmodule Main do
+
+  def main(x) do
+
+    if is_binary(x)  do
+      IO.puts "IT'S BINARY"
+    else
+      IO.puts "IT'S Not-BINARY"
+    end
+
+  end
+end
+
+Main.main(1) # IT'S BINARY
+Main.main("10") # IT'S Not-BINARY
+```
+
+`if` statement can also be _inlined_ like
+
+```elixir showLineNumbers {4}
+defmodule Main do
+
+  def maxLocal(a, b) do
+    if a > b, do: a, else: b
+  end
+
+  def main do
+    IO.puts maxLocal(45, 67)
+  end
+end
+
+Main.main
+```
+
+**Unless**
+`unless` is just `if not`.
+
+**Cond**
+
+`cond` is to solve the `if else-if else` condition by simplifying the syntax.
+
+> I think `cond` is for condition
+
+```bash {6}
+cond do
+	a -> # a
+	b -> # b
+	c -> # c
+	d -> # d
+	true -> # will always match in the last
+end
+```
+
+> Which ever expression evaluate first
+
+Here _a_, _b_, _c_, _d_, are `Bollean Expression`.
+And in line _6_ we have `true` , this will act a a _Default_ match, because is non of expression will match in the `cond` then it will return an error.
+
+**Case**
+
+```bash
+case expression do
+	pattern_1 -> # 1
+	pattern_2 -> # 2
+	pattern_3 -> # 3
+	_ -> # Default (it will match anything)
+end
+```
+
+A quick example
+
+```elixir showLineNumbers
+defmodule Main do
+  def max(a, b) do
+    case a >= b do
+      true -> a
+      false -> b
+    end
+  end
+end
+
+IO.puts Main.max(2, 9)
+```
+
+**With** Special Form
+
+```bash
+with pattern_1 <- expression_1,
+	 pattern_2 <- expression_2,
+	 pattern_3 <- expression_3
+	 do
+		{:ok, {something}} # the return value
+	 end
+```
+
+In this special form, if any of the _expression_x_ failed to match with _pattern_x_ then the _`{:error, reason}`_ of that _expression_x_ will be returned.
+
+> More about `with` special form: https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1
+
+.
+.
+.
+.
+next up we have loops.
+As a gentle reminder, there are nokk `loops` in _Elixir_....
