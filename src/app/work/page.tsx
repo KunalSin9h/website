@@ -19,16 +19,6 @@ export default function Work() {
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
         <TiltBox>
           <WorkBox
-            url="https://github.com/dearapp"
-            icon="/images/dearapp.png"
-            name="DearApp"
-            tagline="Consumer Social"
-            role="Backend Developer"
-            work="Building systems to facilitate realtime messaging, feed and social connections."
-          />
-        </TiltBox>
-        <TiltBox>
-          <WorkBox
             url="https://github.com/meltred"
             icon="/images/meltred.png"
             name="Meltred"
