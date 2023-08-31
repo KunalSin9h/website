@@ -114,7 +114,9 @@ export default function RootLayout({
               <div className="flex items-center justify-between border-b py-4">
                 <a href="/" className="flex items-center space-x-2">
                   <div className="flex flex-col space-y-1 text-sm leading-none">
-                    <span className="text-2xl font-bold">Kunal Singh</span>
+                    <span className="text-2xl font-bold">
+                      Kunal Singh <span> </span>{" "}
+                    </span>
                     <span className="opacity-60">Software Engineer</span>
                   </div>
                 </a>
