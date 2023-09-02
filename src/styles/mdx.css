@@ -1,8 +1,8 @@
 [data-rehype-pretty-code-fragment] {
-  @apply rounded-xl bg-[#24292e]
+  @apply rounded-xl bg-[#24292e];
 }
 [data-rehype-pretty-code-fragment] pre {
-  @apply border-0
+  @apply border-0;
 }
 
 [data-rehype-pretty-code-fragment] code {
@@ -56,11 +56,11 @@
   color: gray;
 }
 
-[data-line-numbers-max-digits='2'] > [data-line]::before {
+[data-line-numbers-max-digits="2"] > [data-line]::before {
   width: 2rem;
 }
 
-[data-line-numbers-max-digits='3'] > [data-line]::before {
+[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
 
@@ -69,4 +69,3 @@
   background-color: #52525b80;
   box-shadow: 0 0 0 4px #52525b80;
 }
-
