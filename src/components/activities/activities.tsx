@@ -11,7 +11,6 @@ import { Problems } from "../Icons/radix";
 Most of VsCodeBox is similar to NeoVimBox code
 */
 export function VsCodeBox({ act }: { act: VsCode }) {
-  console.log(act);
   const [isRepo, setIsRepo] = useState(false);
   const repo = `kunalsin9h/${act.state?.replaceAll("Workspace: ", "")}`;
 
@@ -154,7 +153,6 @@ async function hasGithubRepo(repo: string): Promise<boolean> {
     const response = await fetch(`https://api.github.com/repos/${repo}`);
     return response.status === 200;
   } catch (err) {
-    console.log(err);
     return false;
   }
 }

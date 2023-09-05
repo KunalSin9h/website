@@ -31,7 +31,6 @@ export default function LiveActivity() {
     });
 
     socket.addEventListener("message", ({ data }) => {
-      console.log(data);
       const lanyard = JSON.parse(data);
       const opcode = lanyard.op;
 
