@@ -60,7 +60,7 @@ export default function Bharat() {
         height={713}
       />
       <div className="my-8">
-        <div className="font-bold text-xl">Currently at</div>
+        <div className="font-bold text-xl">On the map</div>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117350.3935062054!2d77.32349071838195!3d23.199388245784927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c428f8fd68fbd%3A0x2155716d572d4f8!2sBhopal%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1693933361952!5m2!1sen!2sin"
           className="w-full h-96 rounded-xl shadow-lg mx-auto my-2"
