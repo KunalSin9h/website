@@ -13,7 +13,7 @@ export default function Home() {
         I&#39;m <span className="">Kunal</span>, a{" "}
         <HoverTooltip content="29th May 2002" child={<span>21</span>} /> y/o
         developer based in{" "}
-        <span className="inline-block">
+        <span className="inline-block cursor-pointer">
           <Bharat />
         </span>
         . I am pursuing my bachelor&#39;s in{" "}

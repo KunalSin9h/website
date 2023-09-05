@@ -25,22 +25,22 @@ const rgbDataURL = (r: number, g: number, b: number) =>
 export default function Bharat() {
   return (
     <div className="">
-      <p className="text-3xl font-bold flex items-center space-x-2">
+      <p className="flex space-x-2">
         <span className="">
           <Image
-            className="shadow-lg hover:scale-125 transition"
+            className="shadow-lg hover:scale-125 transition rounded"
             placeholder="blur"
             blurDataURL={rgbDataURL(255, 255, 255)}
             draggable={false}
             alt="Bharat Flag Picture"
-            src="/images/bharat-flag.png"
-            width={40}
-            height={30}
+            src="/images/bharat-flag.webp"
+            width={50}
+            height={40}
           />
         </span>{" "}
-        <span>Bharat</span>
+        <span className="text-4xl font-bold ">Bharat</span>
       </p>
-      <p className="font-bold italic pt-4 md:pt-8">
+      <p className="italic pt-4 md:pt-8 text-xl">
         The country that lies north of the oceans and south of the snowy
         mountains is called Bhárata, for there dwell the descendants of Bharata.
         Bhárata is the land of works, in consequence of which men go to heaven,
