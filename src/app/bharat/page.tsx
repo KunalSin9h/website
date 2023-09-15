@@ -38,7 +38,7 @@ export default function Bharat() {
             height={40}
           />
         </span>{" "}
-        <span className="text-4xl font-bold ">Bharat</span>
+        <span className="text-4xl font-bold ">Bharat भारत</span>
       </p>
       <p className="italic pt-4 md:pt-8 text-xl">
         The country that lies north of the oceans and south of the snowy
