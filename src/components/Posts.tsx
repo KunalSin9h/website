@@ -32,6 +32,7 @@ export default function Posts({ posts }: { posts: PostMeta[] }) {
   const original = posts;
   const [blogPosts, setBlogPosts] = useState(posts);
   const [textSearch, setTextSearch] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -49,6 +50,16 @@ export default function Posts({ posts }: { posts: PostMeta[] }) {
   return (
     <div className="w-full py-4 transition">
       <h1 className="mb-4 text-2xl font-black">All Blogs</h1>
+      <div>
+        <span className={`text-sm ${subscribed ? "text-green-500" : "text-purple-500"} font-bold`}>{subscribed ? "Subscribed!" :  "Subscribe the newsletter"}</span>
+        <form target="_blank" action="https://newsletter.kunalsin9h.com/subscription" method="POST"  className="flex items-center justify-between mt-2">
+            <input type="text" placeholder="your name" name="name" className="border px-2 rounded bg-inherit" />
+            <input type="text" placeholder="email" name="email" className="border px-2 rounded bg-inherit" />
+            <button type="submit" className="rounded px-8 bg-gray-800 hover:bg-gray-700 text-white" onClick={() => {
+                setSubscribed(true);
+            }}>Subscribe</button>
+        </form>
+      </div>
       <div className="mx-full my-4">
         <Input
           type="text"
