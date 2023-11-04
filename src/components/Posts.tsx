@@ -53,8 +53,8 @@ export default function Posts({ posts }: { posts: PostMeta[] }) {
       <div>
         <span className={`text-sm ${subscribed ? "text-green-500" : "text-purple-500"} font-bold`}>{subscribed ? "Subscribed!" :  "Subscribe the newsletter"}</span>
         <form target="_blank" action="https://newsletter.kunalsin9h.com/subscription" method="POST"  className="flex items-center justify-between flex-wrap">
-            <input type="text" placeholder="your name" name="name" className="border px-2 rounded bg-inherit my-2" />
-            <input type="email" placeholder="email" name="email" className="border px-2 rounded bg-inherit my-2" />
+            <input type="text" placeholder="your name" name="name" className="border px-2 rounded bg-inherit my-2" required/>
+            <input type="email" placeholder="email" name="email" className="border px-2 rounded bg-inherit my-2" required/>
             <button type="submit" className="rounded px-8 bg-gray-800 hover:bg-gray-700 text-white my-2" onClick={() => {
                 setSubscribed(true);
             }}>Subscribe</button>
