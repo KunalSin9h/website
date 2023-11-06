@@ -59,6 +59,16 @@ export default function Bharat() {
         width={596}
         height={713}
       />
+      <Image
+        className="my-4 mx-auto rounded-xl shadow-xl"
+        placeholder="blur"
+        blurDataURL={rgbDataURL(255, 255, 255)}
+        draggable={false}
+        src="/images/bharat_geo.jpeg"
+        alt="Bharat Geographic Map"
+        width={596}
+        height={713}
+      />
       <div className="my-8">
         <div className="font-bold text-xl">On the map</div>
         <iframe

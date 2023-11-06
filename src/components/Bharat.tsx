@@ -6,10 +6,6 @@ export default function Bharat() {
   const router = useRouter();
   return (
     <span
-      // target="_black"
-      // href="https://www.google.com/maps/place/Bhopal,+Madhya+Pradesh/@23.1993882,77.3234907,12z/data=!3m1!4b1!4m6!3m5!1s0x397c428f8fd68fbd:0x2155716d572d4f8!8m2!3d23.2599333!4d77.412615!16zL20vMGN3NTE?entry=ttu"
-      // href="/bharat"
-      // prefetch={false}
       onClick={(e) => {
         e.preventDefault();
         router.push("/bharat");
