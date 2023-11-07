@@ -117,7 +117,7 @@ const components = {
   blockquote: ({ className, ...props }) => (
     <blockquote
       className={cn(
-        "mt-4 shadow-md border-l-4 pl-4 rounded border-slate-400 text-slate-700 dark:border-l-slate-700 dark:text-slate-200",
+        "mt-4 border-l-4 pl-4 rounded border-l-slate-600 text-slate-600 dark:border-l-slate-400 dark:text-slate-400",
         className
       )}
       {...props}
@@ -187,31 +187,25 @@ const components = {
   ),
   // @ts-ignore
   BlogImage: (props) => (
-    <>
-      <br />
       <Image
         {...(props as ImageProps)}
         placeholder="blur"
         blurDataURL={rgbDataURL(255, 255, 255)}
         draggable={false}
-        alt=""
+        className="py-1"
       />
-    </>
   ),
 
   Video: ({ link, title }: { link: string; title: string }) => (
-    <>
-      <br />
       <iframe
-        width="560"
+        width="100%"
         height="315"
         src={link}
         title={title}
         allow="accelerometer; encrypted-media; gyroscope; web-share"
         allowFullScreen={true}
+        className="py-1"
       ></iframe>
-      <br />
-    </>
   ),
 };
 

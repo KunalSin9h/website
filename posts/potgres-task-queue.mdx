@@ -233,7 +233,8 @@ func SetupQueue() error {
 }
 ```
 
-To connect with postgres we need a running postgres server, you can run it with docker or use a manged postgres service like [Neon](https://neon.tech). In any case you will have a **Database Connection String** which looks like this **"postgres://username:password@host:port/database"**
+To connect with postgres we need a running postgres server, you can run it with docker or use a manged postgres service like [Neon](https://neon.tech). 
+In any case you will have a **Database Connection String** which looks like this `postgres://username:password@host:port/database`
 
 We are specifying this `DATABASE_URL` trough **Environment Variables**.
 
