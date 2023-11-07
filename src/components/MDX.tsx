@@ -187,13 +187,31 @@ const components = {
   ),
   // @ts-ignore
   BlogImage: (props) => (
-    <Image
-      {...(props as ImageProps)}
-      placeholder="blur"
-      blurDataURL={rgbDataURL(255, 255, 255)}
-      draggable={false}
-      alt=""
-    />
+    <>
+      <br />
+      <Image
+        {...(props as ImageProps)}
+        placeholder="blur"
+        blurDataURL={rgbDataURL(255, 255, 255)}
+        draggable={false}
+        alt=""
+      />
+    </>
+  ),
+
+  Video: ({ link, title }: { link: string; title: string }) => (
+    <>
+      <br />
+      <iframe
+        width="560"
+        height="315"
+        src={link}
+        title={title}
+        allow="accelerometer; encrypted-media; gyroscope; web-share"
+        allowFullScreen={true}
+      ></iframe>
+      <br />
+    </>
   ),
 };
 
