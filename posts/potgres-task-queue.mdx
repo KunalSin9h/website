@@ -240,7 +240,7 @@ We are specifying this `DATABASE_URL` trough **Environment Variables**.
 
 Let use this `SetupQueue` in the `main.go`
 
-```go showLineNumbers title="main.go"
+```go showLineNumbers title="main.go" {14}
 package main
 
 import (
@@ -628,7 +628,7 @@ So lets wrap what we have done.
 
 The application does not have any state by it self. But there is one issue thought, and i am got going to fix it. We are deleting the task from the queue before finishing it, so what if out app stops / crashes before the task is finish, as we have already removed the task from the queue, so no other worker is able to find the task. This way the task is not finished and not going to be finished by any one else.
 
-If you find the solution of the problem then don't let me know. (_kunal [at] kunalsin9h [dot] com_)
+If you find the solution of the problem then do let me know. (_kunal [at] kunalsin9h [dot] com_)
 
 _OK..._
 
