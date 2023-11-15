@@ -116,7 +116,7 @@ function DiscordLive() {
       />
       <div>
         <div className="font-bold">Online at Discord</div>
-        <div className="text-md font-mono opacity-80">@kunalsin9h</div>
+        <div className="text-md opacity-80">@kunalsin9h</div>
       </div>
     </div>
   );
