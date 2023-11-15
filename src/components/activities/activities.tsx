@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NeoVim, Spotify, VsCode } from "./types";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Problems } from "../Icons/radix";
+import { start } from "repl";
 
 /*
 Most of VsCodeBox is similar to NeoVimBox code
@@ -33,7 +34,7 @@ export function VsCodeBox({ act }: { act: VsCode }) {
           <div className="text-sm opacity-80">{act.details}</div>
           <div className="text-sm opacity-80">{act.state}</div>
           <div className="text-sm opacity-80">
-            {elapsedTime(act.timestamps.start)} elapsed
+            <ElapsedTimeBox startTime={act.timestamps.start} />
           </div>
         </div>
       </div>
@@ -84,7 +85,7 @@ export function NeoVimBox({ act }: { act: NeoVim }) {
           </div>
           <div className="text-sm opacity-80">{act.state}</div>
           <div className="text-sm opacity-80">
-            {elapsedTime(act.timestamps.start)} elapsed
+            <ElapsedTimeBox startTime={act.timestamps.start} />
           </div>
         </div>
       </div>
@@ -155,6 +156,24 @@ async function hasGithubRepo(repo: string): Promise<boolean> {
   } catch (err) {
     return false;
   }
+}
+
+function ElapsedTimeBox({ startTime }: { startTime: number }) {
+  const [elapsed, setElapsed] = useState("00:00");
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setElapsed(elapsedTime(startTime));
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [startTime]);
+  return (
+    <div>
+      <span className="font-mono font-xs">{elapsed}</span> elapsed
+    </div>
+  );
 }
 
 // startTime and Date.now are in meiliseconds

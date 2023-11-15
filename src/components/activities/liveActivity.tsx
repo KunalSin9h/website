@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import OnlineButton from "./onlineButton";
 
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { Activities, Activity, Spotify, NeoVim, VsCode } from "./types";
-import { NeoVimBox, SpotifyBox, VsCodeBox } from "./activities";
+import { NeoVimBox, SpotifyBox, VsCodeBox, rgbDataURL } from "./activities";
 
 export default function LiveActivity() {
   const [online, setOnline] = useState(false);
@@ -74,9 +73,7 @@ export default function LiveActivity() {
       </SheetTrigger>
       <SheetContent className="text-left overflow-y-scroll">
         <SheetHeader className="mt-8 text-left">
-          <SheetTitle>
-            Heyy, I am online on Discord, <br /> say hi. @kunalsin9h{" "}
-          </SheetTitle>
+          <DiscordLive />
           <div>
             <p className="opacity-80">
               {activities.length === 0 && spotify === undefined
@@ -100,5 +97,27 @@ export default function LiveActivity() {
         </SheetHeader>
       </SheetContent>
     </Sheet>
+  );
+}
+
+function DiscordLive() {
+  return (
+    <div className="flex flex-col md:flex-row md:items-center space-y-2  md:space-x-4 my-4">
+      <Image
+        className=""
+        unoptimized={true}
+        src="/images/discord.png"
+        alt="Spotify Song album art"
+        placeholder="blur"
+        blurDataURL={rgbDataURL(255, 255, 255)}
+        draggable={false}
+        width={80}
+        height={80}
+      />
+      <div>
+        <div className="font-bold">Online at Discord</div>
+        <div className="text-sm opacity-80">@kunalsin9h</div>
+      </div>
+    </div>
   );
 }
