@@ -193,6 +193,7 @@ const components = {
         blurDataURL={rgbDataURL(255, 255, 255)}
         draggable={false}
         className="py-1"
+        alt=""
       />
   ),
 
