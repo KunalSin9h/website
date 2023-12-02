@@ -29,7 +29,7 @@ export default function Work() {
         </TiltBox>
         <TiltBox>
           <WorkBox
-            url="https://github.com/meltred/meltrcd"
+            url="https://github.com/meltred/meltcd"
             icon="/images/meltcd.png"
             name="Melt-CD"
             tagline="Continuous Development"
