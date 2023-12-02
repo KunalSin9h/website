@@ -24,13 +24,29 @@ export default function Work() {
             name="Meltred"
             tagline="Software Deployment"
             role="Developer"
-            work="Building full stack application for managing and deploying software with ease on own machines."
+            work="Building full stack system for managing and deploying software with ease on own machines."
+          />
+        </TiltBox>
+        <TiltBox>
+          <WorkBox
+            url="https://github.com/meltred/meltrcd"
+            icon="/images/meltcd.png"
+            name="Melt-CD"
+            tagline="Continuous Development"
+            role="Developer"
+            work="Building a reliable GitDevOps Continuous Development platform for docker swarm. Part of Meltred"
           />
         </TiltBox>
       </div>
       <h1 className="text-xl font-bold">
         <span className="opacity-30">#</span> Open-source Projects
       </h1>
+      <ProjectBox
+        url="https://github.com/kunalsin9h/secops"
+        name="Secops"
+        language="TypeScript Rust"
+        description="An Ubuntu Desktop Application for managing security."
+      />
       <ProjectBox
         url="https://github.com/kunalsin9h/tiddi"
         name="Tiddi"

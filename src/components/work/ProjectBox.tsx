@@ -20,7 +20,7 @@ export default function ProjectBox({
   language: string;
   description: string;
 }) {
-  const langColor = languageColor.get(language.toLowerCase());
+  const langs = language.split(" ");
 
   return (
     <div className="hover:bg-slate-100 p-2 rounded dark:hover:bg-white/[.10]">
@@ -34,10 +34,18 @@ export default function ProjectBox({
         <p className="flex space-x-2">
           <span className="opacity-60 font-bold">Language: </span>
           <span className="flex space-x-2 items-center justify-start">
-            <span>{language}</span>
-            <span
-              className={`h-3 w-3 inline-block rounded-full opacity-80 ${langColor}`}
-            ></span>
+            {langs.map((lang: string) => {
+              return (
+                <>
+                  <span>{lang}</span>
+                  <span
+                    className={`h-3 w-3 inline-block rounded-full opacity-80 ${languageColor.get(
+                      lang.toLowerCase()
+                    )}`}
+                  ></span>
+                </>
+              );
+            })}
           </span>
         </p>
         <p>
