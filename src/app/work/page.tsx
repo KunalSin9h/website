@@ -34,7 +34,7 @@ export default function Work() {
             name="Melt-CD"
             tagline="Continuous Development"
             role="Developer"
-            work="Building a reliable GitDevOps Continuous Development platform for docker swarm. Part of Meltred"
+            work="Building a reliable GitDevOps Continuous Development platform for docker swarm."
           />
         </TiltBox>
       </div>
