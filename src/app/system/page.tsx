@@ -8,7 +8,6 @@ export const metadata: Metadata = PageMeta({
   url: "https://kunalsin9h.com/system/",
 });
 
-
 export default function System() {
   return (
     <>
@@ -23,7 +22,7 @@ export default function System() {
         Ubuntu, which i have used for nearly a year.
       </p>
       <p>
-        Now, from past 6 months, i have been using{" "}
+        Since, 1 year, i have been using{" "}
         <a
           href="https://archlinux.org/"
           target="_black"
