@@ -24,20 +24,16 @@ export function ImageThatOpensInNewTab({ props }: { props: ImageProps }) {
   let imageURL = props.src as string;
 
   return (
-    <Image
-      {...props}
-      placeholder="blur"
-      blurDataURL={rgbDataURL(255, 255, 255)}
-      onClick={() => {
-        openImage(imageURL);
-      }}
-      draggable={true}
-      className="py-1 hover:cursor-zoom-in"
-      alt={props.alt}
-    />
+    <div className="py-2 xl:py-4">
+      <Image
+        {...props}
+        placeholder="blur"
+        blurDataURL={rgbDataURL(230, 230, 230)}
+        onClick={() => window.open(imageURL, "_blank")}
+        draggable={true}
+        className="hover:cursor-zoom-in rounded"
+        alt={props.alt}
+      />
+    </div>
   );
-}
-
-function openImage(url: string) {
-  window.open(url, "_blank");
 }

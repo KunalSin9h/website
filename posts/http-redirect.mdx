@@ -1,15 +1,15 @@
 ---
 title: HTTP Redirecting on Edge
-description: Using Cloduflare workers to do http redirect and comparision with other methods.
+description: Using Cloudflare workers to do http redirect and comparison with other methods.
 published: "2023-12-18"
 ---
 
-Redirecting one _URL_ to other _URL_ is a common practice.  There are _2_ HTTP Status Code for redirection, which are
+Redirecting one _URL_ to other _URL_ is a common practice. There are _2_ HTTP Status Code for redirection, which are
 
 | HTTP Status Code | Description        |
-| :--------------- | :------------------| 
+| :--------------- | :----------------- |
 | **301**          | Permanent Redirect |
-| **302**          | Temporary Redirect | 
+| **302**          | Temporary Redirect |
 
 _Their descriptions explain there existence._
 
@@ -17,20 +17,20 @@ There are multiple ways of redirecting, one include a traditions HTML based, whe
 
 ```html
 <head>
-	<meta http-equiv="Refresh" content="0; URL=https://kunalsin9h.com" />
+  <meta http-equiv="Refresh" content="0; URL=https://kunalsin9h.com" />
 </head>
 ```
 
-Here, `content="0; ..."`, `0` is the time, _i guess in seconds_,  before redirection happens.
+Here, `content="0; ..."`, `0` is the time, _i guess in seconds_, before redirection happens.
 
-This approach can be a good choice if we want to show some message, using the same html page, before redirecting. 
+This approach can be a good choice if we want to show some message, using the same html page, before redirecting.
 
-But for this approach, you need to host the site on the server, and when request happens browser will redirect, hence this is very slow process. 
+But for this approach, you need to host the site on the server, and when request happens browser will redirect, hence this is very slow process.
 
 ### Redirect from DNS Provider
 
-Second approach of redirecting URL is using DNS Provider, I am using **[Cloudflare](https://cloudflare.com)** here, but you can use any DNS Provider (but the steps will be different). 
-I will recommend using _Cloudflare DNS_, even your domain registrar is different. 
+Second approach of redirecting URL is using DNS Provider, I am using **[Cloudflare](https://cloudflare.com)** here, but you can use any DNS Provider (but the steps will be different).
+I will recommend using _Cloudflare DNS_, even your domain registrar is different.
 
 For this we need to create a **Redirect Rule**. This can easily be done using Cloudflare dashboard.
 Steps are:
@@ -40,24 +40,23 @@ Steps are:
 3. Go to **Redirect Rules**
 4. Click on **Create Rule**
 
-Now you will be given some option for creating redirect. 
-You chose to redirect over all incoming traffic or create costume paths. You can refer the [documentation](https://developers.cloudflare.com/rules/url-forwarding/) for more 
+Now you will be given some option for creating redirect.
+You chose to redirect over all incoming traffic or create costume paths. You can refer the [documentation](https://developers.cloudflare.com/rules/url-forwarding/) for more
 
 Single Redirects and Bulk Redirects require that you [proxy the DNS records](https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records/) of your domain (or subdomain) through Cloudflare.
 
 > The above line means you must define and `A` record to `domain.com` which you want to use (in my case `singh.software`) with any `IP` but it must me **Proxied**, refer to above instruction for more information.
 > ![DNS Record Demo](https://i.imgur.com/7cAieM7.png)
-> 
+>
 > This is what i have done, see `Content` in record is `192.0.2.1` this is taken from above docs, it can by anything.
-
 
 This is how i redirected https://singh.software to https://kunalsin9h.com
 
 <BlogImage
-    alt="Redirect Rule page demo from cloudflare dashboard"
-    src="https://i.imgur.com/ooiLasm.png"
-    width={1659}
-    height={908}
+  alt="Redirect Rule page demo from cloudflare dashboard"
+  src="https://i.imgur.com/ooiLasm.png"
+  width={1659}
+  height={908}
 />
 
 # Using Edge Functions to do Redirect
@@ -66,7 +65,7 @@ Now we are finally here, how to use edge to do HTTP redirect.
 
 A simple googling tells us that _"Edge computing is a distributed computing paradigm that brings computation and data storage closer to the sources of data."_
 
-Means edge service will store a function to all the server it has and upon request, the nearest server form the user will execute the function and give response. 
+Means edge service will store a function to all the server it has and upon request, the nearest server form the user will execute the function and give response.
 
 _Cold Start_ is a term used denote the time between _request_ hit the server and the _function_ is executed. For _Functions_ deployed on **Edge** network this is minimum.
 
@@ -74,37 +73,38 @@ Now enough theory. Let do it.
 
 #### Creating a Worker
 
-_Workers_ in Cloudflare are the _Function_ deployed on **Cloudflare Edge Network**. 
+_Workers_ in Cloudflare are the _Function_ deployed on **Cloudflare Edge Network**.
 
 For this example, i am going to redirect https://kunals.me to https://kunalsin9h.com
 
-To create a new Worker. 
+To create a new Worker.
+
 1. Go to home of Cloudflare dashboard, not to any specific site.
-2. Go to **Workers & Pages** 
+2. Go to **Workers & Pages**
 3. Click on **Create Application**
 4. Click on **Create Worker**
 
 You will see see a very clean interface which you just have to give a name for the worker and a simple _"Hello World"_ function will be there.
 
-<BlogImage 
-    alt="Creating Worker Demo"
-    src="https://i.imgur.com/KQjciDO.png"
-    width={1592}
-    height={802}
+<BlogImage
+  alt="Creating Worker Demo"
+  src="https://i.imgur.com/KQjciDO.png"
+  width={1592}
+  height={802}
 />
 
 Go ahead and press the **Deploy** button to deploy the function.
 
 And... Boom.. This function is deployed to every location in this map.
 
-<BlogImage 
-    alt="Cloudflare Edge Network map"
-    src="https://i.imgur.com/avYa7Zn.png"
-    width={796}
-    height={459}
+<BlogImage
+  alt="Cloudflare Edge Network map"
+  src="https://i.imgur.com/avYa7Zn.png"
+  width={796}
+  height={459}
 />
 
-You must see a URL for the function, when you try to **GET** request to the URL you will "Hello World" as body. 
+You must see a URL for the function, when you try to **GET** request to the URL you will "Hello World" as body.
 
 Now lets edit the function to do redirect. The default "Hello World" function will look like this.
 
@@ -114,9 +114,9 @@ Now lets edit the function to do redirect. The default "Hello World" function wi
 **/
 
 export default {
-	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
-	},
+  async fetch(request, env, ctx) {
+    return new Response("Hello World!");
+  },
 };
 ```
 
@@ -124,9 +124,9 @@ We need to change the _Response_ to redirect as
 
 ```js showLineNumbers {3}
 export default {
-	async fetch(request, env, ctx) {
-		return Response.redirect("https://kunalsin9h.com", 301);
-	},
+  async fetch(request, env, ctx) {
+    return Response.redirect("https://kunalsin9h.com", 301);
+  },
 };
 ```
 
@@ -134,7 +134,7 @@ Save and deploy the code, now when you hit the URL again, you will be redirected
 
 Great, we have just created a HTTP redirect on **Edge**.
 
-To add a custom domain like i have https://kunals.me  to this worker URL.
+To add a custom domain like i have https://kunals.me to this worker URL.
 
 1. Go to the **Worker page**
 2. Go to **Triggers**
@@ -142,11 +142,11 @@ To add a custom domain like i have https://kunals.me  to this worker URL.
 
 You can see in this image.
 
-<BlogImage 
-    alt="Adding Custom domain demo"
-    src="https://i.imgur.com/RSk0JNR.png"
-    width={1729}
-    height={801}
+<BlogImage
+  alt="Adding Custom domain demo"
+  src="https://i.imgur.com/RSk0JNR.png"
+  width={1729}
+  height={801}
 />
 
 This will take few hours to propagate, but you can still use the worker URL created by the Cloudflare for testing, it should be like `https://something.your-username.workers.dev`.
@@ -155,20 +155,20 @@ Let see the performance difference between using **Redirect Rules** vs **Workers
 
 When I do the _Performance Testing_ on [Key CDN](https://tools.keycdn.com/performance), for redirect using _Workers_ we get these results. (see below)
 
-<BlogImage 
-    alt="Worker Performance Test result"
-    src="https://i.imgur.com/C4EcGED.png"
-    width={806}
-    height={711}
+<BlogImage
+  alt="Worker Performance Test result"
+  src="https://i.imgur.com/C4EcGED.png"
+  width={806}
+  height={711}
 />
 
 And redirect using **Redirect Rules** will give these results. (see below)
 
-<BlogImage 
-    alt="Redirect Rules result"
-    src="https://i.imgur.com/IiVd6wl.png"
-    width={780}
-    height={694}
+<BlogImage
+  alt="Redirect Rules result"
+  src="https://i.imgur.com/IiVd6wl.png"
+  width={780}
+  height={694}
 />
 
 ### But wait... 🤔🤔🤔🤔
@@ -177,26 +177,26 @@ These results are very very close, is **Redirect Rules** is using **Edge**?
 
 Yes, I missed it. Using **Redirects are happening on Edge**.
 
-<BlogImage 
-    alt="Redirects are happening on edge demo page"
-    src="https://i.imgur.com/JfpZRl8.png"
-    width={684}
-    height={385}
+<BlogImage
+  alt="Redirects are happening on edge demo page"
+  src="https://i.imgur.com/JfpZRl8.png"
+  width={684}
+  height={385}
 />
 
 As you can see from the image.
 
 So using _Cloudflare Redirect Rules_ is equal in performance as redirecting with _Cloudflare Worker Functions_. But It must/should be faster then naive HTML `<meta />` tag redirect. Lets see.
 
-Running same performance test for redirect using HTML `<meta>` tag as explain in the beginning from the server in _Central India (Pune) .
+Running same performance test for redirect using HTML `<meta>` tag as explain in the beginning from the server in \_Central India (Pune) .
 
 I have using https://r.kunalsin9h.com to redirect to https://kunalsin9h.co for this example.
 
-<BlogImage 
-    alt="Html meta tag redirect speed demo"
-    src="https://i.imgur.com/uFn1fqe.png"
-    width={831}
-    height={704}
+<BlogImage
+  alt="Html meta tag redirect speed demo"
+  src="https://i.imgur.com/uFn1fqe.png"
+  width={831}
+  height={704}
 />
 
 As expected very slow for all locations except _Bangalore_. Also We are getting `200` Response code means the time here is for reaching the destination.
@@ -216,29 +216,28 @@ server {
 }
 ```
 
-The server same,  it is at _Central India (Pune)_. lets see the performance test results.
+The server same, it is at _Central India (Pune)_. lets see the performance test results.
 
-![()
-
-<BlogImage 
-    alt="Redirection using nginx]"
-    src="https://i.imgur.com/wxw5Tli.png"
-    width={810}
-    height={718}
+<BlogImage
+  alt="Redirection using nginx]"
+  src="https://i.imgur.com/wxw5Tli.png"
+  width={810}
+  height={718}
 />
 
 # What !💀
 
-It _Connected_ so fast, means **Connection Time** for redirect is fast for all cases. That means **TTFB** - Time for First Byte - is the real measurement for performance here.
+It _Connected_ so fast, means **Connection Time** for redirect is fast for all cases. That means **TTFB** - Time to First Byte - is the real measurement for performance here.
 
 Hence, we can clearly see how _TTFB_ for **Edge** redirect is so small as compared to _Nginx_ (centralized server) one.
 
 While using all these domains, the speed difference I noticed is as follows:
 
 From Fast to Less Fast:
+
 1. https://kunals.me (using edge functions)
 2. https://singh.software (using redirect rules)
 3. https://rn.kunalsin9h.com (using nginx)
 4. https://r.kunalsin9h.con (using html meta tag)
 
-Peace. 
+Peace.
