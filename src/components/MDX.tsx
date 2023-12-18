@@ -3,26 +3,13 @@ import Image, { ImageProps } from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
 import { Fira_Code } from "next/font/google";
+import { ImageThatOpensInNewTab } from "./MDX_CLIENT";
 
 const firaCode = Fira_Code({
   weight: ["400"],
   subsets: ["latin"],
   display: "swap",
 });
-
-const keyStr =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-const triplet = (e1: number, e2: number, e3: number) =>
-  keyStr.charAt(e1 >> 2) +
-  keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
-  keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
-  keyStr.charAt(e3 & 63);
-
-export const rgbDataURL = (r: number, g: number, b: number) =>
-  `data:image/gif;base64,R0lGODlhAQABAPAA${
-    triplet(0, r, g) + triplet(b, 255, 255)
-  }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 const components = {
   // @ts-ignore
@@ -186,27 +173,18 @@ const components = {
     />
   ),
   // @ts-ignore
-  BlogImage: (props) => (
-      <Image
-        {...(props as ImageProps)}
-        placeholder="blur"
-        blurDataURL={rgbDataURL(255, 255, 255)}
-        draggable={false}
-        className="py-1"
-        alt=""
-      />
-  ),
+  BlogImage: (props) => <ImageThatOpensInNewTab props={props} />,
 
   Video: ({ link, title }: { link: string; title: string }) => (
-      <iframe
-        width="100%"
-        height="315"
-        src={link}
-        title={title}
-        allow="accelerometer; encrypted-media; gyroscope; web-share"
-        allowFullScreen={true}
-        className="py-1"
-      ></iframe>
+    <iframe
+      width="100%"
+      height="315"
+      src={link}
+      title={title}
+      allow="accelerometer; encrypted-media; gyroscope; web-share"
+      allowFullScreen={true}
+      className="py-1"
+    ></iframe>
   ),
 };
 
