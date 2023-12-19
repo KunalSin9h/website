@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image, { ImageProps } from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
 import { Fira_Code } from "next/font/google";
@@ -118,7 +117,9 @@ const components = {
     // eslint-disable-next-line @next/next/no-img-element
     <img className={cn("rounded", className)} alt={alt} {...props} />
   ),
-  hr: ({ ...props }) => <hr className="my-2 md:my-4" {...props} />,
+  hr: ({ ...props }) => (
+    <hr className="my-2 py-[0.02rem] md:my-4 bg-slate-500" {...props} />
+  ),
 
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-4 w-full overflow-y-auto">
@@ -174,6 +175,18 @@ const components = {
   ),
   // @ts-ignore
   BlogImage: (props) => <ImageThatOpensInNewTab props={props} />,
+
+  // @ts-ignore
+  TLDR: ({ content }) => (
+    <div className="bg-zinc-200 dark:bg-zinc-800 p-4 rounded-lg">
+      <div className="text-slate-600 dark:text-slate-400 text-md">
+        <div className="text-slate-800 dark:text-slate-300 font-semibold">
+          TL;DR
+        </div>
+        <div className="mt-2">{content}</div>
+      </div>
+    </div>
+  ),
 
   Video: ({ link, title }: { link: string; title: string }) => (
     <iframe

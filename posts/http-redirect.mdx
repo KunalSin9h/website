@@ -4,6 +4,8 @@ description: Using Cloudflare workers to do http redirect and comparison with ot
 published: "2023-12-18"
 ---
 
+<TLDR content="This blog explores HTTP redirection methods, comparing traditional HTML-based, DNS provider (Cloudflare) rules, and edge computing using Cloudflare Workers. We discuss the process of creating a Cloudflare Worker for HTTP redirects, emphasizing its efficiency over DNS-based and HTML meta tag methods. Performance tests reveal that Cloudflare Worker and Redirect Rules perform similarly, with both outperforming HTML meta tag and centralized server (Nginx) redirection, showcasing the advantages of utilizing edge computing for efficient and fast URL redirection." />
+
 Redirecting one _URL_ to other _URL_ is a common practice. There are _2_ HTTP Status Code for redirection, which are
 
 | HTTP Status Code | Description        |
@@ -188,9 +190,9 @@ As you can see from the image.
 
 So using _Cloudflare Redirect Rules_ is equal in performance as redirecting with _Cloudflare Worker Functions_. But It must/should be faster then naive HTML `<meta />` tag redirect. Lets see.
 
-Running same performance test for redirect using HTML `<meta>` tag as explain in the beginning from the server in \_Central India (Pune) .
+Running same performance test for redirect using HTML `<meta>` tag as explain in the beginning. The server from where HTML will be served is in Central India (Pune).
 
-I have using https://r.kunalsin9h.com to redirect to https://kunalsin9h.co for this example.
+I am using https://r.kunalsin9h.com to redirect to https://kunalsin9h.co for this example.
 
 <BlogImage
   alt="Html meta tag redirect speed demo"
@@ -209,14 +211,11 @@ Redirecting using _Web Server_ like **Nginx**. We can redirect URL at _Web Serve
 server {
         listen 80;
         server_name rn.kunalsin9h.com;
-
-        if ($host = rn.kunalsin9h.com) {
-                return 301 https://kunalsin9h.com;
-        }
+        return 301 https://kunalsin9h.com;
 }
 ```
 
-The server same, it is at _Central India (Pune)_. lets see the performance test results.
+The server same, it is at Central India (Pune). lets see the performance test results.
 
 <BlogImage
   alt="Redirection using nginx]"
@@ -240,4 +239,4 @@ From Fast to Less Fast:
 3. https://rn.kunalsin9h.com (using nginx)
 4. https://r.kunalsin9h.con (using html meta tag)
 
-Peace.
+With this we can conclude that using **Edge** for redirecting is the best option.
