@@ -20,7 +20,7 @@ export default function K9() {
         number which i used often. I have a lot of reasons to use 9.
       </p>
       <p className="text-xl font-semibold ">
-        Here are some of the reasons why i use 9:
+        Here are some of the reasons why 9 is my favorite number:
       </p>
       <div className="pl-4">
         <p className="text-xl my-4">My Name with 9</p>
