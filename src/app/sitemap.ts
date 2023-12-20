@@ -7,12 +7,19 @@ const Sitemap = () => {
     lastModified: post.published,
   }));
 
-  const routes = ["", "/", "/blog", "/system", "/work"].map(
-    (route) => ({
-      url: `https://kunalsin9h.com${route}`,
-      lastModified: new Date().toISOString().split("T")[0],
-    })
-  );
+  const routes = [
+    "",
+    "/",
+    "/bharat",
+    "/blog",
+    "/k9",
+    "/papers",
+    "/system",
+    "/work",
+  ].map((route) => ({
+    url: `https://kunalsin9h.com${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
 
   return [...routes, ...posts];
 };

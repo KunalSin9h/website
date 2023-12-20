@@ -1,7 +1,6 @@
-import { ImageThatOpensInNewTab } from "@/components/MDX_CLIENT";
 import PageMeta from "@/lib/pageMetadata";
 import { Metadata } from "next";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 
 export const metadata: Metadata = PageMeta({
   title: "Unsubscribe Email",
@@ -9,7 +8,7 @@ export const metadata: Metadata = PageMeta({
   url: "https://kunalsin9h.com/unsubscribe/",
 });
 
-export default function Papers() {
+export default function Unsubscribe() {
   return (
     <>
       <p className="text-3xl font-bold">
