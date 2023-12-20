@@ -53,14 +53,14 @@ export default function K9() {
             I was born at <strong>9:55</strong> PM on{" "}
             <span className="font-semibold">Wednesday</span>. So assuming it
             took <strong>1</strong> minute to grab my birth record entry, I
-            would have been born at <strong>9:45</strong>, which means...
+            would have been born at <strong>9:54</strong>, which means...
           </p>
           <BlurImage
-            src="/images/k9/birth.png"
+            src="/images/k9/time.png"
             className="rounded my-1"
             alt="Time of birth with 9"
-            width={317}
-            height={308}
+            width={253}
+            height={274}
           />
           <p>
             Now coming to <strong>Wednesday</strong>, how many characters are in
