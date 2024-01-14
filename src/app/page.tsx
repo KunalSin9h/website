@@ -16,8 +16,6 @@ export default function Home() {
         <span className="inline-block cursor-pointer">
           <Bharat />
         </span>
-      </p>
-      <p>
         . I love building end-to-end products, tools, beautiful interfaces. I
         have a strong passion for Backend Development, Servers & Linux, CLI,
         Databases, Cloud & Networking.{" "}
