@@ -16,12 +16,10 @@ export default function Home() {
         <span className="inline-block cursor-pointer">
           <Bharat />
         </span>
-        . I am pursuing my bachelor&#39;s in{" "}
-        <span className="italic">Computer Science & Engineering.</span>
       </p>
       <p>
-        I love building end-to-end products, tools, beautiful interfaces. I have
-        a strong passion for Backend Development, Servers & Linux, CLI,
+        . I love building end-to-end products, tools, beautiful interfaces. I
+        have a strong passion for Backend Development, Servers & Linux, CLI,
         Databases, Cloud & Networking.{" "}
       </p>
       <p>
