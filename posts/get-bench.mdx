@@ -1,0 +1,155 @@
+---
+title: Benchmarking different http framework from nodejs, go and rust.
+description: Benchmarking different http framework from nodejs, go and rust.
+published: "2024-01-17"
+---
+
+To Benchmark i have used `ab` (_Apache Bench_) which is an _http benchmarking tools_
+
+#### Configuration
+
+I have used 
+```bash
+ab -n 100000 -c 1 http://127.0.0.1:3000/
+```
+
+command which means sending `100000` (_1 Lakh_) request with `1` concurrent connections. 
+
+> This config have given most differentiable results.
+
+## Express.js
+
+Project setup:
+
+Need `express.js` package from `npm`
+
+<BlogImage
+  alt="Express.js folder structure"
+  src="https://i.imgur.com/zh8rFac.png"
+  width={209}
+  height={158}
+/>
+
+Code: 
+
+```js 
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+	res.send("ABCD");
+})
+
+app.listen(3000);
+```
+
+Result: **2543.58** Requests / Second
+
+## Fastify.js
+
+> Fastify is the fastest http framework for nodejs.
+
+Project setup: 
+
+Need `fastify` package from `npm`
+
+<BlogImage
+  alt="Fastify.js folder structure"
+  src="https://i.imgur.com/HCnR15u.png"
+  width={199}
+  height={150}
+/>
+
+Code: 
+
+```js
+const fastify = require('fastify')({
+    logger: false
+});
+
+fastify.get('/', (request, reply) => {
+  reply.send("ABCD");
+})
+
+fastify.listen({ port: 3001 })
+```
+
+Result: **5805.55** Requests / Second
+
+## GoLang's _Build In_ `net/http` 
+
+Project setup:
+
+> No need to install any third party lib or package.
+
+<BlogImage
+  alt="Go lang folder structure"
+  src="https://i.imgur.com/epfd60s.png"
+  width={200}
+  height={69}
+/>
+
+Code: 
+
+```go
+package main
+
+import (
+    "net/http"
+)
+
+func main(){
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("ABCD"))
+        return 
+    })
+
+    http.ListenAndServe(":3002", nil)
+}
+```
+
+Result: **6401.89** Requests / Second
+
+## Rust
+
+Project setup:
+
+Need `axum`  and `tokio` package from `crats.io`
+
+<BlogImage
+  alt="Rust lang folder structure"
+  src="https://i.imgur.com/ipM8XRW.png"
+  width={188}
+  height={181}
+/>
+
+```rust
+use axum::{
+    routing::get,
+    Router
+};
+
+#[tokio::main]
+async fn main()  {
+    let app = Router::new()
+        .route("/", get(root));
+
+    let ln = tokio::net::TcpListener::bind("127.0.0.1:3003").await.unwrap();
+    axum::serve(ln, app).await.unwrap()
+}
+
+async fn root() -> &'static str {
+    "ABCD"
+}
+```
+
+Result:  **3311.86** Requests / Second
+
+ 🤔 Isn't this should be more. 
+
+I have done the benchmarking on very log end Virtual Machine. 
+
+## Todo...
+
+To do the same benchmakring on very - ultra - high end Virtual Machine.
