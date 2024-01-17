@@ -150,6 +150,29 @@ Result:  **3311.86** Requests / Second
 
 I have done the benchmarking on very low-end Virtual Machine. 
 
+
+# Changing Configuration
+
+Now i am using 
+
+```bash
+ab -n 100000 -c 100 http://127.0.0.1:3001/
+```
+
+This means total of `100000` (_1 Lakh_) request with  `100` concurrent  connections.
+
+And the results are:
+
+- **Express.js** performs **3235.46** requests / second
+
+- **Fastify.js** performs **7443.41** requests / second
+
+- **Go** performs **11,297.47** requests/ second
+
+- **Rust** performs **10,805.90** requests / second
+
+And i do `1000` concurrent connections, only _Express.js_ and _Fastify.js_ (both for node.js) get crashed.
+ 
 ## Todo...
 
 To do the same benchmakring on very - ultra - high end Virtual Machine.
