@@ -144,10 +144,11 @@ async fn root() -> &'static str {
 }
 ```
 
-Result:  **3311.86** Requests / Second
+Result without `--release` flag:  **3311.86** Requests / Second
 
- 🤔 Isn't this should be more. 
+Result with `--release` flag: **7882.94** Requests / Second
 
+> i.e building with this `cargo build --release` 
 
 # Changing Configuration
 
@@ -167,9 +168,21 @@ And the results are:
 
 - **Go** performs **11,297.47** requests/ second
 
-- **Rust** performs **10,805.90** requests / second
+- **Rust** _Without `--release` flag_ performs **10,805.90** requests / second
 
-And i do `1000` concurrent connections, only _Express.js_ and _Fastify.js_ (both for node.js) get crashed.
+- **Rust** _With `--release` flag_ performs **12,687.14** requests / second
+
+#### On `1000` concurrent connections.
+
+```bash
+ab -n 100000 -c 1000 http://127.0.0.1:3003/
+```
+
+-  _Express.js_ and _Fastify.js_ (both for node.js) get crashed.
+
+-  _Go_ performs **11,252.25** requests / second
+
+-  _Rust_ performs **12,189.86** requests / second
  
 ## Todo...
 
