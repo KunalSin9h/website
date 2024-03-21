@@ -233,7 +233,7 @@ func SetupQueue() error {
 }
 ```
 
-To connect with postgres we need a running postgres server, you can run it with docker or use a manged postgres service like [Neon](https://neon.tech). 
+To connect with postgres we need a running postgres server, you can run it with docker or use a manged postgres service like [Neon](https://neon.tech).
 In any case you will have a **Database Connection String** which looks like this `postgres://username:password@host:port/database`
 
 We are specifying this `DATABASE_URL` trough **Environment Variables**.
@@ -523,7 +523,7 @@ Let run it again, Here is a video of me running it.
 
 So lets refactor the code to show the worker `id` in the output. We will use a `worker_id` to print output by that worker, for this we need to make change in the few place.
 
-```go showLineNumbers{42} title="main.go" {3,14,22,23,46}
+```go showLineNumbers{42} title="main.go" {3,15,22,23,46}
 [...]
 
 func worker(err chan error, worker_id uint16) { // working id
