@@ -18,13 +18,12 @@ export default function Home() {
         </span>
         . I love building end-to-end products, tools, beautiful interfaces. I
         have a strong passion for Backend Development, Servers & Linux, CLI,
-        Databases, Cloud & Networking.{" "}
+        Databases, Cloud & Networking and Artificial Intelligence.{" "}
       </p>
       <p>
-        Arch Linux and Vim are my daily drivers for development, though for big
-        projects, I have to switch to VSCode. Currently, I am learning Rust and
-        Real-time Systems. I love contributing to Open-Source Software
-        Development.
+        <del>Arch Linux</del> Windows and <del>Vim</del> are my daily drivers
+        for development. Currently, I am learning ML, Rust and Real-time Systems. I
+        love contributing to Open-Source Software Development.
       </p>
       <p>
         Apart from software development, I love to play basketball, attempt to
