@@ -22,7 +22,7 @@ export default function System() {
         Ubuntu, which i have used for nearly a year.
       </p>
       <p>
-        Since, 1 year, i have been using{" "}
+        And for 1 year, i have used{" "}
         <a
           href="https://archlinux.org/"
           target="_black"
@@ -30,11 +30,12 @@ export default function System() {
         >
           Arch Linux
         </a>
-        . It is a linux distro which is most bleeding edge, in terms os kernal
-        version, feature etc.
+        . It is a linux distro which is most bleeding edge, in terms os kernel
+        version, feature etc. But since then i am using Windows, mostly due to
+        some requirements in developing desktop applications.
         <br />
-        It was not an easy switch...
       </p>
+      <p>This is my tweet when i switched to arch linux, it was not easy.</p>
       <Image
         alt="Screenshot of tweet showing my arch install"
         src="/images/arch-tweet.webp"
@@ -58,9 +59,9 @@ export default function System() {
         className="rounded"
       />
       <p>
-        With the <strong>Kernal</strong> version <strong>6.4.3</strong>. I
+        With the <strong>Kernel</strong> version <strong>6.4.3</strong>. I
         don&apos;t know any linux distro will give this latest version of
-        kernal.
+        kernel.
       </p>
       <p>
         Few arch linux stuff what i wrote on my <strong>github gist</strong>,
