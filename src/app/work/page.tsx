@@ -17,16 +17,16 @@ export default function Work() {
         <span className="opacity-30">#</span> Projects
       </h1>
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
-        {/* <TiltBox>
+        <TiltBox>
           <WorkBox
             url="https://github.com/meltred"
-            icon="/images/meltred.png"
+            icon="/images/orangewhite.png"
             name="Meltred"
             tagline="AI Research"
-            role="Developer"
-            work=""
+            role="Developer & Researcher"
+            work="Working on ML Models to suite business growth Uses cases."
           />
-        </TiltBox> */}
+        </TiltBox>
         <TiltBox>
           <WorkBox
             url="https://github.com/kunalsin9h/meltcd"
