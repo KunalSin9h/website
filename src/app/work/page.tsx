@@ -24,7 +24,7 @@ export default function Work() {
             name="Meltred"
             tagline="AI Research"
             role="Developer & Researcher"
-            work="Working on ML Models to suite business growth uses cases."
+            work="Working on ML Models to suite business growth use cases."
           />
         </TiltBox>
         <TiltBox>
