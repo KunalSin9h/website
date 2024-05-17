@@ -21,7 +21,7 @@ export default function Home() {
         Databases, Cloud & Networking and Artificial Intelligence.{" "}
       </p>
       <p>
-        <del>Arch Linux</del> Windows and <del>Vim</del> VSCode are my daily
+        Arch Linux and Vim are my daily
         drivers for development. Currently, I am learning ML, Rust and Real-time
         Systems. I love contributing to Open-Source Software Development.
       </p>
