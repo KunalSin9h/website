@@ -11,7 +11,7 @@ export default function Home() {
       </p>
       <p>
         I&#39;m <span className="">Kunal</span>, a{" "}
-        <HoverTooltip content="29th May 2002" child={<span>21</span>} /> y/o
+        <HoverTooltip content="29th May 2002" child={<span>22</span>} /> y/o
         developer based in{" "}
         <span className="inline-block cursor-pointer">
           <Bharat />
@@ -26,9 +26,7 @@ export default function Home() {
         Systems. I love contributing to Open-Source Software Development.
       </p>
       <p>
-        Apart from software development, I love to play basketball, attempt to
-        wake up early for a morning run (although I &#39;m really struggling
-        with this), have a strong interest in national and global geopolitics
+        Apart from software development, I love to play basketball, have a strong interest in national and global geopolitics
         and occasionally upload videos on{" "}
         <Link
           href="https://www.youtube.com/@kunalsin9h"
