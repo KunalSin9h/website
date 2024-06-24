@@ -46,13 +46,40 @@ It can be `geoDNS`, `geoDistance`, `Weighted Shuffle` and `Anycast`.
 
 - *geoDNS* : Every server has unique **IP**, we distribute request on the basis os IP, ASN, Region, Continent, Country. 
 
+    <details>
+    <summary>See example image</summary>
+
+        <BlogImage 
+            src="https://i.imgur.com/Zt22jto.png"
+            alt="GeoDNS example"
+            width={1100}
+            height={753}
+        />
+
+    </details>
+
 - *geoDistance* : Every server has unique **IP**, we distribute request on the basis nearest server, by calculating shortest distance. 
 
-- *Weighted Shuffle* : TODO
+- *Weighted Shuffle* : Random order with weights - Mainly for preventing DDoS 
 
 - *Anycast*: All the server has same **IP**, request goes to nearest server using *BGP* Protocol. 
 
+    <details>
+    <summary>See example image</summary>
+
+        <BlogImage 
+            src="https://i.imgur.com/cigYslY.png"
+            alt="Anycast example"
+            width={1100}
+            height={753}
+        />
+
+    </details>
+
 > Here *we* means the *DNS* Server.
+
+_Anycast_ is hard to achieve, since involve working with hardware and network layer and publishing same IP for all server.  _Weighed Shuffle_ is not want we want. 
+So we are going to use _geoDNS_ and _geoDistance_.
 
 That was a brief about CDNs, now lets talk about creating one. 
 
