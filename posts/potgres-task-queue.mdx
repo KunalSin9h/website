@@ -648,12 +648,6 @@ So lets wrap what we have done.
 2. We are adding task in the queue using a REST API
 3. The tasks are being completed by the `async workers`
 
-The application does not have any state by it self. But there is one issue thought, and i am got going to fix it. We are deleting the task from the queue before finishing it, so what if out app stops / crashes before the task is finish, as we have already removed the task from the queue, so no other worker is able to find the task. This way the task is not finished and not going to be finished by any one else.
-
-If you find the solution of the problem then do let me know. (_kunal [at] kunalsin9h [dot] com_)
-
-_OK..._
-
 I hope you enjoyed the blog, if you like the content then don't forgot to **subscribe** the blog for getting notifications about future blogs.
 
 ## See you soon :)

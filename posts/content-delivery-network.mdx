@@ -1,0 +1,77 @@
+---
+title: Create a custom CDN - Content Delivery Network
+description: Using Pulumi, Nginx and geoDNS created a distributed server network for content delivery.
+published: "2024-06-24"
+---
+
+### Using Pulumi, Azure, Nginx and geoDNS created a distributed server network for content delivery.
+Although this architecture can be used for creating anything which need to be deployed as **\`per user location\`** basis.
+
+For example
+
+- Content Delivery Network
+- Distributed  HTTPS Cache
+- Distributed Deployments
+- And so on...
+
+#### In this very blog, we are just going to see CDN
+
+**CDN** - _Content Delivery Network_
+
+<BlogImage
+    src="https://i.imgur.com/cz0tTsI.png"
+    alt="cdn example"
+    width={1478}
+    height={792}
+ />
+
+CDN are server used for delivering content - images, videos, audios, texts and blog for naming few. These are located 
+on every location where there is significant human popular is present.
+
+In the example image above, I have shown how can Company (or even we) place server at different location and create a logic to 
+distribute request depending on client location to nearest server.
+
+<BlogImage
+    alt="nearest server example"
+    src="https://i.imgur.com/r5yYY0B.png"
+    width={432}
+    height={306}
+/>
+
+#### What logic ?
+
+It can be `geoDNS`, `geoDistance`, `Weighted Shuffle` and `Anycast`.
+
+> Go and read about them, Here is TL;DR
+
+- *geoDNS* : Every server has unique **IP**, we distribute request on the basis os IP, ASN, Region, Continent, Country. 
+
+- *geoDistance* : Every server has unique **IP**, we distribute request on the basis nearest server, by calculating shortest distance. 
+
+- *Weighted Shuffle* : TODO
+
+- *Anycast*: All the server has same **IP**, request goes to nearest server using *BGP* Protocol. 
+
+> Here *we* means the *DNS* Server.
+
+That was a brief about CDNs, now lets talk about creating one. 
+
+# Creating a Custom CDN Network. 
+
+We are gonna use ...
+
+1. Azure for creating Virtual Machines at 3 different locations
+
+    To do this, we are using [Pulumi](https://www.pulumi.com/) - An _Infrastructure as Code_ platform for doing this repetitive task.
+
+2. [Gcore](https://www.pulumi.com/) for DNS with Free geoDNS service. 
+
+    Other DNS service providers, like Cloudflare does not have geoDNS for Free - Its only for Enterprise users.
+
+3. Nginx for _Static contents serving_
+    
+    To do this, we are using [Ansible](https://www.ansible.com/)
+
+4. Finally upload _Contents_ to our _Content Delivery Network_
+
+    Using _Bash Scripts_ or a custom CLI tool.

@@ -10,7 +10,6 @@ import { Analytics } from "@vercel/analytics/react";
 import BackToTop from "@/components/BackToTop";
 import { League_Spartan } from "next/font/google";
 import LiveActivity from "@/components/activities/liveActivity";
-import PlayClickSound from "@/components/ClickSound";
 
 const leagueSpartan = League_Spartan({
   weight: ["400", "500", "600", "700"],
@@ -199,8 +198,6 @@ export default function RootLayout({
             </footer>
           </div>
         </ThemeProvider>
-
-        <PlayClickSound />
       </body>
     </html>
   );
