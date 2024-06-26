@@ -26,7 +26,7 @@ For example
  />
 
 CDN are server used for delivering content - images, videos, audios, texts and blog for naming few. These are located 
-on every location where there is significant human popular is present.
+on every location where there is significant human population is present.
 
 In the example image above, I have shown how can Company (or even we) place server at different location and create a logic to 
 distribute request depending on client location to nearest server.
@@ -87,9 +87,12 @@ That was a brief about CDNs, now lets talk about creating one.
 
 We are gonna use ...
 
-1. Azure for creating Virtual Machines at 3 different locations
+> If you don't want to do these steps exactly simmilar, then you can do it your way. The core
+> idea same.
 
-    To do this, we are using [Pulumi](https://www.pulumi.com/) - An _Infrastructure as Code_ platform for doing this repetitive task.
+1. Azure for creating Virtual Machines at 5 different locations
+
+    To do this, we are using [Pulumi](https://www.pulumi.com/) - An _Infrastructure as Code_ platform 
 
 2. [Gcore](https://www.pulumi.com/) for DNS with Free geoDNS service. 
 
@@ -102,3 +105,22 @@ We are gonna use ...
 4. Finally upload _Contents_ to our _Content Delivery Network_
 
     Using _Bash Scripts_ or a custom CLI tool.
+
+## Creating Virtual Machines - Our Servers
+
+The task is to create multiple server (virtual machine) at different locations, and get unique *IP Address* of all.
+
+I'm going to create 5 servers at these locations:
+
+-   "Central US"
+-   "Central India"
+-   "West Europe"
+-   "UAE Central"
+-   "Australia Central"
+
+<br />
+<details>
+    <summary>See how to do it with **Pulumi**</summary>
+</details>
+
+After creating these
