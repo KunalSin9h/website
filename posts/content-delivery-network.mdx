@@ -613,6 +613,12 @@ We are able to store content to our content network, any we can access it at `cd
             cmd: certbot --nginx -m {{ admin_email }} -d {{ domain_name }} --agree-tos --non-interactive
     ```    
 
+    And run this playbook as
+
+    ```bash
+    ansible-playbook -i inventory.ini  install_ssl_cert.yml
+    ```
+
 </details>
 
 When doing manually, _FOR EACH SERVER_
