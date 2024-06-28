@@ -10,7 +10,7 @@ Although this architecture can be used for creating anything which need to be de
 For example
 
 - Content Delivery Network
-- Distributed  HTTPS Cache
+- Global  HTTPS Cache using Varnish
 - Distributed Deployments
 - And so on...
 
@@ -87,14 +87,16 @@ That was a brief about CDNs, now lets talk about creating one.
 
 We are gonna use ...
 
-> If you don't want to do these steps exactly simmilar, then you can do it your way. The core
+> If you don't want to do these steps exactly similar, then you can do it your way. The core
 > idea same.
 
-1. Azure for creating Virtual Machines at 7 different locations
+1. Azure for creating Virtual Machines at 3 different locations
+
+    To do this, we are using [Terraform](https://www.terraform.io/) - An _Infrastructure as Code_ platform 
 
 2. Nginx for _Static contents serving_
 
-    To do both, we are using [Terraform](https://www.terraform.io/) - An _Infrastructure as Code_ platform 
+    To do this we will use [Ansible](https://www.ansible.com/)
 
 3. [Gcore](https://www.pulumi.com/) for DNS with Free geoDNS service. 
 
@@ -102,7 +104,7 @@ We are gonna use ...
 
 4. Finally upload _Contents_ to our _Content Delivery Network_
 
-    Using _Bash Scripts_ or a custom CLI tool.
+    To do this we also use **Ansible**
 
 ## Creating Virtual Machines - Our Servers
 
@@ -113,10 +115,6 @@ I'm going to create 7 servers at these locations:
 -   "Central India"
 -   "Central US"
 -   "West Europe"
--   "Australia Central"
--   "Japan East"
--   "South Africa North"
--   "Brazil South"
 
 <br />
 <details>
@@ -150,31 +148,6 @@ I'm going to create 7 servers at these locations:
             "vm3" = {
                 name = "westeurope"
                 location = "West Europe"
-                size = "Standard_B1s"
-            }
-
-            "vm4" = {
-                name = "australiacentral"
-                location = "Australia Central"
-                size = "Standard_B1s"
-            }
-
-
-            "vm5" = {
-                name = "japaneast"
-                location = "Japan East"
-                size = "Standard_B1s"
-            }
-
-            "vm6" = {
-                name = "southafricanorth"
-                location = "South Africa North"
-                size = "Standard_B1s"
-            }
-
-            "vm7" = {
-                name = "brazilsouth"
-                location = "Brazil South"
                 size = "Standard_B1s"
             }
         }
@@ -309,12 +282,8 @@ After creating the Virtual Machines, we will have all the **IP** address as.
 
 ```hcl
 custom_cdn_public_ip = {
-  "australiacentral-PublicIp" = "20.28.46.102"
-  "brazilsouth-PublicIp" = "191.232.182.67"
   "centralindia-PublicIp" = "4.213.167.247"
   "centralus-PublicIp" = "40.86.90.42"
-  "japaneast-PublicIp" = "4.215.236.83"
-  "southafricanorth-PublicIp" = "102.37.60.130"
   "westeurope-PublicIp" = "4.180.232.216"
 }
 ```
@@ -326,58 +295,339 @@ static content - files and folders.
 
 <br />
 <details>
-    <summary>See how to do it with **Terraform**</summary>
+    <summary>See how to do it with **Ansible**</summary>
 
+    The source code for this ansible is in `infra` folder [here](https://github.com)
+
+    After we got all the **IP** Address of all VMs. Create a `inventory.ini` file for storing all this data, which ansible take as input.  
+
+    ```ini title="inventory.ini"
+    [azure_vms]
+    central-india location=central-india ansible_host=[HOST IP] ansible_user=custom-cdn ansible_ssh_pass=Password1234!
+    central-us location=central-us ansible_host=[HOST IP] ansible_user=custom-cdn ansible_ssh_pass=Password1234!
+    west-europe location=west-europe ansible_host=[HOST IP] ansible_user=custom-cdn ansible_ssh_pass=Password1234!
+    ```
+
+    Replace `[HOST IP]` with server IP address.
+
+    To install and setup nginx, create a `nginx.conf` in the same directory.
+
+    ```nginx title="nginx.conf"
+    server { 
+        listen 80;
+        server_name {{ domain_name }};
+
+        add_header X-Server-Location {{ location }};
+        autoindex on;
+
+        root /home/custom-cdn/contents;
+    }
+    ```
+
+    and now create an `Ansible Playbook` file. 
+
+    ```yml title="setup_nginx.yml"
+    - name: Install NGINX on all VMs
+        hosts: azure_vms
+        become: yes
+        vars:
+            domain_name: cdn.kunals.me
+        tasks:
+            - name: Update apt cache
+            apt:
+                update_cache: yes
+            
+            - name: Create a new contents directory
+            file:
+                path: /home/custom-cdn/contents
+                state: directory
+                mode: "0755"
+
+            - name: Install NGINX
+            apt:
+                name: nginx
+                state: present
+
+            - name: Create NGINX configuration for new domain
+            template:
+                src: nginx.conf
+                dest: /etc/nginx/sites-available/{{ domain_name }}.conf
+            notify:
+                - Restart NGINX
+
+            - name: Enable new NGINX site
+            file:
+                src: /etc/nginx/sites-available/{{ domain_name }}.conf
+                dest: /etc/nginx/sites-enabled/{{ domain_name }}.conf
+                state: link
+            notify:
+                - Restart NGINX
+
+        handlers:
+            - name: Restart NGINX
+                service:
+                    name: nginx
+                    state: restarted
+    ```
+
+    and finally in the same directory. Create Ansible configuration file, `ansible.cfg`
+
+    ```cfg title="ansible.cfg"
+    [defaults]
+    host_key_checking = false
+    ```
+
+    After these files, we are ready to run the playbook.
+
+    > make sure you have `sshpass` installed on your system. Ansible require it.
+
+    Run the _playbook_
+
+    ```bash
+    ansible-playbook -i inventory.ini setup_nginx.yml
+    ```
+    
+    This will install nginx on all server, create _nginx.conf_ file in right place and restart nginx. 
 
 </details>
 
-To Login we use SSH 
+<br />
+<details>
+    <summary>See how to do it Manually</summary>
 
-```bash
-ssh custom-cdn@10.10.10.10
-# custom-cdn is each machines username
-```
+    _FOR EACH SERVER_
 
-Create a folder where all the contents reside.
+    To Login we use SSH 
 
-```bash
-mkdir contents
+    ```bash
+    ssh custom-cdn@10.10.10.10
 
-# pwd
-# /home/custom-cdn/contents
-```
+    # custom-cdn is each machines username
+    # replace 10.10.10.10 to actual server ip
+    ```
 
-Install nginx and make sure its running.
+    Create a folder where all the contents reside.
 
-> Open any **IP** address in the browser you must see nginx page
+    ```bash
+    mkdir contents
 
-Lets write a conf  at `/etc/nginx/sites-enabled/`
+    # pwd
+    # /home/custom-cdn/contents
+    ```
 
-Create a new file
+    _Install nginx and make sure its running._
 
-```bash
-sudo vim cdn.kunals.me
-# choose any domain you want
-```
-And write this 
+    > Open the **IP** address in the browser you must see nginx page
 
-```nginx
-server {
+    Edit the `nginx.conf` to add current user.
 
-    listen 80;
-    serve_name cdn.kunals.me;
+    edit file `/etc/nginx/nginx.conf`
 
-    add_header X-Server-Location centalindia; # place your sever location name here
+    ```diff
+    - user www-data;
+    + user custom-cdn;
+    ```
 
-    autoindex on;
-    root /home/custom-cdn/contents;
-}
-```
+    Restart nginx
 
-Reload nginx
+    ```bash
+    sudo systemctl restart nginx
+    ```
+    Lets write a configuration  at `/etc/nginx/sites-enabled/`
 
-```bash
-sudo nginx -s reload
-```
+    Create a new file
+
+    ```bash
+    sudo vim cdn.kunals.me
+    # choose any domain you want
+    ```
+    And write this 
+
+    ```nginx
+    server {
+
+        listen 80;
+        serve_name cdn.kunals.me;
+
+        add_header X-Server-Location centalindia; # place your sever location name here
+
+        autoindex on;
+        root /home/custom-cdn/contents;
+    }
+    ```
+
+    Reload nginx
+
+    ```bash
+    sudo nginx -s reload
+    ```
+
+</details>
 
 This will make nginx server static files and folder in `contents` directory of each machine.
+
+Which means on hitting `cdn.kunals.me` the files and folders in `contents` folder will be served. 
+
+# Setting DNS 
+
+Now lets point `cdn.kunals.me` to each **IP** address of our servers. You heard it right, one domain name 
+will point to multiple _IP_ address using request distribution logic.
+
+Our **DNS** of choice is [**Gcore DNS**](https://gcore.com/dns), reason?. It has _free_ **geoDNS** support. Go ahead and create your 
+account on [Gcore](https://gcore.com/dns). 
+
+Open the Gcore's [DNS page](https://portal.gcore.com/dns/zones)
+
+Click on **Add Zone**
+
+<BlogImage
+    src="https://i.imgur.com/Eim3ePV.png"
+    alt="Add zone demo image" 
+    width={472}
+    height={299}
+ />
+
+Add your domain **nameserver** to Gcore.
+
+<BlogImage 
+    src="https://i.imgur.com/6bxHP3s.png"
+    alt="Add domain name"
+    width={717}
+    height={320}
+/>
+
+After your domain name is Active, lets create some *A* records.
+
+Make sure you have **Interface mode** set to  **Advance**
+
+<BlogImage  
+    src="https://i.imgur.com/Zz8bcFr.png"
+    alt="Interface mode"
+    width={277}
+    height={125}
+/>
+
+Click on Add a _Record Set_
+
+<BlogImage
+    src="https://i.imgur.com/0dQNy38.png"
+    alt="new records set"
+    width={368}
+    height={174}
+/>
+
+Add an **A** with name `cdn.kunals.me` ( replace it with your domain). And click on **Geo Distance** to select  _geoDistance_
+preset.
+
+Fill each **IP** address in the records.
+
+<BlogImage
+    src="https://i.imgur.com/ebIygs0.png"
+    alt="add a record"
+    width={497}
+    height={235}
+/>
+
+After filling all the 3 records, click on **Create**.
+
+Now we should able to hit `cdn.kunals.me` and get the empty directory served by nginx.
+
+## Uploading content to our network.
+
+Anything that is present in `contents` directory will be served. Our task is to put items in this directory
+across all servers. 
+
+<br />
+<details>
+    <summary>See how to do it with **Ansible**</summary>
+
+    Create a new ansible playbook called `scp.yml`
+
+    ```yml title="scp.yml"
+    - name: Transfer files using scp
+        hosts: azure_vms
+        vars:
+            file_path: null # Path to the file you want to transfer
+        tasks:
+            - name: SCP file to VM
+            shell:
+                cmd: sshpass -p {{ ansible_ssh_pass }} scp {{ file_path }} {{ ansible_user }}@{{ ansible_host }}:/home/custom-cdn/contents
+            delegate_to: localhost
+    ```
+
+    when running this playbook specify the `file_path` variable you want to send.
+
+    ```bash
+    ansible-playbook -i inventory.ini scp.yml -e "file_path=/home/kunal/hello.txt"  
+    ```
+
+    This way we will store any file in `contents` folder of every server.
+
+</details>
+
+When doing it manually, for _EVERY SERVER_
+
+We can use `scp` - Secure Copy. An SSH based file transfer utility. 
+
+```bash
+scp new_file.txt custom-cdn@10.10.10.10:/home/custom-cdn/contents
+
+# Replace 10.10.10.10 to actual server IP
+```
+
+# Finally
+
+We are able to store content to our content network, any we can access it at `cdn.kunals.me`
+
+## Bonus - Add a SSL Certificate to get `HTTPS`
+
+<br />
+<details>
+    <summary>See how to do it with **Ansible**</summary>
+
+    Create a new ansible playbook, called `install_ssl_cert.yml`
+
+    ```yml title"install_ssl_cert.yml"
+    - name: Setup SSL Certificates
+    hosts: azure_vms
+    become: yes
+    vars:
+        domain_name: cdn.kunals.me
+        admin_email: email@exaple.com
+    tasks:
+        - name: Update apt cache
+        apt: 
+            update_cache: yes
+
+        - name: Ensure Snapd is installed
+        apt:
+            name: snapd
+            state: present
+        
+        - name: Install certbot 
+        shell:
+            cmd: snap install --classic certbot
+        
+        - name: Install Certificates
+        shell:
+            cmd: certbot --nginx -m {{ admin_email }} -d {{ domain_name }} --agree-tos --non-interactive
+    ```    
+
+</details>
+
+When doing manually, _FOR EACH SERVER_
+
+Install the [**certbot**](https://certbot.eff.org/)
+
+Run this command to issue certificates.
+
+```bash
+sudo certbot --nginx
+```
+
+# Done
+
+Thank for reading it. For any suggestions email me - kunal [at] kunalsin9h [dot] com
+
+
+
