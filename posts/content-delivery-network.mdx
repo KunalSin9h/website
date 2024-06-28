@@ -90,17 +90,15 @@ We are gonna use ...
 > If you don't want to do these steps exactly simmilar, then you can do it your way. The core
 > idea same.
 
-1. Azure for creating Virtual Machines at 5 different locations
+1. Azure for creating Virtual Machines at 7 different locations
 
-    To do this, we are using [Pulumi](https://www.pulumi.com/) - An _Infrastructure as Code_ platform 
+2. Nginx for _Static contents serving_
 
-2. [Gcore](https://www.pulumi.com/) for DNS with Free geoDNS service. 
+    To do both, we are using [Terraform](https://www.terraform.io/) - An _Infrastructure as Code_ platform 
+
+3. [Gcore](https://www.pulumi.com/) for DNS with Free geoDNS service. 
 
     Other DNS service providers, like Cloudflare does not have geoDNS for Free - Its only for Enterprise users.
-
-3. Nginx for _Static contents serving_
-    
-    To do this, we are using [Ansible](https://www.ansible.com/)
 
 4. Finally upload _Contents_ to our _Content Delivery Network_
 
@@ -110,17 +108,276 @@ We are gonna use ...
 
 The task is to create multiple server (virtual machine) at different locations, and get unique *IP Address* of all.
 
-I'm going to create 5 servers at these locations:
+I'm going to create 7 servers at these locations:
 
--   "Central US"
 -   "Central India"
+-   "Central US"
 -   "West Europe"
--   "UAE Central"
 -   "Australia Central"
+-   "Japan East"
+-   "South Africa North"
+-   "Brazil South"
 
 <br />
 <details>
-    <summary>See how to do it with **Pulumi**</summary>
+    <summary>See how to do it with **Terraform**</summary>
+
+    The source code for this terraform infra setup will be found [here](https://github.com)
+
+    We created our Virtual Machine map
+
+    ```hcl title="variables.tf"
+    variable "vm_map" {
+        type = map(object({
+            name     = string
+            location = string
+            size     = string
+        }))
+
+        default = {
+            "vm1" = {
+                name = "centralindia"
+                location = "Central India"
+                size = "Standard_B1s"
+            }
+
+            "vm2" = {
+                name = "centralus"
+                location = "Central US"
+                size = "Standard_B1s"
+            }
+
+            "vm3" = {
+                name = "westeurope"
+                location = "West Europe"
+                size = "Standard_B1s"
+            }
+
+            "vm4" = {
+                name = "australiacentral"
+                location = "Australia Central"
+                size = "Standard_B1s"
+            }
+
+
+            "vm5" = {
+                name = "japaneast"
+                location = "Japan East"
+                size = "Standard_B1s"
+            }
+
+            "vm6" = {
+                name = "southafricanorth"
+                location = "South Africa North"
+                size = "Standard_B1s"
+            }
+
+            "vm7" = {
+                name = "brazilsouth"
+                location = "Brazil South"
+                size = "Standard_B1s"
+            }
+        }
+    }
+    ```    
+    And the main file, which created all other resources is
+
+    ```hcl title="main.tf"
+    terraform {
+        required_providers {
+            azurerm = {
+                source = "hashicorp/azurerm"
+                version = "~> 3.0.2"
+            }
+        }
+
+        required_version = ">= 1.8.5"
+    }
+
+    provider "azurerm" {
+        features {
+            resource_group {
+                prevent_deletion_if_contains_resources = false
+            }
+        }
+    }
+
+    resource "azurerm_resource_group" "custom-cdn" {
+        name = "custom-cdn-ResourceGroup"
+        location = "Central India" # location has no effect
+        # since resouce group is just a container for other resource
+    }
+
+    resource "azurerm_virtual_network" "custom-cdn" {
+        for_each = var.vm_map
+
+        name = "${each.value.name}-VNET"
+        location = each.value.location
+        address_space = [ "10.0.0.0/16" ]
+        resource_group_name = azurerm_resource_group.custom-cdn.name
+    }
+
+    resource "azurerm_subnet" "custom-cdn" {
+        for_each = var.vm_map
+
+        name = "${each.value.name}-Subnet"
+        resource_group_name = azurerm_resource_group.custom-cdn.name
+        virtual_network_name = azurerm_virtual_network.custom-cdn[each.key].name  
+        address_prefixes = [ "10.0.1.0/24" ]
+    }
+
+    resource "azurerm_public_ip" "custom-cdn" {
+        for_each = var.vm_map
+
+        name = "${ each.value.name }-PublicIp"
+        location = each.value.location
+        resource_group_name = azurerm_resource_group.custom-cdn.name
+        allocation_method = "Static"
+    }
+
+    resource "azurerm_network_interface" "custom-cdn" {
+        for_each = var.vm_map
+
+        name = "${ each.value.name }-NIC"
+        location = each.value.location
+        resource_group_name = azurerm_resource_group.custom-cdn.name
+
+        ip_configuration {
+            name = "${each.value.name}-public"
+            subnet_id = azurerm_subnet.custom-cdn[each.key].id
+            public_ip_address_id = azurerm_public_ip.custom-cdn[each.key].id
+            private_ip_address_allocation = "Dynamic"
+        }
+    }
+
+    resource "azurerm_virtual_machine" "custom-cdn" {
+        for_each = var.vm_map
+
+        name = "${ each.value.name }-VM"
+        location = each.value.location
+        resource_group_name = azurerm_resource_group.custom-cdn.name
+        network_interface_ids = [ azurerm_network_interface.custom-cdn[each.key].id ]
+        vm_size = each.value.size
+
+        storage_image_reference {
+            publisher = "Canonical"
+            offer     = "0001-com-ubuntu-server-jammy"
+            sku       = "22_04-lts-gen2"
+            version   = "latest"
+        }
+
+        storage_os_disk {
+            name              = "${ each.value.name }-OsDisk"
+            caching           = "ReadWrite"
+            create_option     = "FromImage"
+            managed_disk_type = "Standard_LRS"
+        }
+
+        os_profile {
+            computer_name  = each.value.name
+            admin_username = "custom-cdn"
+            admin_password = "Password1234!"
+        }
+
+        os_profile_linux_config {
+            disable_password_authentication = false
+        }
+    }
+
+    output "custom_cdn_public_ip" {
+        value = {
+            for vm in azurerm_public_ip.custom-cdn : vm.name => vm.ip_address
+        }
+    }  
+    ```
+
+    > See the admin password is `Password1234!` - Change this to more secure one.
+
+    ```bash
+    terraform apply
+    ```
+    We will get all the **IP** Address.
+
+    ```bash
+    # This will also print the output
+    terraform output
+    ```
+
 </details>
 
-After creating these
+After creating the Virtual Machines, we will have all the **IP** address as.
+
+```hcl
+custom_cdn_public_ip = {
+  "australiacentral-PublicIp" = "20.28.46.102"
+  "brazilsouth-PublicIp" = "191.232.182.67"
+  "centralindia-PublicIp" = "4.213.167.247"
+  "centralus-PublicIp" = "40.86.90.42"
+  "japaneast-PublicIp" = "4.215.236.83"
+  "southafricanorth-PublicIp" = "102.37.60.130"
+  "westeurope-PublicIp" = "4.180.232.216"
+}
+```
+
+## Serving Static Contents using Nginx
+
+The task is to login to each virtual machine and setup **nginx** and start serving
+static content - files and folders.
+
+<br />
+<details>
+    <summary>See how to do it with **Terraform**</summary>
+
+
+</details>
+
+To Login we use SSH 
+
+```bash
+ssh custom-cdn@10.10.10.10
+# custom-cdn is each machines username
+```
+
+Create a folder where all the contents reside.
+
+```bash
+mkdir contents
+
+# pwd
+# /home/custom-cdn/contents
+```
+
+Install nginx and make sure its running.
+
+> Open any **IP** address in the browser you must see nginx page
+
+Lets write a conf  at `/etc/nginx/sites-enabled/`
+
+Create a new file
+
+```bash
+sudo vim cdn.kunals.me
+# choose any domain you want
+```
+And write this 
+
+```nginx
+server {
+
+    listen 80;
+    serve_name cdn.kunals.me;
+
+    add_header X-Server-Location centalindia; # place your sever location name here
+
+    autoindex on;
+    root /home/custom-cdn/contents;
+}
+```
+
+Reload nginx
+
+```bash
+sudo nginx -s reload
+```
+
+This will make nginx server static files and folder in `contents` directory of each machine.
