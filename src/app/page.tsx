@@ -1,5 +1,5 @@
-import HoverTooltip from "@/components/hover-tooltip";
 import Link from "next/link";
+import HoverTooltip from "@/components/hover-tooltip";
 import { Button } from "@/components/ui/button";
 import Bharat from "@/components/Bharat";
 
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <p className="text-3xl font-bold">
-        <span className="opacity-30">#</span> Hello 👋🏼
+        <span className="opacity-30">#</span> Hello
       </p>
       <p>
         I&#39;m <span className="">Kunal</span>, a{" "}
