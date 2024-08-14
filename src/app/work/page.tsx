@@ -14,6 +14,22 @@ export default function Work() {
   return (
     <>
       <h1 className="text-2xl font-bold">
+        <span className="opacity-30">#</span> Work
+      </h1>
+      <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
+        <TiltBox>
+          <WorkBox
+            url="https://blupp.co/"
+            icon="https://i.imgur.com/caLPLvi.png"
+            name="Blupp Co."
+            tagline="Software Service"
+            role="Backend Developer Intern"
+            work="Worked on Serverless application involving Cloudflare Workers and Other technologies like JavaScript,
+Go, NodeJS, TypeScript. PlanetScale."
+          />
+        </TiltBox>
+        </div>
+      <h1 className="text-2xl font-bold">
         <span className="opacity-30">#</span> Projects
       </h1>
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
