@@ -76,14 +76,14 @@ export default function Ancestors() {
           name="Bheka Singh"
           place="Khajuri"
           alive={false}
-          description="A farmer who had 3 sons."
+          description="A zamidar and farmer who had 3 sons."
         />
         <Ansistors
           image="/images/history/notv.png"
           name="Yashoda Singh"
           place="Khajuri"
           alive={false}
-          description="Son of Bheka Singh, also a farmer who had 6 sons."
+          description="Son of Bheka Singh, a zamidar and farmer who had 6 sons."
         />
         <Ansistors
           image="/images/history/notv.png"
@@ -91,7 +91,7 @@ export default function Ancestors() {
           place="Khajuri"
           wife="Shanjira Devi"
           alive={false}
-          description="Son of Yashoda Singh, a zamidar who had 1 son."
+          description="Son of Yashoda Singh, a zamidar and farmer who had 1 son."
         />
         <Ansistors
           image="/images/history/notv.png"
@@ -100,7 +100,7 @@ export default function Ancestors() {
           place="Khajuri & Paharpur"
           wife="Dharora Devi"
           alive={false}
-          description="Son of Janak Singh, also a farmer who has 2 sons. Married in 1934"
+          description="Son of Janak Singh, also a farmer and owner of Fertilizer Depot who has 2 sons. Married in 1934"
         />
         <Ansistors
           image="/images/history/raghaw.jpeg"
