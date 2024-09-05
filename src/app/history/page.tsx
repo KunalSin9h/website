@@ -131,8 +131,8 @@ export default function K9() {
       </ul>
       <br />
       <p>
-        That's what we know so far. I will update this page upon gaining more
-        knowledge.
+        That&apos;s what we know so far. I will update this page upon gaining
+        more knowledge.
       </p>
       <p>
         In particular, the life of my grandfather, Mr. Raghaw Singh, is very
