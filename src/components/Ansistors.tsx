@@ -24,14 +24,16 @@ export default function Ansistors(props: props) {
         <p className="font-bold">{props.name}</p>
         <div className="flex gap-4 items-center text-green-600">
           <p className={`${props.born ? "block" : "hidden"}`}>
-            Born: <span className="text-black">{props.born}</span>
+            Born:{" "}
+            <span className="text-black dark:text-white">{props.born}</span>
           </p>
           <p>
             {props.alive ? "Living in" : "Lived in"}:{" "}
-            <span className="text-black">{props.place}</span>
+            <span className="text-black dark:text-white">{props.place}</span>
           </p>
           <p className={`${props.wife ? "block" : "hidden"}`}>
-            Wife: <span className="text-black">{props.wife}</span>
+            Wife:{" "}
+            <span className="text-black dark:text-white">{props.wife}</span>
           </p>
         </div>
         <p className="text-slate-500">{props.description}</p>

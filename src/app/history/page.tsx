@@ -10,7 +10,7 @@ export const metadata: Metadata = PageMeta({
   image: "https://i.imgur.com/Bwu9QAr.jpeg",
 });
 
-export default function K9() {
+export default function Ancestors() {
   return (
     <div>
       <p className="text-3xl font-bold">
