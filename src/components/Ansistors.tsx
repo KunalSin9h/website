@@ -20,7 +20,7 @@ export default function Ansistors(props: props) {
         height={160}
         className="rounded"
       />
-      <div className="col-span-3">
+      <div className="col-span-3 px-2">
         <p className="font-bold">{props.name}</p>
         <div className="flex gap-4 items-center text-green-600">
           <p className={`${props.born ? "block" : "hidden"}`}>

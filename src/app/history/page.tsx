@@ -100,7 +100,7 @@ export default function K9() {
           place="Khajuri & Paharpur"
           wife="Dharora Devi"
           alive={false}
-          description="Son of Janak Singh, also a farmer who had 2 sons. Married in 1934"
+          description="Son of Janak Singh, also a farmer who has 2 sons. Married in 1934"
         />
         <Ansistors
           image="/images/history/raghaw.jpeg"
@@ -118,7 +118,7 @@ export default function K9() {
           place="Bhopal"
           wife="Monika Devi"
           alive={true}
-          description="My father, Son of Raghaw Singh. A businessman who had 2 sons and 1 doughter. Married in 2000"
+          description="My father, Son of Raghaw Singh. A businessman who has 2 sons and 1 doughter. Married in 2000"
         />
         <Ansistors
           image="/images/history/kunal.jpeg"
