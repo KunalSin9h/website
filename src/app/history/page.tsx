@@ -91,7 +91,7 @@ export default function Ancestors() {
           place="Khajuri"
           wife="Shanjira Devi"
           alive={false}
-          description="Son of Yashoda Singh, also a farmer who had 1 son."
+          description="Son of Yashoda Singh, a zamidar who had 1 son."
         />
         <Ansistors
           image="/images/history/notv.png"
