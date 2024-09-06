@@ -134,10 +134,6 @@ export default function Ancestors() {
         That&apos;s what we know so far. I will update this page upon gaining
         more knowledge.
       </p>
-      <p>
-        In particular, the life of my grandfather, Mr. Raghaw Singh, is very
-        interesting. I will write a short biography in the future.
-      </p>
       <br />
       <br />
       <strong>References (links)</strong>
