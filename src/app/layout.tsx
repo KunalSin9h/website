@@ -149,7 +149,7 @@ export default function RootLayout({
                     child={
                       <Button variant="ghost" size="icon">
                         <a
-                          href="https://twitter.com/kunalsin9h"
+                          href="https://x.com/intent/follow?screen_name=kunalsin9h"
                           target="_black"
                         >
                           <svg
