@@ -21,13 +21,14 @@ export default function Home() {
         Databases, Cloud & Networking and Artificial Intelligence.{" "}
       </p>
       <p>
-        Arch Linux and Vim are my daily
-        drivers for development. Currently, I am learning ML, Rust and Real-time
-        Systems. I love contributing to Open-Source Software Development.
+        Arch Linux and Vim are my daily drivers for development. Currently, I am
+        learning ML, Rust and Real-time Systems. I love contributing to
+        Open-Source Software Development.
       </p>
       <p>
-        Apart from software development, I love to play basketball, have a strong interest in national and global geopolitics
-        and occasionally upload videos on{" "}
+        Apart from software development, I love to play basketball, have a
+        strong interest in national and global geopolitics and occasionally
+        upload videos on{" "}
         <Link
           href="https://www.youtube.com/@kunalsin9h"
           target="_black"
@@ -99,6 +100,21 @@ export default function Home() {
             </Button>
           }
         />
+      </div>
+
+      <div>
+        <p className="text-xl font-bold mb-4">
+          <span className="opacity-30">#</span> More
+        </p>
+
+        <p>
+          <a href="https://kunalsin9h.com/k9">Why i use 9 in my username!</a>
+        </p>
+        <p>
+          <a href="https://kunalsin9h.com/history">
+            Whats my ancestral history!
+          </a>
+        </p>
       </div>
     </>
   );
