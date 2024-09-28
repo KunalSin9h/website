@@ -22,10 +22,21 @@ export default function Work() {
             url="https://blupp.co/"
             icon="https://i.imgur.com/caLPLvi.png"
             name="Blupp Co."
-            tagline="Software Service"
+            tagline="Software Consultancy"
             role="Backend Developer Intern"
             work="Worked on Serverless application involving Cloudflare Workers and Other technologies like JavaScript,
 Go, NodeJS, TypeScript. PlanetScale."
+          />
+        </TiltBox>
+          <TiltBox>
+          <WorkBox
+            url="https://easybhandar.pages.dev/"
+            icon="/images/eb.png"
+            name="Easy Bhandar"
+            tagline="SaaS"
+            role="Creator"
+            work="This started as a project for a client in Patna, Bihar. Now a SaaS offering, is a platform designed
+            for small businesses, aimed at micro inventory management."
           />
         </TiltBox>
         </div>
@@ -33,6 +44,16 @@ Go, NodeJS, TypeScript. PlanetScale."
         <span className="opacity-30">#</span> Projects
       </h1>
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
+      <TiltBox>
+          <WorkBox
+            url="https://netgres.pages.dev"
+            icon="/images/netgres.png"
+            name="Netgres"
+            tagline="Secret Store"
+            role="Developer"
+            work="Working on a private network password manager and secret store on top of Tailscale."
+          />
+        </TiltBox>
         <TiltBox>
           <WorkBox
             url="https://github.com/meltred"
