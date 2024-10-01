@@ -21,7 +21,7 @@ export default function Home() {
         Databases, Cloud & Networking and Artificial Intelligence.{" "}
       </p>
       <p>
-        <string>Arch Linux</string> Ubuntu, Vim and JetBrains IDEs are my daily drivers for development. Currently, I am
+        <strike>Arch Linux</strike> Ubuntu, Vim and JetBrains IDEs are my daily drivers for development. Currently, I am
         learning ML, Rust and Real-time Systems. I love contributing to
         Open-Source Software Development.
       </p>
