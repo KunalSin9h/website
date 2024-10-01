@@ -14,6 +14,7 @@ export default function System() {
       <p className="text-3xl font-bold">
         <span className="opacity-30">#</span> My Daily Drivers
       </p>
+        <p className="text-purple-400 my-2">The stuff has changed a lot since i wrote this. I have to updated</p>
       <p>
         These are the things which is use for my day-to-day development.
         Starting with the{" "}
