@@ -22,9 +22,9 @@ export default function Home() {
       </p>
       <p>
         <span className="line-through">Arch Linux</span> Ubuntu, Vim and are my
-        daily drivers for development. Currently, I am learning ML, Rust and
-        Real-time Systems. I love contributing to Open-Source Software
-        Development.
+        daily drivers for development. Currently, I am learning ML, Rust, Scala,
+        Real-time and Distributed Systems. I love contributing to Open-Source
+        Software Development.
       </p>
       <p>
         Apart from software development, I love to play basketball, have a
