@@ -38,7 +38,7 @@ export default function Papers() {
             return (
               <li className="my-2" key={index}>
                 <div
-                  className={`flex flex-col  p-2 ${item.reading && "border rounded bg-gray-100"}`}
+                  className={`flex flex-col  p-2 ${item.reading && "border rounded bg-gray-100 dark:bg-gray-900"}`}
                 >
                   <span
                     className={`text-sm uppercase text-green-500 ${!item.reading && "hidden"}`}
@@ -48,7 +48,7 @@ export default function Papers() {
                   <a
                     href={item.link}
                     target="_blank"
-                    className="underline underline-offset-2 hover:text-gray-700"
+                    className="underline underline-offset-2 hover:text-gray-700 dark:hover:text-gray-300"
                   >
                     {item.title}
                   </a>
