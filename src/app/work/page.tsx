@@ -28,7 +28,7 @@ export default function Work() {
 Go, NodeJS, TypeScript. PlanetScale."
           />
         </TiltBox>
-          <TiltBox>
+        {/* <TiltBox>
           <WorkBox
             url="https://easybhandar.pages.dev/"
             icon="/images/eb.png"
@@ -38,13 +38,13 @@ Go, NodeJS, TypeScript. PlanetScale."
             work="This started as a project for a client in Patna, Bihar. Now a SaaS offering, is a platform designed
             for small businesses, aimed at micro inventory management."
           />
-        </TiltBox>
-        </div>
+        </TiltBox> */}
+      </div>
       <h1 className="text-2xl font-bold">
         <span className="opacity-30">#</span> Projects
       </h1>
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
-      <TiltBox>
+        <TiltBox>
           <WorkBox
             url="https://netgres.pages.dev"
             icon="/images/netgres.png"
