@@ -3,7 +3,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = PageMeta({
   title: "Paper Shelf",
-  description: "Collections of research papers I have read or reading...",
+  description:
+    "Collections of research papers and books I have read or am reading...",
   url: "https://kunalsin9h.com/papershelf/",
 });
 
