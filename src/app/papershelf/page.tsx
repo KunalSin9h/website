@@ -46,6 +46,13 @@ const books: Book[] = [
     reading: false,
     readingList: true,
   },
+  {
+    title: "Zero To Production In Rust",
+    link: "https://www.zero2prod.com/index.html",
+    autohor: "Luca Palmieri",
+    reading: false,
+    readingList: false,
+  },
 ];
 
 export default function Papers() {
