@@ -38,13 +38,13 @@ export default function Bharat() {
             height={40}
           />
         </span>{" "}
-        <span className="text-4xl font-bold ">Bhārat भारत</span>
+        <span className="text-4xl font-bold ">Bharat भारत</span>
       </p>
       <p className="italic pt-4 md:pt-8 text-xl">
         The country that lies north of the oceans and south of the snowy
         mountains is called Bhárata, for there dwell the descendants of Bharata.
-        Bhárata is the land of works, in consequence of which men/women go to
-        heaven, or obtain emancipation.
+        Bhárata is the land of works, in consequence of which men go to heaven,
+        or obtain emancipation.
       </p>
       <div className="text-xs opacity-80 pt-2">
         The Vishnu Purana, Chapter III 400 BCE
