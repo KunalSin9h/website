@@ -25,16 +25,16 @@ type Book = {
 
 const distributedSystems: Paper[] = [
   {
-    title: "MapReduce: Simplified Data Processing on Large Clusters",
-    link: "https://pdos.csail.mit.edu/6.824/papers/mapreduce.pdf",
+    title: "Scalability! But at what COST?",
+    link: "https://www.usenix.org/system/files/conference/hotos15/hotos15-paper-mcsherry.pdf",
     reading: true,
     readingList: false,
   },
   {
-    title: "Scalability! But at what COST?",
-    link: "https://www.usenix.org/system/files/conference/hotos15/hotos15-paper-mcsherry.pdf",
+    title: "MapReduce: Simplified Data Processing on Large Clusters",
+    link: "https://pdos.csail.mit.edu/6.824/papers/mapreduce.pdf",
     reading: false,
-    readingList: false,
+    readingList: true,
   },
 ];
 
