@@ -121,7 +121,7 @@ export default function Ancestors() {
           description="My father, Son of Raghaw Singh. A businessman who has 2 sons and 1 doughter. Married in 2000"
         />
         <Ansistors
-          image="/images/history/kunal.jpeg"
+          image="/images/history/kunal.jpg"
           name="Kunal Singh"
           born="2002"
           alive={true}
