@@ -40,6 +40,13 @@ const distributedSystems: Paper[] = [
 
 const books: Book[] = [
   {
+    title: "Build a Large Language Model (From Scratch)",
+    link: "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+    autohor: "Sebastian Raschka",
+    reading: false,
+    readingList: true,
+  },
+  {
     title: "Adventures in Rocket Science",
     link: "https://www.nasa.gov/wp-content/uploads/2009/07/265386main_Adventures_In_Rocket_Science.pdf",
     autohor: "NASA",
