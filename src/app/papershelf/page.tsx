@@ -43,8 +43,8 @@ const books: Book[] = [
     title: "Build a Large Language Model (From Scratch)",
     link: "https://www.manning.com/books/build-a-large-language-model-from-scratch",
     autohor: "Sebastian Raschka",
-    reading: false,
-    readingList: true,
+    reading: true,
+    readingList: false,
   },
   {
     title: "Adventures in Rocket Science",
