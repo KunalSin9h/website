@@ -27,9 +27,8 @@ export default function Home() {
         Software Development.
       </p>
       <p>
-        Apart from software development, I love to play basketball, have a
-        strong interest in national and global geopolitics and occasionally
-        upload videos on{" "}
+        Apart from software development, I love to play basketball and
+        occasionally upload videos on{" "}
         <Link
           href="https://www.youtube.com/@kunalsin9h"
           target="_black"
