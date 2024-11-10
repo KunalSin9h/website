@@ -1,4 +1,12 @@
 import Image from "next/image";
+import { Metadata } from "next";
+import PageMeta from "@/lib/pageMetadata";
+
+export const metadata: Metadata = PageMeta({
+  title: "Bais Flag and Details",
+  description: "",
+  url: "https://kunalsin9h.com/bais/",
+});
 
 export default function Bais() {
   return (

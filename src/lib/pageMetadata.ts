@@ -21,6 +21,7 @@ export default function PageMeta({
   type = !type ? "website" : type;
 
   return {
+    metadataBase: new URL("http://localhost:3000"),
     title,
     description,
     openGraph: {
