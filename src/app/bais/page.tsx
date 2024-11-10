@@ -39,13 +39,20 @@ export default function Bais() {
             >
               Kunal Singh
             </a>
-            . Download{" "}
+            . Download Flag{" "}
             <a className="underline hover:text-blue-500" href="/bais/flag.png">
               PNG
             </a>
             {"/"}
             <a className="underline hover:text-blue-500" href="/bais/flag.svg">
               SVG
+            </a>
+            . Snake Emblem{" "}
+            <a
+              className="underline hover:text-blue-500"
+              href="/bais/snake-emblem.png"
+            >
+              PNG
             </a>
           </p>
         </div>
