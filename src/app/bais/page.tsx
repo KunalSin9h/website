@@ -18,7 +18,7 @@ export default function Bais() {
           <KeyVal name="Dwaj (Flag)" val="Skyblue color with Snake Emblem" />
           <Image
             className="mt-2"
-            src="/bais/dwaj.webp"
+            src="/bais/flag.webp"
             alt="Bais Rajput Dwaj"
             width={1200}
             height={756}
