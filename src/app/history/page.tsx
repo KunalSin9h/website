@@ -94,13 +94,13 @@ export default function Ancestors() {
           description="Son of Yashoda Singh, a zamidar and farmer who had 1 son."
         />
         <Ansistors
-          image="/images/history/notv.png"
+          image="/images/history/perdada.jpg"
           name="Hem Narayan Singh"
           born="1915"
           place="Khajuri & Paharpur"
           wife="Dharora Devi"
           alive={false}
-          description="Son of Janak Singh, also a farmer and owner of Fertilizer Depot who has 2 sons. Married in 1934"
+          description="Son of Janak Singh, also a farmer and owner of Fertilizer Depot who has 2 sons and 1 daughter. Married in 1934"
         />
         <Ansistors
           image="/images/history/raghaw.jpeg"
