@@ -10,9 +10,8 @@ export default function Home() {
         <span className="opacity-30">#</span> Hello
       </p>
       <p>
-        I&#39;m <span className="">Kunal</span>, a{" "}
-        <HoverTooltip content="29th May 2002" child={<span>22</span>} /> y/o
-        developer based in{" "}
+        I&#39;m <span className="">Kunal</span>, a <span>22</span> y/o developer
+        based in{" "}
         <span className="inline-block cursor-pointer">
           <Bharat />
         </span>
@@ -105,10 +104,6 @@ export default function Home() {
       <div>
         <p className="text-xl font-bold mb-4">
           <span className="opacity-30">#</span> More
-        </p>
-
-        <p>
-          <a href="https://kunalsin9h.com/k9">Why i use 9 in my username!</a>
         </p>
         <p>
           <a href="https://kunalsin9h.com/history">
