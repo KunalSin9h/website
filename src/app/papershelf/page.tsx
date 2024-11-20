@@ -57,13 +57,6 @@ const books: Book[] = [
     readingList: false,
   },
   {
-    title: "Adventures in Rocket Science",
-    link: "https://www.nasa.gov/wp-content/uploads/2009/07/265386main_Adventures_In_Rocket_Science.pdf",
-    autohor: "NASA",
-    reading: false,
-    readingList: true,
-  },
-  {
     title: "Zero To Production In Rust",
     link: "https://www.zero2prod.com/index.html",
     autohor: "Luca Palmieri",
@@ -81,7 +74,7 @@ export default function Papers() {
       <p className="text-xl">{metadata.description}</p>
 
       <div>
-        <p className="font-bold uppercase text-gray-500 tracking-wider">
+        <p className="font-bold uppercase text-red-500 tracking-wider">
           Distributed Systems
         </p>
         <ol>
@@ -116,11 +109,11 @@ export default function Papers() {
       </div>
 
       <div>
-        <p className="font-bold uppercase text-gray-500 tracking-wider">
+        <p className="font-bold uppercase text-red-500 tracking-wider">
           Artificial Intelligence
         </p>
         <ol>
-          {distributedSystems.map((item: Paper, index: number) => {
+          {AI.map((item: Paper, index: number) => {
             return (
               <li className="my-2" key={index}>
                 <div
@@ -151,9 +144,7 @@ export default function Papers() {
       </div>
 
       <div>
-        <p className="font-bold uppercase text-gray-500 tracking-wider">
-          Books
-        </p>
+        <p className="font-bold uppercase text-red-500 tracking-wider">Books</p>
         <ol>
           {books.map((book: Book, index: number) => {
             return (
