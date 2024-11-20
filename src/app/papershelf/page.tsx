@@ -38,6 +38,16 @@ const distributedSystems: Paper[] = [
   },
 ];
 
+const AI: Paper[] = [
+  {
+    title:
+      "1-bit AI Infra: Part 1.1, Fast and Lossless BitNet b1.58 Inference on CPUs",
+    link: "https://arxiv.org/pdf/2410.16144",
+    reading: false,
+    readingList: true,
+  },
+];
+
 const books: Book[] = [
   {
     title: "Build a Large Language Model (From Scratch)",
@@ -104,6 +114,42 @@ export default function Papers() {
           })}
         </ol>
       </div>
+
+      <div>
+        <p className="font-bold uppercase text-gray-500 tracking-wider">
+          Artificial Intelligence
+        </p>
+        <ol>
+          {distributedSystems.map((item: Paper, index: number) => {
+            return (
+              <li className="my-2" key={index}>
+                <div
+                  className={`flex flex-col  p-2 ${item.reading && "border rounded bg-gray-100 dark:bg-gray-900"}`}
+                >
+                  <span
+                    className={`text-xs uppercase text-green-500 ${!item.reading && "hidden"}`}
+                  >
+                    Reading
+                  </span>
+                  <span
+                    className={`text-xs uppercase text-blue-500 ${!item.readingList && "hidden"}`}
+                  >
+                    Up Next on Reading List
+                  </span>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    className="underline underline-offset-2 hover:text-gray-700 dark:hover:text-gray-300"
+                  >
+                    {item.title}
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+
       <div>
         <p className="font-bold uppercase text-gray-500 tracking-wider">
           Books
