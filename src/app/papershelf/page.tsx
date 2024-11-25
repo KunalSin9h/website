@@ -57,6 +57,13 @@ const books: Book[] = [
     readingList: false,
   },
   {
+    title: "Designing Data-Intensive Applications",
+    link: "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/",
+    autohor: "Martin Kleppmann",
+    reading: false,
+    readingList: true,
+  },
+  {
     title: "Zero To Production In Rust",
     link: "https://www.zero2prod.com/index.html",
     autohor: "Luca Palmieri",
