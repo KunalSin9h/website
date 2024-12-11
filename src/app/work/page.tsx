@@ -28,17 +28,19 @@ export default function Work() {
 Go, NodeJS, TypeScript. PlanetScale."
           />
         </TiltBox>
-        {/* <TiltBox>
-          <WorkBox
-            url="https://easybhandar.pages.dev/"
-            icon="/images/eb.png"
-            name="Easy Bhandar"
-            tagline="SaaS"
-            role="Creator"
-            work="This started as a project for a client in Patna, Bihar. Now a SaaS offering, is a platform designed
+        {
+          <TiltBox>
+            <WorkBox
+              url="https://easybhandar.pages.dev/"
+              icon="/images/eb.png"
+              name="Easy Bhandar"
+              tagline="SaaS"
+              role="Founder"
+              work="This started as a project for a client in Patna, Bihar. Now a SaaS offering, is a platform designed
             for small businesses, aimed at micro inventory management."
-          />
-        </TiltBox> */}
+            />
+          </TiltBox>
+        }
       </div>
       <h1 className="text-2xl font-bold">
         <span className="opacity-30">#</span> Projects
