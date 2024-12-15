@@ -185,16 +185,6 @@ export default function Papers() {
                     {book.title}
                   </a>
                   <p className="text-xs text-gray-400">from {book.autohor}</p>
-                  {book.imageLink && (
-                    <div className="p-4">
-                      <Image
-                        src={book.imageLink}
-                        alt="Book image"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                  )}
                 </div>
               </li>
             );
