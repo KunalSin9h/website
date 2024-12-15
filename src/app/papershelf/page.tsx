@@ -1,5 +1,6 @@
 import PageMeta from "@/lib/pageMetadata";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = PageMeta({
   title: "Paper Shelf",
@@ -60,6 +61,13 @@ const books: Book[] = [
     title: "Designing Data-Intensive Applications",
     link: "https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/",
     autohor: "Martin Kleppmann",
+    reading: false,
+    readingList: true,
+  },
+  {
+    title: "A Brief History Of Time",
+    link: "https://www.amazon.in/Brief-History-Time-Black-Holes/dp/0553175211",
+    autohor: "Stephen Hawking",
     reading: false,
     readingList: true,
   },
@@ -177,6 +185,16 @@ export default function Papers() {
                     {book.title}
                   </a>
                   <p className="text-xs text-gray-400">from {book.autohor}</p>
+                  {book.imageLink && (
+                    <div className="p-4">
+                      <Image
+                        src={book.imageLink}
+                        alt="Book image"
+                        width={100}
+                        height={100}
+                      />
+                    </div>
+                  )}
                 </div>
               </li>
             );
