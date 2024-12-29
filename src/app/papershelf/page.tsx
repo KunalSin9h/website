@@ -65,13 +65,6 @@ const books: Book[] = [
     readingList: true,
   },
   {
-    title: "A Brief History Of Time",
-    link: "https://www.amazon.in/Brief-History-Time-Black-Holes/dp/0553175211",
-    autohor: "Stephen Hawking",
-    reading: false,
-    readingList: true,
-  },
-  {
     title: "Zero To Production In Rust",
     link: "https://www.zero2prod.com/index.html",
     autohor: "Luca Palmieri",
