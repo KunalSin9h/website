@@ -39,6 +39,15 @@ const distributedSystems: Paper[] = [
   },
 ];
 
+const systemsProgramming: Paper[] = [
+  {
+    title: "Compiling C to Safe Rust, Formalized",
+    link: "https://arxiv.org/pdf/2412.15042#page=2.21",
+    reading: false,
+    readingList: true,
+  },
+];
+
 const AI: Paper[] = [
   {
     title:
@@ -87,6 +96,41 @@ export default function Papers() {
         </p>
         <ol>
           {distributedSystems.map((item: Paper, index: number) => {
+            return (
+              <li className="my-2" key={index}>
+                <div
+                  className={`flex flex-col  p-2 ${item.reading && "border rounded bg-gray-100 dark:bg-gray-900"}`}
+                >
+                  <span
+                    className={`text-xs uppercase text-green-500 ${!item.reading && "hidden"}`}
+                  >
+                    Reading
+                  </span>
+                  <span
+                    className={`text-xs uppercase text-blue-500 ${!item.readingList && "hidden"}`}
+                  >
+                    Up Next on Reading List
+                  </span>
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    className="underline underline-offset-2 hover:text-gray-700 dark:hover:text-gray-300"
+                  >
+                    {item.title}
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+
+      <div>
+        <p className="font-bold uppercase text-red-500 tracking-wider">
+          Systems Programming
+        </p>
+        <ol>
+          {systemsProgramming.map((item: Paper, index: number) => {
             return (
               <li className="my-2" key={index}>
                 <div
