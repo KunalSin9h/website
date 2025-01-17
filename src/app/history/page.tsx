@@ -94,7 +94,7 @@ export default function Ancestors() {
           description="Son of Yashoda Singh, a zamidar and farmer who had 1 son."
         />
         <Ansistors
-          image="/images/history/perdada.jpg"
+          image="/images/history/hem.jpg"
           name="Hem Narayan Singh"
           born="1915"
           place="Khajuri & Paharpur"
