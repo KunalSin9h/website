@@ -46,7 +46,7 @@ Go, NodeJS, TypeScript. PlanetScale."
         <span className="opacity-30">#</span> Projects
       </h1>
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
-        <TiltBox>
+        {/* <TiltBox>
           <WorkBox
             url="https://netgres.pages.dev"
             icon="/images/netgres.png"
@@ -55,7 +55,7 @@ Go, NodeJS, TypeScript. PlanetScale."
             role="Developer"
             work="Working on a private network password manager and secret store on top of Tailscale."
           />
-        </TiltBox>
+        </TiltBox> */}
         <TiltBox>
           <WorkBox
             url="https://github.com/meltred"
