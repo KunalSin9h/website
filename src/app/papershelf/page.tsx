@@ -26,12 +26,6 @@ type Book = {
 
 const distributedSystems: Paper[] = [
   {
-    title: "Scalability! But at what COST?",
-    link: "https://www.usenix.org/system/files/conference/hotos15/hotos15-paper-mcsherry.pdf",
-    reading: true,
-    readingList: false,
-  },
-  {
     title: "MapReduce: Simplified Data Processing on Large Clusters",
     link: "https://pdos.csail.mit.edu/6.824/papers/mapreduce.pdf",
     reading: false,
@@ -39,14 +33,7 @@ const distributedSystems: Paper[] = [
   },
 ];
 
-const systemsProgramming: Paper[] = [
-  {
-    title: "Compiling C to Safe Rust, Formalized",
-    link: "https://arxiv.org/pdf/2412.15042#page=2.21",
-    reading: false,
-    readingList: true,
-  },
-];
+const systemsProgramming: Paper[] = [];
 
 const AI: Paper[] = [
   {
