@@ -20,7 +20,7 @@ export default function Home() {
         Databases, Cloud & Networking and Artificial Intelligence.{" "}
       </p>
       <p>
-        <span className="line-through">Arch Linux</span> Ubuntu, Vim and are my
+        <span className="line-through">Arch Linux</span> <span className="line-through">Ubuntu</span> Pop!_OS, Vim, Jetbrains are my
         daily drivers for development. Currently, I am learning ML, Rust, Scala,
         Real-time and Distributed Systems. I love contributing to Open-Source
         Software Development.
