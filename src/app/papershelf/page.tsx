@@ -43,6 +43,13 @@ const AI: Paper[] = [
     reading: false,
     readingList: true,
   },
+  {
+    title:
+      "IPO: Your Language Model is Secretly a Preference Classifier",
+    link: "https://arxiv.org/pdf/2502.16182",
+    reading: false,
+    readingList: true,
+  },
 ];
 
 const books: Book[] = [
