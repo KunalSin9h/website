@@ -19,6 +19,16 @@ export default function Work() {
       <div className="grid gap-2 h-full grid-cols-1 md:grid-cols-2">
         <TiltBox>
           <WorkBox
+            url="https://safedep.io/"
+            icon="https://i.imgur.com/d9Jv7V2.png"
+            name="SafeDep, Inc."
+            tagline="Safe & Trusted OSS for Software Development Teams"
+            role="Software Developer Intern"
+            work="Worked on creating platform for secure open source supply chain"
+          />
+        </TiltBox>
+        <TiltBox>
+          <WorkBox
             url="https://blupp.co/"
             icon="https://i.imgur.com/caLPLvi.png"
             name="Blupp Co."
